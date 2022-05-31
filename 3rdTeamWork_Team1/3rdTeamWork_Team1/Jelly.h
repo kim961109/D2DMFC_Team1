@@ -1,12 +1,11 @@
 #pragma once
 #include "Obj.h"
-
-class CPlayerJini :
+class CJelly :
 	public CObj
 {
 public:
-	CPlayerJini();
-	virtual ~CPlayerJini();
+	CJelly();
+	virtual ~CJelly();
 
 public:
 	virtual void Initialize(void) override;
@@ -15,22 +14,11 @@ public:
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
 
-private:
-	float	m_fSpeed;
-	float	m_fAngle;
-	float	m_fScale;
-	float	m_fEllipse;
-
-	D3DXVECTOR3		m_vBodyLocal[4];
-	D3DXVECTOR3		m_vBody[4];
-
-	D3DXVECTOR3		m_vDirLocal;
-	D3DXVECTOR3		m_vLookLocal;
-
+private :
 	int		m_iPlayerColorR;
 	int		m_iPlayerColorG;
 	int		m_iPlayerColorB;
 
-
+	int		m_iScale;
 };
 

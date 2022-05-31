@@ -2,6 +2,7 @@
 enum OBJID
 {
 	OBJ_Player,
+	OBJ_Item,
 	OBJ_End
 };
 

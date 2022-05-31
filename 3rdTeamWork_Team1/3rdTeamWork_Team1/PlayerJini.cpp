@@ -28,11 +28,11 @@ void CPlayerJini::Initialize(void)
 	m_vBodyLocal[2] = { 50.f, 0.f, 0.f }; //right
 	m_vBodyLocal[3] = { 0.f, 50.f, 0.f }; //bottom
 
-	// 색상 설정
+	// 색상 랜덤 설정
 	srand(unsigned int(time(NULL)));
-	m_PlayerColorR = rand() % 256;
-	m_PlayerColorG = rand() % 256;
-	m_PlayerColorB = rand() % 256;
+	m_iPlayerColorR = rand() % 256;
+	m_iPlayerColorG = rand() % 256;
+	m_iPlayerColorB = rand() % 256;
 }
 
 void CPlayerJini::Update(void)
@@ -75,9 +75,9 @@ void CPlayerJini::Late_Update(void)
 
 void CPlayerJini::Render(HDC hDC)
 {
-	HBRUSH myBrush = (HBRUSH)CreateSolidBrush(RGB(m_PlayerColorR, m_PlayerColorG, m_PlayerColorB));
+	HBRUSH myBrush = (HBRUSH)CreateSolidBrush(RGB(m_iPlayerColorR, m_iPlayerColorG, m_iPlayerColorB));
 	HBRUSH oldBrush = (HBRUSH)SelectObject(hDC, myBrush);
-	HPEN myPen = (HPEN)CreatePen(PS_SOLID, 1, RGB(m_PlayerColorR, m_PlayerColorG, m_PlayerColorB));
+	HPEN myPen = (HPEN)CreatePen(PS_SOLID, 1, RGB(m_iPlayerColorR, m_iPlayerColorG, m_iPlayerColorB));
 	HPEN oldPen = (HPEN)SelectObject(hDC, myPen);
 
 	Ellipse(hDC,
