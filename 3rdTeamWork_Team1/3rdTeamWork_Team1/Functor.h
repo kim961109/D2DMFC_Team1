@@ -20,7 +20,7 @@ void		Safe_Delete_Array(T& Temp)
 }
 
 
-// �Լ� ��ü
+// ÇÔ¼ö °´Ã¼
 
 class CDeleteObj
 {
