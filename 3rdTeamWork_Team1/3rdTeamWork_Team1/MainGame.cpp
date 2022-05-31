@@ -14,22 +14,16 @@ CMainGame::~CMainGame()
 
 void CMainGame::Initialize(void)
 {
-
-	int i = 0;
-
-
-
-
 	m_hDC = GetDC(g_hWnd);
 
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/stardewPanorama.bmp", L"stardewPanorama"); //Back 버퍼에 해당하는 그림을 추가를 해야한다.
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/stardewPanorama.bmp", L"stardewPanorama"); //Back 버퍼???�당?�는 그림??추�?�??�야?�다.
 
 	CSceneMgr::Get_Instance()->Scene_Change(SC_Main);
 }
 
 void CMainGame::Update(void)
 {
-	//CScrollMgr::Get_Instance()->Scroll_Lock(); //스크롤 락은 나중에 필요시 사용.
+	//CScrollMgr::Get_Instance()->Scroll_Lock(); //?�크�??��? ?�중???�요???�용.
 	CSceneMgr::Get_Instance()->Update();
 
 }
@@ -41,11 +35,11 @@ void CMainGame::Late_Update(void)
 
 void CMainGame::Render(void)
 {
-	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"stardewPanorama"); // Back 버퍼에 그릴 그림
+	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"stardewPanorama"); // Back 버퍼??그릴 그림
 
 	BitBlt(m_hDC, 0, 0, WINCX, WINCY, hMemDC, 0, 0, SRCCOPY);
 
-	CSceneMgr::Get_Instance()->Render(hMemDC); // 백 버퍼에다가 그림을 그린다
+	CSceneMgr::Get_Instance()->Render(hMemDC); // �?버퍼?�다가 그림??그린??
 
 
 #ifdef _DEBUG
