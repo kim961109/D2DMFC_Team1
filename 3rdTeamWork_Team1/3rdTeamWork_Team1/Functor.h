@@ -20,7 +20,7 @@ void		Safe_Delete_Array(T& Temp)
 }
 
 
-// �Լ� ��ü
+// ÇÔ¼ö °´Ã¼
 
 class CDeleteObj
 {
@@ -66,7 +66,7 @@ private:
 	const TCHAR*		m_pTag;
 };
 
-static D3DXVECTOR3		Get_Mouse(void)
+static D3DXVECTOR3		Get_Mouse()
 {
 	POINT	Pt{};
 

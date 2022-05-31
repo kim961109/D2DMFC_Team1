@@ -159,11 +159,15 @@
     <ClInclude Include="Scene_KS.h">
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClInclude>
+
     <ClInclude Include="Player_KS.h">
       <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJini.h">
+      <Filter>02. Scene\01.Scene_jini</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,11 +225,15 @@
     <ClCompile Include="Scene_KS.cpp">
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClCompile>
+
     <ClCompile Include="Player_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJini.cpp">
+      <Filter>02. Scene\01.Scene_jini</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
