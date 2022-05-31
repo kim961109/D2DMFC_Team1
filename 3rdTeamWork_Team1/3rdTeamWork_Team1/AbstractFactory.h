@@ -23,6 +23,7 @@ public:
 		return pObj;
 	}
 
+
 	static CObj*& Create_SetPos(float _fX, float _fY, float _fZ)
 	{
 		CObj* pObj = new T();
@@ -31,4 +32,5 @@ public:
 
 		return pObj;
 	}
+
 };
