@@ -49,7 +49,7 @@ void CScene_Main::Key_Input(void)
 {
 	if (CKeyMgr::Get_Instance()->Key_Down('1'))
 	{
-		CSceneMgr::Get_Instance()->Scene_Change(SC_jini);
+		CSceneMgr::Get_Instance()->Scene_Change(SC_Jini);
 	}
 	else if (CKeyMgr::Get_Instance()->Key_Down('2'))
 	{
