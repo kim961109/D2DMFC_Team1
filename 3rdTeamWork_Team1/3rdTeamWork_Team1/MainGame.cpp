@@ -14,18 +14,22 @@ CMainGame::~CMainGame()
 
 void CMainGame::Initialize(void)
 {
-	int iA = 0;
+
+	int i = 0;
+
+
+
 
 	m_hDC = GetDC(g_hWnd);
 
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/stardewPanorama.bmp", L"stardewPanorama"); //Back ¹öÆÛ¿¡ ÇØ´çÇÏ´Â ±×¸²À» Ãß°¡¸¦ ÇØ¾ßÇÑ´Ù.
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/stardewPanorama.bmp", L"stardewPanorama"); //Back ë²„í¼ì— í•´ë‹¹í•˜ëŠ” ê·¸ë¦¼ì„ ì¶”ê°€ë¥¼ í•´ì•¼í•œë‹¤.
 
 	CSceneMgr::Get_Instance()->Scene_Change(SC_Main);
 }
 
 void CMainGame::Update(void)
 {
-	//CScrollMgr::Get_Instance()->Scroll_Lock(); //½ºÅ©·Ñ ¶ôÀº ³ªÁß¿¡ ÇÊ¿ä½Ã »ç¿ë.
+	//CScrollMgr::Get_Instance()->Scroll_Lock(); //ìŠ¤í¬ë¡¤ ë½ì€ ë‚˜ì¤‘ì— í•„ìš”ì‹œ ì‚¬ìš©.
 	CSceneMgr::Get_Instance()->Update();
 
 }
@@ -37,11 +41,11 @@ void CMainGame::Late_Update(void)
 
 void CMainGame::Render(void)
 {
-	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"stardewPanorama"); // Back ¹öÆÛ¿¡ ±×¸± ±×¸²
+	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"stardewPanorama"); // Back ë²„í¼ì— ê·¸ë¦´ ê·¸ë¦¼
 
 	BitBlt(m_hDC, 0, 0, WINCX, WINCY, hMemDC, 0, 0, SRCCOPY);
 
-	CSceneMgr::Get_Instance()->Render(hMemDC); // ¹é ¹öÆÛ¿¡´Ù°¡ ±×¸²À» ±×¸°´Ù
+	CSceneMgr::Get_Instance()->Render(hMemDC); // ë°± ë²„í¼ì—ë‹¤ê°€ ê·¸ë¦¼ì„ ê·¸ë¦°ë‹¤
 
 
 #ifdef _DEBUG
