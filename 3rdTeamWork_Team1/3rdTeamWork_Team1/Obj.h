@@ -22,6 +22,9 @@ public:
 	RECT Get_Rect(void) { return m_tRect; }
 	INFO Get_Info(void) { return m_tInfo; }
 
+	void Set_Pos(float _fX, float _fY, float _fZ) { m_tInfo.vPos.x = _fX; m_tInfo.vPos.y = _fY; m_tInfo.vPos.z = _fZ; }
+
+
 protected:
 	OBJINFO m_tObjInfo;		//충돌하는 벽 같은 움직이지 않을 오브젝트는 이걸로 월드 좌표만 주고
 	RECT m_tRect;			//움직이지 않는 물체의 렉트.

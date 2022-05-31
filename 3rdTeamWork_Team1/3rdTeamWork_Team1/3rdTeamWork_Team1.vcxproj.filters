@@ -164,9 +164,11 @@
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClInclude>
 
+
     <ClInclude Include="PlayerKJE.h">
       <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
     </ClInclude>
+
 
     <ClInclude Include="Player_KS.h">
       <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
@@ -176,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="PlayerJini.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
+    </ClInclude>
+    <ClInclude Include="Jelly.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +252,9 @@
     <ClCompile Include="PlayerJini.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
 
+    </ClCompile>
+    <ClCompile Include="Jelly.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
