@@ -26,7 +26,7 @@ void CSceneMgr::Scene_Change(SCENEID eID)    // 추후 SceneExchange함수 만들어 기
 			m_pScene = new CScene_Main;
 			break;
 
-		case SC_jini:
+		case SC_Jini:
 			m_pScene = new CScene_jini;
 			break;
 

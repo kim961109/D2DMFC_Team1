@@ -153,6 +153,9 @@
     <ClInclude Include="Scene_KS.h">
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerJini.h">
+      <Filter>02. Scene\01.Scene_jini</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -208,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="Scene_KS.cpp">
       <Filter>02. Scene\04.Scene_KS</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJini.cpp">
+      <Filter>02. Scene\01.Scene_jini</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
