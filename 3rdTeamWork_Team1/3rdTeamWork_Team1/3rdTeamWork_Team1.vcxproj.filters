@@ -70,6 +70,12 @@
     <Filter Include="02. Scene\04.Scene_KS">
       <UniqueIdentifier>{55d2ca62-5b57-45ae-82c3-218ee130c183}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\Player_KS">
+      <UniqueIdentifier>{2a65d3c5-f33e-434a-97ef-75de3005a94b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\Bullet">
+      <UniqueIdentifier>{65fb6f5f-7bbc-4512-ad03-9bc830d20d9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -153,6 +159,12 @@
     <ClInclude Include="Scene_KS.h">
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClInclude>
+    <ClInclude Include="Player_KS.h">
+      <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -208,6 +220,12 @@
     </ClCompile>
     <ClCompile Include="Scene_KS.cpp">
       <Filter>02. Scene\04.Scene_KS</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_KS.cpp">
+      <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
