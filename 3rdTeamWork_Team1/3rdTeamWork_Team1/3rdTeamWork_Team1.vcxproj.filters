@@ -70,6 +70,9 @@
     <Filter Include="02. Scene\04.Scene_KS">
       <UniqueIdentifier>{55d2ca62-5b57-45ae-82c3-218ee130c183}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Scene\03.Scene_KJE\PlayerKJE">
+      <UniqueIdentifier>{e8cb5467-918b-4642-bbba-ac0c8d6d044e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -153,6 +156,9 @@
     <ClInclude Include="Scene_KS.h">
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerKJE.h">
+      <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -208,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="Scene_KS.cpp">
       <Filter>02. Scene\04.Scene_KS</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerKJE.cpp">
+      <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
