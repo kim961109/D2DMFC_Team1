@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="99.Design">
+      <UniqueIdentifier>{584486a9-50ac-43da-b60e-b36d5db24f53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.Header">
+      <UniqueIdentifier>{1c7cef3a-82dc-41d0-a14e-7c0e0296d943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.MainGame">
+      <UniqueIdentifier>{09df5d50-1170-424a-b7b4-1e25e1222008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.OBJ">
+      <UniqueIdentifier>{cede8158-6c8b-4283-a7a4-871cd971c7d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.OBJ\01.Player">
+      <UniqueIdentifier>{02ecc48b-b1ec-4f7c-98a8-b87eeadc5677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Design\02.ObjMgr">
+      <UniqueIdentifier>{e6a3a40d-72a3-4b21-afc3-bdd516ae8d38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Design\03.KeyMgr">
+      <UniqueIdentifier>{8650fbc0-6b66-47eb-8bd0-613590d9b4d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Design\04.ScrollMgr">
+      <UniqueIdentifier>{c31705cd-2507-43f3-bb7f-8c1e2532a281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Design\01.Factory">
+      <UniqueIdentifier>{6ed20100-cf09-4245-9474-b818f63b007d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Design\05.CollisionMgr">
+      <UniqueIdentifier>{4d80e74a-180c-4741-9d71-fb92cca2b691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Design\06.SceneMgr">
+      <UniqueIdentifier>{19d00c24-40a4-45d7-aae3-b64061d870ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene">
+      <UniqueIdentifier>{e133e5db-a171-4b10-ae73-c8ed37890555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\00.Scene_Main">
+      <UniqueIdentifier>{3e3362ad-c256-4388-9a43-122d1866ac40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Design\07.BmpMgr">
+      <UniqueIdentifier>{1cfe4452-c878-4d50-b7f3-87657cbfb74e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Bmp">
+      <UniqueIdentifier>{6e57cb13-378c-4644-9ab9-34e419cbcf60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\01.Scene_jini">
+      <UniqueIdentifier>{bcb69c08-e1bc-49bf-87a3-e98de6377e43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\02.Scene_MinSungJJang">
+      <UniqueIdentifier>{f73054c9-b032-4b2e-927c-45a371b5d6d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\03.Scene_KJE">
+      <UniqueIdentifier>{37baf4a0-6cef-4963-b6ec-6def75f88560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS">
+      <UniqueIdentifier>{55d2ca62-5b57-45ae-82c3-218ee130c183}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdTeamWork_Team1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Functor.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>00.MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj.h">
+      <Filter>01.OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>01.OBJ\01.Player</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractFactory.h">
+      <Filter>99.Design\01.Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMgr.h">
+      <Filter>99.Design\02.ObjMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionMgr.h">
+      <Filter>99.Design\05.CollisionMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyMgr.h">
+      <Filter>99.Design\03.KeyMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="ScrollMgr.h">
+      <Filter>99.Design\04.ScrollMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMgr.h">
+      <Filter>99.Design\06.SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>02. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Main.h">
+      <Filter>02. Scene\00.Scene_Main</Filter>
+    </ClInclude>
+    <ClInclude Include="MyBmp.h">
+      <Filter>03.Bmp</Filter>
+    </ClInclude>
+    <ClInclude Include="BmpMgr.h">
+      <Filter>99.Design\07.BmpMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_jini.h">
+      <Filter>02. Scene\01.Scene_jini</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_MinSungJJang.h">
+      <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_KJE.h">
+      <Filter>02. Scene\03.Scene_KJE</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_KS.h">
+      <Filter>02. Scene\04.Scene_KS</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdTeamWork_Team1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>00.MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj.cpp">
+      <Filter>01.OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>01.OBJ\01.Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMgr.cpp">
+      <Filter>99.Design\02.ObjMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionMgr.cpp">
+      <Filter>99.Design\05.CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyMgr.cpp">
+      <Filter>99.Design\03.KeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrollMgr.cpp">
+      <Filter>99.Design\04.ScrollMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMgr.cpp">
+      <Filter>99.Design\06.SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>02. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_Main.cpp">
+      <Filter>02. Scene\00.Scene_Main</Filter>
+    </ClCompile>
+    <ClCompile Include="MyBmp.cpp">
+      <Filter>03.Bmp</Filter>
+    </ClCompile>
+    <ClCompile Include="BmpMgr.cpp">
+      <Filter>99.Design\07.BmpMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_jini.cpp">
+      <Filter>02. Scene\01.Scene_jini</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_MinSungJJang.cpp">
+      <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_KJE.cpp">
+      <Filter>02. Scene\03.Scene_KJE</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_KS.cpp">
+      <Filter>02. Scene\04.Scene_KS</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="3rdTeamWork_Team1.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="3rdTeamWork_Team1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
