@@ -1,5 +1,10 @@
 #pragma once
 #include "Scene.h"
+#include "ObjMgr.h"
+#include "AbstractFactory.h"
+#include "Player_KS.h"
+
+
 class CScene_KS :
 	public CScene
 {

@@ -1,11 +1,11 @@
 #pragma once
-#include "Scene.h"
-class CScene_jini :
-	public CScene
+#include "Obj.h"
+class CJelly :
+	public CObj
 {
 public:
-	CScene_jini();
-	virtual ~CScene_jini();
+	CJelly();
+	virtual ~CJelly();
 
 public:
 	virtual void Initialize(void) override;
@@ -14,10 +14,11 @@ public:
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
 
-private:
+private :
+	int		m_iPlayerColorR;
+	int		m_iPlayerColorG;
+	int		m_iPlayerColorB;
 
-	float	m_fPosXRandom;
-	float	m_fPosYRandom;
-	float	m_fPosZRandom;
+	int		m_iScale;
 };
 

@@ -70,14 +70,22 @@
     <Filter Include="02. Scene\04.Scene_KS">
       <UniqueIdentifier>{55d2ca62-5b57-45ae-82c3-218ee130c183}</UniqueIdentifier>
     </Filter>
+
     <Filter Include="02. Scene\03.Scene_KJE\PlayerKJE">
       <UniqueIdentifier>{e8cb5467-918b-4642-bbba-ac0c8d6d044e}</UniqueIdentifier>
     </Filter>
+
     <Filter Include="99.Design\08.TileMgr">
       <UniqueIdentifier>{97a96152-a368-404c-84ae-06111edb446b}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. Scene\03.Scene_KJE\Tile_KJE">
       <UniqueIdentifier>{302ab07d-9683-4ce0-83bf-84db47fd69ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\Player_KS">
+      <UniqueIdentifier>{2a65d3c5-f33e-434a-97ef-75de3005a94b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\Bullet">
+      <UniqueIdentifier>{65fb6f5f-7bbc-4512-ad03-9bc830d20d9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +170,7 @@
     <ClInclude Include="Scene_KS.h">
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClInclude>
+
     <ClInclude Include="Snake_Head.h">
       <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
     </ClInclude>
@@ -173,6 +182,25 @@
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>02. Scene\03.Scene_KJE\Tile_KJE</Filter>
+    </ClInclude>
+
+
+    <ClInclude Include="PlayerKJE.h">
+      <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
+    </ClInclude>
+
+
+    <ClInclude Include="Player_KS.h">
+      <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJini.h">
+      <Filter>02. Scene\01.Scene_jini</Filter>
+    </ClInclude>
+    <ClInclude Include="Jelly.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +258,7 @@
     <ClCompile Include="Scene_KS.cpp">
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClCompile>
+
     <ClCompile Include="Snake_Head.cpp">
       <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
     </ClCompile>
@@ -241,6 +270,20 @@
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>02. Scene\03.Scene_KJE\Tile_KJE</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_KS.cpp">
+      <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJini.cpp">
+      <Filter>02. Scene\01.Scene_jini</Filter>
+
+    </ClCompile>
+    <ClCompile Include="Jelly.cpp">
+      <Filter>Source Files</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -155,19 +155,26 @@
     <ClInclude Include="3rdTeamWork_Team1.h" />
     <ClInclude Include="AbstractFactory.h" />
     <ClInclude Include="BmpMgr.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Functor.h" />
     <ClInclude Include="Include.h" />
+    <ClInclude Include="Jelly.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MyBmp.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjMgr.h" />
     <ClInclude Include="Player.h" />
+
     <ClInclude Include="Snake_Body.h" />
     <ClInclude Include="Snake_Head.h" />
+
+    <ClInclude Include="Player_KS.h" />
+    <ClInclude Include="PlayerJini.h" />
+
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneMgr.h" />
@@ -186,15 +193,22 @@
   <ItemGroup>
     <ClCompile Include="3rdTeamWork_Team1.cpp" />
     <ClCompile Include="BmpMgr.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
+    <ClCompile Include="Jelly.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="MyBmp.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjMgr.cpp" />
     <ClCompile Include="Player.cpp" />
+
     <ClCompile Include="Snake_Body.cpp" />
     <ClCompile Include="Snake_Head.cpp" />
+
+    <ClCompile Include="Player_KS.cpp" />
+    <ClCompile Include="PlayerJini.cpp" />
+
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
     <ClCompile Include="Scene_jini.cpp" />
