@@ -9,7 +9,7 @@ public:
 
 public:
 	virtual void Initialize(void) PURE;
-	virtual void Update(void) PURE;
+	virtual int Update(void) PURE;
 	virtual void Late_Update(void) PURE;
 	virtual void Render(HDC hDC) PURE;
 	virtual void Release(void) PURE;
@@ -21,14 +21,16 @@ public:
 	OBJINFO Get_ObjInfo(void) { return m_tObjInfo; }
 	RECT Get_Rect(void) { return m_tRect; }
 	INFO Get_Info(void) { return m_tInfo; }
-
+  
 	void Set_Pos(float _fX, float _fY, float _fZ) { m_tInfo.vPos.x = _fX; m_tInfo.vPos.y = _fY; m_tInfo.vPos.z = _fZ; }
 
-
 protected:
-	OBJINFO m_tObjInfo;		//Ãæµ¹ÇÏ´Â º® °°Àº ¿òÁ÷ÀÌÁö ¾ÊÀ» ¿ÀºêÁ§Æ®´Â ÀÌ°É·Î ¿ùµå ÁÂÇ¥¸¸ ÁÖ°í
-	RECT m_tRect;			//¿òÁ÷ÀÌÁö ¾Ê´Â ¹°Ã¼ÀÇ ·ºÆ®.
+	OBJINFO m_tObjInfo;		//ì¶©ëŒí•˜ëŠ” ë²½ ê°™ì€ ì›€ì§ì´ì§€ ì•Šì„ ì˜¤ë¸Œì íŠ¸ëŠ” ì´ê±¸ë¡œ ì›”ë“œ ì¢Œí‘œë§Œ ì£¼ê³ 
+	RECT m_tRect;			//ì›€ì§ì´ì§€ ì•ŠëŠ” ë¬¼ì²´ì˜ ë ‰íŠ¸.
 
-	INFO m_tInfo;			//¿òÁ÷ÀÌ´Â ÇÃ·¹ÀÌ¾î¿Í °°Àº ¿ÀºêÁ§Æ®´Â D3D º¤ÅÍ »ç¿ëÇÏÀÚ.
+	INFO m_tInfo;//ì›€ì§ì´ëŠ” í”Œë ˆì´ì–´ì™€ ê°™ì€ ì˜¤ë¸Œì íŠ¸ëŠ” D3D ë²¡í„° ì‚¬ìš©í•˜ì.
+
+	bool		m_bDead;
+
 };
 

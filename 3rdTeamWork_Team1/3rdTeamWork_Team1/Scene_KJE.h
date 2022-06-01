@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-#include "PlayerKJE.h"
+#include "Snake_Head.h"
 class CScene_KJE :
 	public CScene
 {
@@ -16,6 +16,6 @@ public:
 	virtual void Release(void) override;
 
 private:
-	list<CPlayerKJE*> m_SnakeList;
+	list<CSnake_Head*> m_SnakeList;
 };
 
