@@ -1,5 +1,11 @@
 #pragma once
 #include "Scene.h"
+#include "BmpMgr.h"
+#include "ObjMgr.h"
+#include "KeyMgr.h"
+#include "SceneMgr.h"
+#include "AbstractFactory.h"
+#include "PlayerMS.h"
 class CScene_MinSungJJang :
 	public CScene
 {

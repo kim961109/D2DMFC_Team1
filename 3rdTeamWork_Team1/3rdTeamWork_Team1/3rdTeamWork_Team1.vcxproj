@@ -168,15 +168,10 @@
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjMgr.h" />
     <ClInclude Include="Player.h" />
-
-
     <ClInclude Include="PlayerKJE.h" />
-
-
-
+    <ClInclude Include="PlayerMS.h" />
     <ClInclude Include="Player_KS.h" />
     <ClInclude Include="PlayerJini.h" />
-
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneMgr.h" />
@@ -202,15 +197,10 @@
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjMgr.cpp" />
     <ClCompile Include="Player.cpp" />
-
-
     <ClCompile Include="PlayerKJE.cpp" />
-
-
-
+    <ClCompile Include="PlayerMS.cpp" />
     <ClCompile Include="Player_KS.cpp" />
     <ClCompile Include="PlayerJini.cpp" />
-
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
     <ClCompile Include="Scene_jini.cpp" />
