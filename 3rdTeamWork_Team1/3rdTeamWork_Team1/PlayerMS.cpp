@@ -30,7 +30,7 @@ void CPlayerMS::Initialize(void)
 	m_fSpeed = 5.f;
 }
 
-void CPlayerMS::Update(void)
+int CPlayerMS::Update(void)
 {
 	Key_Input(); 
 
@@ -48,6 +48,8 @@ void CPlayerMS::Update(void)
 		m_vPoint[i] -= { 400.f, 300.f, 0.f };
 		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
 	}
+
+	return 0;
 }
 
 void CPlayerMS::Late_Update(void)
