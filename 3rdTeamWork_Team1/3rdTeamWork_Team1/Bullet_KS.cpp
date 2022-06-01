@@ -28,9 +28,11 @@ void CBullet_KS::Initialize(void)
 	m_tInfo.vDir.z = 0.f;
 }
 
-void CBullet_KS::Update(void)
+int CBullet_KS::Update(void)
 {
 	Move_Bullet_KS();
+
+	return 0;
 }
 
 void CBullet_KS::Late_Update(void)

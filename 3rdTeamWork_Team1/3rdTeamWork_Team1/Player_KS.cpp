@@ -39,7 +39,7 @@ void CPlayer_KS::Initialize(void)
 	}
 }
 
-void CPlayer_KS::Update(void)
+int CPlayer_KS::Update(void)
 {
 	//총구가 바라보는 방향으로의 각도를 구함.
 	Change_GunAngle();
@@ -75,6 +75,8 @@ void CPlayer_KS::Update(void)
 	cout << "마우스 POS좌표 : " << ::Get_Mouse().x << "\t" << ::Get_Mouse().y << "\t" << ::Get_Mouse().z << endl;
 
 #endif // _DEBUG
+
+	return 0;
 }
 
 void CPlayer_KS::Late_Update(void)

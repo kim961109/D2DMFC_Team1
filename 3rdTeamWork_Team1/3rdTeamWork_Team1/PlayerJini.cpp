@@ -42,7 +42,7 @@ void CPlayerJini::Initialize(void)
 	m_strTag = "부모"; 
 }
 
-void CPlayerJini::Update(void)
+int CPlayerJini::Update(void)
 {
 	// 여기
 	Key_Input();
@@ -75,6 +75,8 @@ void CPlayerJini::Update(void)
 	{
 		D3DXVec3TransformCoord(&m_vBody[i], &m_vBodyLocal[i], &m_tInfo.matWorld);
 	}
+
+	return 0;
 }
 
 void CPlayerJini::Late_Update(void)
