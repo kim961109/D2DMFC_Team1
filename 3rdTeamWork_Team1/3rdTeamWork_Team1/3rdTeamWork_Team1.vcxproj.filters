@@ -204,6 +204,10 @@
     <ClInclude Include="Jelly.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+
+    <ClInclude Include="PlayerMS.h">
+      <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
+    </ClInclude>
     <ClInclude Include="Bullet_KS.h">
       <Filter>02. Scene\04.Scene_KS\Bullet_KS</Filter>
     </ClInclude>
@@ -310,6 +314,9 @@
     </ClCompile>
     <ClCompile Include="UIMgr.cpp">
       <Filter>99.Design\08.UIMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMS.cpp">
+      <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -172,6 +172,8 @@
     <ClInclude Include="ObjMgr.h" />
     <ClInclude Include="Player.h" />
 
+    <ClInclude Include="PlayerMS.h" />
+
     <ClInclude Include="Snake_Body.h" />
     <ClInclude Include="Snake_Head.h" />
 
@@ -211,6 +213,8 @@
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjMgr.cpp" />
     <ClCompile Include="Player.cpp" />
+
+    <ClCompile Include="PlayerMS.cpp" />
 
     <ClCompile Include="Snake_Body.cpp" />
     <ClCompile Include="Snake_Head.cpp" />
