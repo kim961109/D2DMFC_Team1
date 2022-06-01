@@ -23,10 +23,15 @@ void CJelly::Initialize(void)
 	m_iPlayerColorB = (rand() % 256 * m_iColor) % 256;
 
 	m_iScale = rand() % 6 + 5;
+	
+	// ¿©±â
+	m_fPlusScale = m_iScale * 0.1f;
 }
 
-void CJelly::Update(void)
+int CJelly::Update(void)
 {
+
+	return 0;
 }
 
 void CJelly::Late_Update(void)

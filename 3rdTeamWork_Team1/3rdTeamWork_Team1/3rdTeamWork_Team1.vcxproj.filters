@@ -73,11 +73,27 @@
     <Filter Include="02. Scene\03.Scene_KJE\PlayerKJE">
       <UniqueIdentifier>{e8cb5467-918b-4642-bbba-ac0c8d6d044e}</UniqueIdentifier>
     </Filter>
+
+    <Filter Include="99.Design\08.TileMgr">
+      <UniqueIdentifier>{97a96152-a368-404c-84ae-06111edb446b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\03.Scene_KJE\Tile_KJE">
+      <UniqueIdentifier>{302ab07d-9683-4ce0-83bf-84db47fd69ae}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02. Scene\04.Scene_KS\Player_KS">
       <UniqueIdentifier>{2a65d3c5-f33e-434a-97ef-75de3005a94b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Scene\04.Scene_KS\Bullet">
+    <Filter Include="02. Scene\04.Scene_KS\Bullet_KS">
       <UniqueIdentifier>{65fb6f5f-7bbc-4512-ad03-9bc830d20d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI">
+      <UniqueIdentifier>{8b50a7ed-d6d6-476c-bfd7-3b8128c6cee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Design\08.UIMgr">
+      <UniqueIdentifier>{e29c332a-5f4f-440b-b099-62fb8c4aa14f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\01.UI_PlayerHp">
+      <UniqueIdentifier>{a3df4341-9920-4f3f-b019-f54b23332e65}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -162,14 +178,25 @@
     <ClInclude Include="Scene_KS.h">
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClInclude>
+
+    <ClInclude Include="Snake_Head.h">
+      <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
+    </ClInclude>
+    <ClInclude Include="Snake_Body.h">
+      <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMgr.h">
+      <Filter>99.Design\08.TileMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>02. Scene\03.Scene_KJE\Tile_KJE</Filter>
+    </ClInclude>
+
     <ClInclude Include="PlayerKJE.h">
       <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
     </ClInclude>
     <ClInclude Include="Player_KS.h">
       <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerJini.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
@@ -177,8 +204,24 @@
     <ClInclude Include="Jelly.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+
     <ClInclude Include="PlayerMS.h">
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet_KS.h">
+      <Filter>02. Scene\04.Scene_KS\Bullet_KS</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>04.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIFactory.h">
+      <Filter>99.Design\01.Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_PlayerHp.h">
+      <Filter>02. Scene\04.Scene_KS\01.UI_PlayerHp</Filter>
+    </ClInclude>
+    <ClInclude Include="UIMgr.h">
+      <Filter>99.Design\08.UIMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -236,20 +279,41 @@
     <ClCompile Include="Scene_KS.cpp">
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerKJE.cpp">
+
+    <ClCompile Include="Snake_Head.cpp">
       <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
     </ClCompile>
+    <ClCompile Include="Snake_Body.cpp">
+      <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMgr.cpp">
+      <Filter>99.Design\08.TileMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>02. Scene\03.Scene_KJE\Tile_KJE</Filter>
+    </ClCompile>
+
     <ClCompile Include="Player_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerJini.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClCompile>
     <ClCompile Include="Jelly.cpp">
       <Filter>Source Files</Filter>
+
+    </ClCompile>
+    <ClCompile Include="Bullet_KS.cpp">
+      <Filter>02. Scene\04.Scene_KS\Bullet_KS</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>04.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_PlayerHp.cpp">
+      <Filter>02. Scene\04.Scene_KS\01.UI_PlayerHp</Filter>
+    </ClCompile>
+    <ClCompile Include="UIMgr.cpp">
+      <Filter>99.Design\08.UIMgr</Filter>
     </ClCompile>
     <ClCompile Include="PlayerMS.cpp">
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>

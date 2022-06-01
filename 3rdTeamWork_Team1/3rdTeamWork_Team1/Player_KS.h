@@ -1,5 +1,10 @@
 #pragma once
 #include "Obj.h"
+#include "KeyMgr.h"
+#include "ObjMgr.h"
+#include "AbstractFactory.h"
+#include "Bullet_KS.h"
+
 class CPlayer_KS :
 	public CObj
 {
@@ -9,13 +14,14 @@ public:
 
 public:
 	virtual void Initialize(void) override;
-	virtual void Update(void) override;
+	virtual int Update(void) override;
 	virtual void Late_Update(void) override;
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
 
 private:
 	void		Key_Input(void);
+	void		Key_Shoot(void);
 	void        Change_GunAngle(void);
 
 
@@ -26,7 +32,10 @@ private:
 	D3DXVECTOR3			m_vBodyPoint[4];//몸체의 4개 점의 좌표.
 	D3DXVECTOR3			m_vOriginBodyPoint[4];//몸체의 로컬 좌표를 기억해줄 벡터.
 
-	float				m_fGunAngle = 0.f;//총구가 바라보는 방향.
+	float				m_fGunAngle;//총구가 바라보는 방향.
+	float               m_fBodyAngle;//몸체가 바라보는 방향.
 	float               m_fSpeed;//플레이어의 이동속도.
+
+	int                 m_iHp;
 };
 

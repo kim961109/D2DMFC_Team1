@@ -1,18 +1,19 @@
-#include "stdafx.h"
-#include "PlayerKJE.h"
+ï»¿#include "stdafx.h"
+#include "Snake_Body.h"
 
 
-CPlayerKJE::CPlayerKJE()
+CSnake_Body::CSnake_Body()
 {
 }
 
-CPlayerKJE::~CPlayerKJE()
+
+CSnake_Body::~CSnake_Body()
 {
 }
 
-void CPlayerKJE::Initialize(void)
-{
-	m_tInfo.vPos = { 400.f, 300.f, 0.f };
+void CSnake_Body::Initialize(void)
+{	//ìœ ë‹ˆì½”ë“œ í…ŒìŠ¤íŠ¸
+	//m_tInfo.vPos = { 400.f, 300.f, 0.f };
 	m_tInfo.vLook = { 0.f, -1.f, 0.f };
 
 	m_vPoint[0] = { m_tInfo.vPos.x - 10.f,  m_tInfo.vPos.y - 10.f, 0.f };
@@ -22,14 +23,14 @@ void CPlayerKJE::Initialize(void)
 
 	for (int i = 0; i < 4; ++i)
 	{
-		m_vOriginPoint[i] = m_vPoint[i];//Å°´©¸¦¶§¸¸¿òÁ÷ÀÌ°ÔÇÏ·Á°í originpoint ¸¸µë
+		m_vOriginPoint[i] = m_vPoint[i];
 	}
 
 	m_fAngle = 0.f;
 	m_fSpeed = 2.f;
 }
 
-void CPlayerKJE::Update(void)
+int CSnake_Body::Update(void)
 {
 	Key_Input();
 
@@ -49,38 +50,30 @@ void CPlayerKJE::Update(void)
 		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
 
 	}
+	return 0;
 }
 
-void CPlayerKJE::Late_Update(void)
+void CSnake_Body::Late_Update(void)
 {
 }
 
-void CPlayerKJE::Render(HDC hDC)
+void CSnake_Body::Render(HDC hDC)
 {
 	MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
 
 	for (int i = 0; i < 4; ++i)
 	{
 		LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
-
-		if (i > 1)
-			continue;
-
-		Ellipse(hDC,
-			(int)m_vPoint[i].x - 5.f,
-			(int)m_vPoint[i].y - 5.f,
-			(int)m_vPoint[i].x + 5.f,
-			(int)m_vPoint[i].y + 5.f);
 	}
 
 	LineTo(hDC, m_vPoint[0].x, m_vPoint[0].y);
 }
 
-void CPlayerKJE::Release(void)
+void CSnake_Body::Release(void)
 {
 }
 
-void CPlayerKJE::Key_Input(void)
+void CSnake_Body::Key_Input(void)
 {
 	if (GetAsyncKeyState('W'))
 	{
@@ -92,26 +85,17 @@ void CPlayerKJE::Key_Input(void)
 
 	if (GetAsyncKeyState(VK_UP))
 	{
-	//	D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-		m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
 	}
 	if (GetAsyncKeyState(VK_DOWN))
 	{
-		//D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-		m_tInfo.vPos -= m_tInfo.vDir * m_fSpeed;
-	
 	}
 	if (GetAsyncKeyState(VK_LEFT))
 	{
-		//D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-		m_fAngle -= D3DXToRadian(3.f);
 	}
 
 	if (GetAsyncKeyState(VK_RIGHT))
 	{
-		//D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-		m_fAngle += D3DXToRadian(3.f);
-
 	}
 
 }
+

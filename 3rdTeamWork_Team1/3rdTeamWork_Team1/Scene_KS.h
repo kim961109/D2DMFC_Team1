@@ -1,7 +1,9 @@
 #pragma once
 #include "Scene.h"
 #include "ObjMgr.h"
+#include "UIMgr.h"
 #include "AbstractFactory.h"
+#include "UIFactory.h"
 #include "Player_KS.h"
 
 
