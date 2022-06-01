@@ -33,6 +33,7 @@ void CMainGame::Initialize(void)
 	}
 
 #endif // _DEBUG
+
 }
 
 void CMainGame::Update(void)

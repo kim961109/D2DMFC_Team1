@@ -10,6 +10,8 @@ public:
 
 public:
 	void Add_Object(OBJID eID, CObj* pObj);
+	// ¿©±â
+	CObj* Get_ListBack(OBJID eID);
 	void Render(HDC hDC);
 	void Update(void);
 	void Late_Update(void);

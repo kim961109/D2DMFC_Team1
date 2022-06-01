@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "PlayerJini.h"
 
+#include "KeyMgr.h"
+#include "ObjMgr.h"
+#include "AbstractFactory.h"
+
 CPlayerJini::CPlayerJini()
 {
 }
@@ -21,7 +25,7 @@ void CPlayerJini::Initialize(void)
 	m_fSpeed		= 2.f;
 	m_fAngle		= 0.f;
 	m_fScale		= 1.5f;
-	m_fEllipse		= 50.f;
+	//m_fEllipse		= 50.f;
 
 	m_vBodyLocal[0] = { -50.f, 0.f, 0.f }; //left
 	m_vBodyLocal[1] = { 0.f, -50.f, 0.f }; //top
@@ -33,11 +37,18 @@ void CPlayerJini::Initialize(void)
 	m_iPlayerColorR = rand() % 256;
 	m_iPlayerColorG = rand() % 256;
 	m_iPlayerColorB = rand() % 256;
+
+	m_strName = "순수하짐";
+	m_strTag = "부모"; 
 }
 
 void CPlayerJini::Update(void)
 {
+	// 여기
+	Key_Input();
+
 	m_fSpeed = m_fScale * 3 / (m_fScale * m_fScale) ;
+
 	// 마우스 방향연산
 	m_vDirLocal = ::Get_Mouse() - m_tInfo.vPos;
 	D3DXVec3Normalize(&m_tInfo.vDir, &m_vDirLocal);
@@ -64,9 +75,6 @@ void CPlayerJini::Update(void)
 	{
 		D3DXVec3TransformCoord(&m_vBody[i], &m_vBodyLocal[i], &m_tInfo.matWorld);
 	}
-
-	
-	//D3DXVec3TransformNormal(&m_tInfo.vDir, &m_vDirLocal, &m_tInfo.matWorld);
 }
 
 void CPlayerJini::Late_Update(void)
@@ -98,5 +106,35 @@ void CPlayerJini::Render(HDC hDC)
 
 void CPlayerJini::Release(void)
 {
+}
+
+// 여기
+void CPlayerJini::Key_Input()
+{
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
+	{
+		Attack();
+
+		// 함수를 따로 떼던가
+		// 먼저 크기를 반으로 나누고
+		//m_fScale *= 0.5;
+
+		// 분신 생성 및 크기 셋팅
+		//CObjMgr::Get_Instance()->Add_Object(OBJ_Player, CAbsractFactory<CPlayer>::Create(0.f, 0.f, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
+		//CObjMgr::Get_Instance()->Get_ListBack(OBJ_Player)->Set_Scale(m_fScale);
+		//CObjMgr::Get_Instance()->Get_ListBack(OBJ_Player)->Set_Tag("자식");
+
+		// 
+	}
+}
+
+// 여기
+void CPlayerJini::Attack()
+{
+	m_fScale *= 0.5;
+
+	CObjMgr::Get_Instance()->Add_Object(OBJ_Player, CAbstractFactory<CPlayerJini>::Create_SetPos(m_tInfo.vPos.x + 50.f, m_tInfo.vPos.y + 50.f, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
+	dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_Player))->Set_Scale(m_fScale);
+	dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_Player))->Set_Tag("자식");
 }
 
