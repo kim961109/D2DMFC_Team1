@@ -26,5 +26,7 @@ private:
 	float		m_fSpeed;
 	float		m_fAngle;
 
+	DWORD		m_dKeyInput;
+
 };
 

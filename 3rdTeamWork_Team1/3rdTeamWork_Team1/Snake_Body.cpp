@@ -12,7 +12,8 @@ CSnake_Body::~CSnake_Body()
 }
 
 void CSnake_Body::Initialize(void)
-{	//유니코드 테스트
+{	//앞에꺼의 bottom 기준으로 좌표생성하면됨
+	//if (순서>0) 면 
 	//m_tInfo.vPos = { 400.f, 300.f, 0.f };
 	m_tInfo.vLook = { 0.f, -1.f, 0.f };
 

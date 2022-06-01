@@ -31,8 +31,11 @@ void CSnake_Head::Initialize(void)
 
 int CSnake_Head::Update(void)
 {
-	Key_Input();
-	m_tInfo.vPos += m_tInfo.vLook * m_fSpeed;
+	if (GetTickCount() - m_dKeyInput > 800)
+	{
+		Key_Input();
+	}
+	//m_tInfo.vPos += m_tInfo.vLook * m_fSpeed;
 	D3DXMATRIX		matScale, matRotZ, matTrans;
 
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
@@ -40,14 +43,14 @@ int CSnake_Head::Update(void)
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f);
 
 	m_tInfo.matWorld = matScale * matRotZ * matTrans;
-	D3DXVec3TransformNormal(&m_tInfo.vLook, &m_tInfo.vLook, &m_tInfo.matWorld);
+	D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
+	m_tInfo.vPos += m_tInfo.vDir*m_fSpeed;
 	for (int i = 0; i < 4; ++i)
 	{
 		m_vPoint[i] = m_vOriginPoint[i];
 		m_vPoint[i] -= { 400.f, 300.f, 0.f };
 
 		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
-
 	}
 	return 0;
 }
@@ -91,30 +94,26 @@ void CSnake_Head::Key_Input(void)
 	{
 	}
 
-	if (GetAsyncKeyState(VK_UP))
-	{
-	//	D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-		//m_tInfo.vPos += m_tInfo.vDir * 20;
-		m_fAngle = D3DXToRadian(90.f);
+	/*if (GetAsyncKeyState(VK_UP))
+	{	
+		m_fAngle -= D3DXToRadian(90.f);
+		m_dKeyInput = GetTickCount();
 	}
 	if (GetAsyncKeyState(VK_DOWN))
 	{
-		//D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-		//m_tInfo.vPos -= m_tInfo.vLook * 20;
-		m_fAngle = D3DXToRadian(270.f);
-	
-	}
+		m_fAngle += D3DXToRadian(90.f);
+		m_dKeyInput = GetTickCount();
+	}/**/
 	if (GetAsyncKeyState(VK_LEFT))
 	{
-		//D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-		m_fAngle = D3DXToRadian(180.f);
+		m_fAngle -= D3DXToRadian(90.f);
+		m_dKeyInput = GetTickCount();
 	}
 
 	if (GetAsyncKeyState(VK_RIGHT))
 	{
-		//D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-		m_fAngle = D3DXToRadian(0.f);
-
+		m_fAngle += D3DXToRadian(90.f);
+		m_dKeyInput = GetTickCount();
 	}
 
 }

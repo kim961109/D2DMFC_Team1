@@ -24,7 +24,12 @@ void CTile::Initialize(void)
 
 	m_iDrawID = 0;
 	m_iOption = 0;
-
+	
+	//타일색상랜덤
+	srand(unsigned int(time(NULL)));
+	m_iTileColorR = rand() % 256;
+	m_iTileColorG = rand() % 256;
+	m_iTileColorB = rand() % 256;
 	//CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Edit/Tile.bmp", L"Tile");
 }
 
@@ -61,17 +66,16 @@ void CTile::Render(HDC hDC)
 		//0,
 		//SRCCOPY);
 	if(m_iOption==0)
-	Rectangle(hDC, m_tInfo.vPos.x - (TILECX * 0.5), m_tInfo.vPos.y - (TILECY * 0.5), m_tInfo.vPos.x + (TILECX * 0.5), m_tInfo.vPos.y + (TILECY * 0.5));
+	{ }
+	//Rectangle(hDC, m_tInfo.vPos.x - (TILECX * 0.5), m_tInfo.vPos.y - (TILECY * 0.5), m_tInfo.vPos.x + (TILECX * 0.5), m_tInfo.vPos.y + (TILECY * 0.5));
 	if (m_iOption == 1)
 	{
-		HBRUSH myBrush = (HBRUSH)CreateSolidBrush(RGB(255, 0, 0));
+		HBRUSH myBrush = (HBRUSH)CreateSolidBrush(RGB(m_iTileColorR, m_iTileColorG, m_iTileColorB));
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hDC, myBrush);
 		Rectangle(hDC, m_tInfo.vPos.x - (TILECX * 0.5), m_tInfo.vPos.y - (TILECY * 0.5), m_tInfo.vPos.x + (TILECX * 0.5), m_tInfo.vPos.y + (TILECY * 0.5));
 		SelectObject(hDC, oldBrush);
 		DeleteObject(myBrush);
 	}
-
-	
 }
 
 void CTile::Release(void)
