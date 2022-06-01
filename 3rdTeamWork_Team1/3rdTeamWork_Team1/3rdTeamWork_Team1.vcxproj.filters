@@ -74,6 +74,13 @@
     <Filter Include="02. Scene\03.Scene_KJE\PlayerKJE">
       <UniqueIdentifier>{e8cb5467-918b-4642-bbba-ac0c8d6d044e}</UniqueIdentifier>
     </Filter>
+
+    <Filter Include="99.Design\08.TileMgr">
+      <UniqueIdentifier>{97a96152-a368-404c-84ae-06111edb446b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\03.Scene_KJE\Tile_KJE">
+      <UniqueIdentifier>{302ab07d-9683-4ce0-83bf-84db47fd69ae}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02. Scene\04.Scene_KS\Player_KS">
       <UniqueIdentifier>{2a65d3c5-f33e-434a-97ef-75de3005a94b}</UniqueIdentifier>
     </Filter>
@@ -164,6 +171,19 @@
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClInclude>
 
+    <ClInclude Include="Snake_Head.h">
+      <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
+    </ClInclude>
+    <ClInclude Include="Snake_Body.h">
+      <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMgr.h">
+      <Filter>99.Design\08.TileMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>02. Scene\03.Scene_KJE\Tile_KJE</Filter>
+    </ClInclude>
+
 
     <ClInclude Include="PlayerKJE.h">
       <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
@@ -239,10 +259,18 @@
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClCompile>
 
-    <ClCompile Include="PlayerKJE.cpp">
+    <ClCompile Include="Snake_Head.cpp">
       <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
     </ClCompile>
-
+    <ClCompile Include="Snake_Body.cpp">
+      <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMgr.cpp">
+      <Filter>99.Design\08.TileMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>02. Scene\03.Scene_KJE\Tile_KJE</Filter>
+    </ClCompile>
     <ClCompile Include="Player_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
     </ClCompile>
@@ -255,6 +283,7 @@
     </ClCompile>
     <ClCompile Include="Jelly.cpp">
       <Filter>Source Files</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

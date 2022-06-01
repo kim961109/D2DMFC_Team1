@@ -12,4 +12,14 @@
 #define VK_S 0x53
 #define VK_D 0x44
 
+#define		OBJ_NOEVENT  0
+#define		OBJ_DEAD	 1
+
+
+#define		TILECX		20
+#define		TILECY		20
+
+#define		TILEX		40
+#define		TILEY		30
+
 #define VK_MAX 0xff

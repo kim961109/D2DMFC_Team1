@@ -1,9 +1,10 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Scene_KJE.h"
 #include "BmpMgr.h"
 #include"ObjMgr.h"
-#include"PlayerKJE.h"
+#include"Snake_Head.h"
 #include "AbstractFactory.h"
+#include"TileMgr.h"
 
 
 CScene_KJE::CScene_KJE()
@@ -18,31 +19,36 @@ CScene_KJE::~CScene_KJE()
 
 void CScene_KJE::Initialize(void)
 {
+
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Scene_KJE.bmp", L"Scene_KJE");
-	CObjMgr::Get_Instance()->Add_Object(OBJ_Player, CAbstractFactory<CPlayerKJE>::Create_Player());
+	CTileMgr::Get_Instance()->Initialize();
+	CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKE, CAbstractFactory<CSnake_Head>::Create(300.f, 400.f, 0.f));
 
 }
 
 void CScene_KJE::Update(void)
 {
+	CTileMgr::Get_Instance()->Update();
 	CObjMgr::Get_Instance()->Update();
 }
 
 void CScene_KJE::Late_Update(void)
 {
+	CTileMgr::Get_Instance()->Late_Update();
 	CObjMgr::Get_Instance()->Late_Update();
 }
 
 void CScene_KJE::Render(HDC hDC)
 {
-	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Scene_KJE");  //°ÔÀÓ ½ÃÀÛ½Ã ¹öÆ° µÚÀÇ È­¸é.
+	
+	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Scene_KJE");
 	BitBlt(hDC, 0, 0, WINCX, WINCY, hMemDC, 0, 0, SRCCOPY);
-
+	CTileMgr::Get_Instance()->Render(hDC);
 	CObjMgr::Get_Instance()->Render(hDC);
 }
 
 void CScene_KJE::Release(void)
 {
-	//CObjMgr::Get_Instance()->Delete_ID(OBJ_MyButton);// ½ÅÀÌ ¹Ù²ğ¶§ ±× ½ÅÀÇ °´Ã¼ ¸ğµÎ »èÁ¦
+	//CObjMgr::Get_Instance()->Delete_ID(OBJ_MyButton);// ì‹ ì´ ë°”ë€”ë•Œ ê·¸ ì‹ ì˜ ê°ì²´ ëª¨ë‘ ì‚­ì œ
 
 }
