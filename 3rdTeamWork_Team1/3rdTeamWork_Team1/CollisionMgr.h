@@ -10,5 +10,6 @@ public:
 
 public:
 	static void		Collision_Rect(list<CObj*> _Dest, list<CObj*> _Sour);
+
 };
 
