@@ -3,6 +3,7 @@ enum OBJID
 {
 	OBJ_Player,
 	OBJ_Item,
+	OBJ_Bullet,
 	OBJ_End
 };
 
