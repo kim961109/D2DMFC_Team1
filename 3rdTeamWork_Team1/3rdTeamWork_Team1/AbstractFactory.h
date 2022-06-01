@@ -42,4 +42,11 @@ public:
 		return pObj;
 	}
 
+	static CObj*& Create_Bullet(float _fAngle, D3DXVECTOR3 vA, D3DXVECTOR3 vB)
+	{
+		CObj* pObj = new T(_fAngle, vA, vB);
+		pObj->Initialize();
+
+		return pObj;
+	}
 };

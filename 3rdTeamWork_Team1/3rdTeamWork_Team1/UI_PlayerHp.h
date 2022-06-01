@@ -1,18 +1,11 @@
 #pragma once
-#include "Scene.h"
-#include "ObjMgr.h"
-#include "UIMgr.h"
-#include "AbstractFactory.h"
-#include "UIFactory.h"
-#include "Player_KS.h"
-
-
-class CScene_KS :
-	public CScene
+#include "UI.h"
+class CUI_PlayerHp :
+	public CUI
 {
 public:
-	CScene_KS();
-	virtual ~CScene_KS();
+	CUI_PlayerHp();
+	virtual ~CUI_PlayerHp();
 
 public:
 	virtual void Initialize(void) override;
