@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CollisionMgr.h"
-
+#include"SceneMgr.h"
 
 CCollisionMgr::CCollisionMgr()
 {

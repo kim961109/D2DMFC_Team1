@@ -11,6 +11,9 @@
 
 CScene_KJE::CScene_KJE()
 {
+	m_iMilliSecond = 0;
+	m_iSecond = 0;
+	m_iApple = 0;
 }
 
 
@@ -36,7 +39,12 @@ void CScene_KJE::Update(void)
 {
 	CTileMgr::Get_Instance()->Update();
 	CObjMgr::Get_Instance()->Update();
-
+	m_iMilliSecond += 3;
+	if (m_iMilliSecond > 100)
+	{
+		m_iMilliSecond = 0;
+		m_iSecond += 1;
+	}
 }
 
 void CScene_KJE::Late_Update(void)
@@ -49,12 +57,21 @@ void CScene_KJE::Late_Update(void)
 
 void CScene_KJE::Render(HDC hDC)
 {
-	
+
 	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Scene_KJE");
 	BitBlt(hDC, 0, 0, WINCX, WINCY, hMemDC, 0, 0, SRCCOPY);
 	CTileMgr::Get_Instance()->Render(hDC);
 	CObjMgr::Get_Instance()->Render(hDC);
+	//타이머
+	TCHAR	szBuff[32] = L"";
+	swprintf_s(szBuff, L"%d : %d", m_iSecond, m_iMilliSecond);
+	TextOut(hDC, 70, 30, szBuff, lstrlen(szBuff));
+	//사과
+	TCHAR	szApple[32] = L"";
+	swprintf_s(szApple, L"Apple: %d", m_iApple);
+	TextOut(hDC, 620, 30, szApple, lstrlen(szApple));
 }
+
 
 void CScene_KJE::Release(void)
 {

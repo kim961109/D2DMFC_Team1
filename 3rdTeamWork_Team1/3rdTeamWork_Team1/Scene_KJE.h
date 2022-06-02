@@ -18,5 +18,9 @@ public:
 private:
 	list<CObj*> m_SnakeList;
 	list<CObj*> m_AppleList;
+
+	int		m_iMilliSecond;
+	int		m_iSecond;
+	int		m_iApple;
 };
 
