@@ -10,6 +10,8 @@ public:
 
 public:
 	static void		Collision_Rect(list<CObj*> _Dest, list<CObj*> _Sour);
+	static void		Collision_Snake_Apple(list<CObj*> _Snake, list<CObj*> _Apple);
+
 
 };
 

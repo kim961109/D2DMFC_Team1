@@ -20,12 +20,6 @@ void CObjMgr::Add_Object(OBJID eID, CObj * pObj)
 	m_ObjList[eID].push_back(pObj);
 }
 
-// ¿©±â
-CObj * CObjMgr::Get_ListBack(OBJID eID)
-{
-	return m_ObjList[eID].back();
-}
-
 void CObjMgr::Render(HDC hDC)
 {
 	for (int i = 0; i < OBJ_End; ++i)
@@ -44,6 +38,22 @@ void CObjMgr::Update(void)
 		for (auto& iter : m_ObjList[i])
 		{
 			iter->Update();
+		}
+	}
+	for (int i = 0; i < OBJ_End; ++i)
+	{
+		for (auto& iter = m_ObjList[i].begin();
+			iter != m_ObjList[i].end(); )
+		{
+			int iResult = (*iter)->Update();
+
+			if (OBJ_DEAD == iResult)
+			{
+				Safe_Delete<CObj*>(*iter);
+				iter = m_ObjList[i].erase(iter);
+			}
+			else
+				++iter;
 		}
 	}
 }
