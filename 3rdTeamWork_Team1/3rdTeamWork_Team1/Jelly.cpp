@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Jelly.h"
+#include "ScrollMgr.h"
 
 
 CJelly::CJelly()
@@ -22,7 +23,7 @@ void CJelly::Initialize(void)
 	m_iPlayerColorG = (rand() % 256 * m_iColor) % 256;
 	m_iPlayerColorB = (rand() % 256 * m_iColor) % 256;
 
-	m_iScale = rand() % 6 + 5;
+	m_iScale = rand() % 6 + 10;
 }
 
 void CJelly::Update(void)
@@ -35,16 +36,19 @@ void CJelly::Late_Update(void)
 
 void CJelly::Render(HDC hDC)
 {
+	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+
 	HBRUSH myBrush = (HBRUSH)CreateSolidBrush(RGB(m_iPlayerColorR, m_iPlayerColorG, m_iPlayerColorB));
 	HBRUSH oldBrush = (HBRUSH)SelectObject(hDC, myBrush);
 	HPEN myPen = (HPEN)CreatePen(PS_SOLID, 1, RGB(m_iPlayerColorR, m_iPlayerColorG, m_iPlayerColorB));
 	HPEN oldPen = (HPEN)SelectObject(hDC, myPen);
 
 	Ellipse(hDC,
-		int(m_tInfo.vPos.x - m_iScale),
-		int(m_tInfo.vPos.y - m_iScale),
-		int(m_tInfo.vPos.x + m_iScale),
-		int(m_tInfo.vPos.y + m_iScale));
+		int(m_tInfo.vPos.x - m_iScale + iScrollX),
+		int(m_tInfo.vPos.y - m_iScale + iScrollY),
+		int(m_tInfo.vPos.x + m_iScale + iScrollX),
+		int(m_tInfo.vPos.y + m_iScale + iScrollY));
 
 	SelectObject(hDC, oldBrush);
 	DeleteObject(myBrush);

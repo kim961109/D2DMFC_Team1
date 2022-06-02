@@ -39,7 +39,7 @@ void CScene_jini::Late_Update(void)
 
 void CScene_jini::Render(HDC hDC)
 {
-	Rectangle(hDC, -10.f, -10.f, 810.f, 610.f);
+	Rectangle(hDC, 0.f, 0.f, 800.f, 600.f);
 
 	CObjMgr::Get_Instance()->Render(hDC);
 }
