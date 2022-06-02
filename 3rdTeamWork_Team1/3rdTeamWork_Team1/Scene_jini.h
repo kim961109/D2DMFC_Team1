@@ -20,6 +20,7 @@ private:
 	float	m_fPosYRandom;
 	float	m_fPosZRandom;
 
+	//¿©±â
 	DWORD	m_dwJellyCreate;
 };
 
