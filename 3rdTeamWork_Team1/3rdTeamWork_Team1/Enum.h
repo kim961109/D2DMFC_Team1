@@ -6,6 +6,7 @@ enum OBJID
 	OBJ_PlayerChild,
 	OBJ_SNAKE,
 	OBJ_Bullet,
+	OBJ_Monster,
 	OBJ_End
 };
 

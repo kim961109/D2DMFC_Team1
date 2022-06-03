@@ -41,7 +41,7 @@ public:
 	}
 
 public:
-	SCENEID Get_SceneID(void) { return m_eCurScene; }
+	const SCENEID& Get_SceneID(void) { return m_eCurScene; }
 
 private:
 	static CSceneMgr*		m_pInstance;

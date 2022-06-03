@@ -50,4 +50,12 @@ public:
 
 		return pObj;
 	}
+
+	static CObj*& Create_Monster(D3DXVECTOR3 vPos)
+	{
+		CObj* pObj = new T(vPos);
+		pObj->Initialize();
+
+		return pObj;
+	}
 };

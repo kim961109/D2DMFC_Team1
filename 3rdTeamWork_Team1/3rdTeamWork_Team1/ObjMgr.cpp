@@ -33,6 +33,7 @@ void CObjMgr::Render(HDC hDC)
 
 void CObjMgr::Update(void)
 {
+	
 	for (int i = 0; i < OBJ_End; ++i)
 	{
 		for (auto& iter = m_ObjList[i].begin();
@@ -47,6 +48,20 @@ void CObjMgr::Update(void)
 			}
 			else
 				++iter;
+
+		//for (auto& iter : m_ObjList[i])
+		/*for (auto& iter = m_ObjList[i].begin() ; iter != m_ObjList[i].end();)
+		{
+			if ((*iter)->Update() == OBJ_DEAD)
+			{
+				Safe_Delete(*iter);
+				iter = m_ObjList[i].erase(iter);
+			}
+			else
+			{
+				++iter;
+			}*/
+
 		}
 	}
 }
@@ -59,7 +74,7 @@ void CObjMgr::Late_Update(void)
 		{
 			iter->Late_Update();
 
-			if (m_ObjList[i].empty()) // ½ÅÀÌ ¹Ù²ğ¶§ ¿ÀºêÁ§Æ®¸¦ ÀüºÎ »èÁ¦ÇÏ¿© Late_Update¿¡¼­ ·±Å¸ÀÓ¿¡·¯°¡ ³ª´Â°É ¹æÁö.
+			if (m_ObjList[i].empty()) // ì‹ ì´ ë°”ë€”ë•Œ ì˜¤ë¸Œì íŠ¸ë¥¼ ì „ë¶€ ì‚­ì œí•˜ì—¬ Late_Updateì—ì„œ ëŸ°íƒ€ì„ì—ëŸ¬ê°€ ë‚˜ëŠ”ê±¸ ë°©ì§€.
 			{
 				return;
 			}
