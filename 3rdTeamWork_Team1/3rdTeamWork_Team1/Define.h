@@ -23,3 +23,6 @@
 #define		TILEY		30
 
 #define VK_MAX 0xff
+
+#define		JINIMAPCX		160
+#define		JINIMAPCY		120

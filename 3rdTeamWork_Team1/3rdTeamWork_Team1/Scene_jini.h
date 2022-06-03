@@ -16,11 +16,11 @@ public:
 
 private:
 
-	float	m_fPosXRandom;
-	float	m_fPosYRandom;
-	float	m_fPosZRandom;
-
 	//¿©±â
 	DWORD	m_dwJellyCreate;
+	DWORD	m_dwJellyCreate2;
+
+	DWORD	m_dwCollisionJelly;
+
 };
 

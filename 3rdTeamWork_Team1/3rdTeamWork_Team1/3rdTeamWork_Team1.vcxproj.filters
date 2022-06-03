@@ -73,7 +73,6 @@
     <Filter Include="02. Scene\03.Scene_KJE\PlayerKJE">
       <UniqueIdentifier>{e8cb5467-918b-4642-bbba-ac0c8d6d044e}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="99.Design\08.TileMgr">
       <UniqueIdentifier>{97a96152-a368-404c-84ae-06111edb446b}</UniqueIdentifier>
     </Filter>
@@ -178,7 +177,6 @@
     <ClInclude Include="Scene_KS.h">
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClInclude>
-
     <ClInclude Include="Snake_Head.h">
       <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
     </ClInclude>
@@ -191,20 +189,12 @@
     <ClInclude Include="Tile.h">
       <Filter>02. Scene\03.Scene_KJE\Tile_KJE</Filter>
     </ClInclude>
-
-    <ClInclude Include="PlayerKJE.h">
-      <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
-    </ClInclude>
     <ClInclude Include="Player_KS.h">
       <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
     </ClInclude>
     <ClInclude Include="PlayerJini.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClInclude>
-    <ClInclude Include="Jelly.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-
     <ClInclude Include="PlayerMS.h">
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClInclude>
@@ -222,6 +212,9 @@
     </ClInclude>
     <ClInclude Include="UIMgr.h">
       <Filter>99.Design\08.UIMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Jelly.h">
+      <Filter>02. Scene\01.Scene_jini</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -279,7 +272,6 @@
     <ClCompile Include="Scene_KS.cpp">
       <Filter>02. Scene\04.Scene_KS</Filter>
     </ClCompile>
-
     <ClCompile Include="Snake_Head.cpp">
       <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
     </ClCompile>
@@ -292,16 +284,11 @@
     <ClCompile Include="Tile.cpp">
       <Filter>02. Scene\03.Scene_KJE\Tile_KJE</Filter>
     </ClCompile>
-
     <ClCompile Include="Player_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
     </ClCompile>
     <ClCompile Include="PlayerJini.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
-    </ClCompile>
-    <ClCompile Include="Jelly.cpp">
-      <Filter>Source Files</Filter>
-
     </ClCompile>
     <ClCompile Include="Bullet_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Bullet_KS</Filter>
@@ -317,6 +304,9 @@
     </ClCompile>
     <ClCompile Include="PlayerMS.cpp">
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
+    </ClCompile>
+    <ClCompile Include="Jelly.cpp">
+      <Filter>02. Scene\01.Scene_jini</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

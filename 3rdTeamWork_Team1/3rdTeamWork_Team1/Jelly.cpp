@@ -22,16 +22,19 @@ void CJelly::Initialize(void)
 	m_iPlayerColorG = (rand() % 256 * m_iColor) % 256;
 	m_iPlayerColorB = (rand() % 256 * m_iColor) % 256;
 
-	m_iScale = rand() % 6 + 5;
+	m_iScale = rand() % 6 + 8;
 	
 	// ¿©±â
-	m_fPlusScale = m_iScale * 0.1f;
+	m_fPlusScale = m_iScale * 0.0005f;
+	m_fRadius = m_iScale;
 }
 
 int CJelly::Update(void)
 {
+	if (m_bDead)
+		return OBJ_DEAD;
 
-	return 0;
+	return OBJ_NOEVENT;
 }
 
 void CJelly::Late_Update(void)
