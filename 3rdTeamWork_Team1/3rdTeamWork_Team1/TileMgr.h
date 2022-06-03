@@ -38,5 +38,7 @@ public:
 private:
 	static CTileMgr*		m_pInstance;
 	vector<CObj*>			m_vecTile;
+
+
 };
 

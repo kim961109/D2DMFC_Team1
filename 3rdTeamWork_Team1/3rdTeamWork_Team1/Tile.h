@@ -22,5 +22,9 @@ private:
 	int			m_iDrawID;
 	int			m_iOption;
 
+	int		m_iTileColorR;
+	int		m_iTileColorG;
+	int		m_iTileColorB;
+
 };
 

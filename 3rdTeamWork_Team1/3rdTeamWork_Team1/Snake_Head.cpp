@@ -14,7 +14,7 @@ void CSnake_Head::Initialize(void)
 {
 	m_tInfo.vPos = { 400.f, 300.f, 0.f };
 	m_tInfo.vLook = { 0.f, -1.f, 0.f };
-
+	
 	m_vPoint[0] = { m_tInfo.vPos.x - 10.f,  m_tInfo.vPos.y - 10.f, 0.f };
 	m_vPoint[1] = { m_tInfo.vPos.x + 10.f,  m_tInfo.vPos.y - 10.f, 0.f };
 	m_vPoint[2] = { m_tInfo.vPos.x + 10.f,  m_tInfo.vPos.y + 10.f, 0.f };
@@ -26,13 +26,16 @@ void CSnake_Head::Initialize(void)
 	}
 
 	m_fAngle = 0.f;
-	m_fSpeed = 1.f;
+	m_fSpeed = 3.f;
 }
 
 int CSnake_Head::Update(void)
 {
-	Key_Input();
-	m_tInfo.vPos += m_tInfo.vLook * m_fSpeed;
+	if (GetTickCount() - m_dKeyInput > 300)
+	{
+		Key_Input();
+	}
+	//m_tInfo.vPos += m_tInfo.vLook * m_fSpeed;
 	D3DXMATRIX		matScale, matRotZ, matTrans;
 
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
@@ -40,15 +43,19 @@ int CSnake_Head::Update(void)
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f);
 
 	m_tInfo.matWorld = matScale * matRotZ * matTrans;
-	D3DXVec3TransformNormal(&m_tInfo.vLook, &m_tInfo.vLook, &m_tInfo.matWorld);
+	D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
+	m_tInfo.vPos += m_tInfo.vDir*m_fSpeed;
 	for (int i = 0; i < 4; ++i)
 	{
 		m_vPoint[i] = m_vOriginPoint[i];
 		m_vPoint[i] -= { 400.f, 300.f, 0.f };
 
 		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
-
 	}
+	m_tRect.left = m_tInfo.vPos.x - 10.f;
+	m_tRect.top = m_tInfo.vPos.y - 10.f;
+	m_tRect.right = m_tInfo.vPos.x + 10.f;
+	m_tRect.bottom = m_tInfo.vPos.y + 10.f;
 	return 0;
 }
 
@@ -75,6 +82,7 @@ void CSnake_Head::Render(HDC hDC)
 	}
 
 	LineTo(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y);
+	Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 }
 
 void CSnake_Head::Release(void)
@@ -91,30 +99,26 @@ void CSnake_Head::Key_Input(void)
 	{
 	}
 
-	if (GetAsyncKeyState(VK_UP))
-	{
-	//	D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-		//m_tInfo.vPos += m_tInfo.vDir * 20;
-		m_fAngle = D3DXToRadian(90.f);
+	/*if (GetAsyncKeyState(VK_UP))
+	{	
+		m_fAngle -= D3DXToRadian(90.f);
+		m_dKeyInput = GetTickCount();
 	}
 	if (GetAsyncKeyState(VK_DOWN))
 	{
-		//D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-		//m_tInfo.vPos -= m_tInfo.vLook * 20;
-		m_fAngle = D3DXToRadian(270.f);
-	
-	}
+		m_fAngle += D3DXToRadian(90.f);
+		m_dKeyInput = GetTickCount();
+	}/**/
 	if (GetAsyncKeyState(VK_LEFT))
 	{
-		//D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-		m_fAngle = D3DXToRadian(180.f);
+		m_fAngle -= D3DXToRadian(90.f);
+		m_dKeyInput = GetTickCount();
 	}
 
 	if (GetAsyncKeyState(VK_RIGHT))
 	{
-		//D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-		m_fAngle = D3DXToRadian(0.f);
-
+		m_fAngle += D3DXToRadian(90.f);
+		m_dKeyInput = GetTickCount();
 	}
 
 }

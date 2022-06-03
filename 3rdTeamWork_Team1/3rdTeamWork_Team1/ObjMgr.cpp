@@ -64,6 +64,22 @@ void CObjMgr::Update(void)
 
 		}
 	}
+	for (int i = 0; i < OBJ_End; ++i)
+	{
+		for (auto& iter = m_ObjList[i].begin();
+			iter != m_ObjList[i].end(); )
+		{
+			int iResult = (*iter)->Update();
+
+			if (OBJ_DEAD == iResult)
+			{
+				Safe_Delete<CObj*>(*iter);
+				iter = m_ObjList[i].erase(iter);
+			}
+			else
+				++iter;
+		}
+	}
 }
 
 void CObjMgr::Late_Update(void)

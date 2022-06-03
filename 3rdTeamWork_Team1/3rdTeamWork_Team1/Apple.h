@@ -1,12 +1,11 @@
 #pragma once
-#include "Obj.h"
-class CSnake_Head
+#include"Obj.h"
+class CApple
 	:public CObj
 {
 public:
-	CSnake_Head();
-	virtual ~CSnake_Head();
-
+	CApple();
+	~CApple();
 public:
 	virtual void Initialize(void) override;
 	virtual int Update(void) override;
@@ -14,19 +13,11 @@ public:
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
 
+public:
+	int Get_Apple() { return m_iApple; }
+	void Set_ApplePlus() { m_iApple += 1; }
 
 private:
-	void		Key_Input(void);
-
-private:
-	
-	D3DXVECTOR3			m_vPoint[4];
-	D3DXVECTOR3			m_vOriginPoint[4];
-
-	float		m_fSpeed;
-	float		m_fAngle;
-
-	DWORD		m_dKeyInput;
-
+	int		m_iApple;
 };
 

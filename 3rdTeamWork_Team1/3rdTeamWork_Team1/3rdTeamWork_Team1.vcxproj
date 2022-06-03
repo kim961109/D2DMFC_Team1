@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="3rdTeamWork_Team1.h" />
     <ClInclude Include="AbstractFactory.h" />
+    <ClInclude Include="Apple.h" />
     <ClInclude Include="BmpMgr.h" />
     <ClInclude Include="Bullet_KS.h" />
     <ClInclude Include="CollisionMgr.h" />
@@ -198,6 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdTeamWork_Team1.cpp" />
+    <ClCompile Include="Apple.cpp" />
     <ClCompile Include="BmpMgr.cpp" />
     <ClCompile Include="Bullet_KS.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />

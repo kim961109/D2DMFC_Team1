@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "CollisionMgr.h"
+#include"SceneMgr.h"
+#include"Apple.h"
 #include "PlayerJini.h"
 #include "Jelly.h"
+
 
 CCollisionMgr::CCollisionMgr()
 {
@@ -28,6 +31,24 @@ void CCollisionMgr::Collision_Rect(list<CObj*> _Dest, list<CObj*> _Sour)
 	}
 }
 
+void CCollisionMgr::Collision_Snake_Apple(list<CObj*> _Snake, list<CObj*> _Apple)
+{
+	RECT		rc{};
+
+	for (auto& Snake : _Snake)
+	{
+		for (auto& Apple : _Apple)
+		{
+			if (IntersectRect(&rc, &(Snake->Get_Rect()), &(Apple->Get_Rect())))
+			{
+				//Apple->Set_Dead();
+				srand(unsigned int(time(NULL)));
+				Apple->Set_ObjPos(rand() % (WINCX - 140)+70, rand() % (WINCY - 140)+70);
+				dynamic_cast<CApple*>(Apple)->Set_ApplePlus();
+      }
+		}
+	}
+}
 
 void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _index)
 {
@@ -62,13 +83,11 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 					//  fRadiusSour = dynamic_cast<CMonster*>(Sour)->Get_Radius();
 					//   break;
 				}
-
-
-			}
+      }
 		}
 	}
 }
-
+	
 bool CCollisionMgr::Check_Sphere(CObj* pDest, CObj* pSour, int _index)
 {
 	// abs : Àý´ë°ªÀ» ±¸ÇØÁÖ´Â ÇÔ¼ö
@@ -138,4 +157,3 @@ void CCollisionMgr::Collision_BulletKS(list<CObj*>& _Dest, list<CObj*>& _Sour)
 		}
 	}
 }
-

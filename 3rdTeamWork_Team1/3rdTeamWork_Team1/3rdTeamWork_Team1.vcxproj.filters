@@ -91,6 +91,10 @@
     <Filter Include="02. Scene\04.Scene_KS\UI_KS\01.UI_PlayerHp">
       <UniqueIdentifier>{a3df4341-9920-4f3f-b019-f54b23332e65}</UniqueIdentifier>
     </Filter>
+
+    <Filter Include="02. Scene\03.Scene_KJE\Apple_KJE">
+      <UniqueIdentifier>{386b7bad-3312-4dfa-8c27-73efe9c1b32c}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02. Scene\04.Scene_KS\Obj_KS">
       <UniqueIdentifier>{83baa121-3dbc-42c7-9d1b-adeefc0e3f2e}</UniqueIdentifier>
     </Filter>
@@ -226,12 +230,15 @@
       <Filter>99.Design\08.UIMgr</Filter>
     </ClInclude>
 
+    <ClInclude Include="Apple.h">
+      <Filter>02. Scene\03.Scene_KJE\Apple_KJE</Filter>
+    </ClInclude>
+
     <ClInclude Include="Jelly.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClInclude>
     <ClInclude Include="Monster_KS.h">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
-
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -328,12 +335,15 @@
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClCompile>
 
+    <ClCompile Include="Apple.cpp">
+      <Filter>02. Scene\03.Scene_KJE\Apple_KJE</Filter>
+    </ClCompile>
+
     <ClCompile Include="Jelly.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClCompile>
     <ClCompile Include="Monster_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
-
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

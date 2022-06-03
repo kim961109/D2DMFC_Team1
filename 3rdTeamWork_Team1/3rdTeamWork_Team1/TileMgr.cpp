@@ -24,9 +24,9 @@ void CTileMgr::Initialize()
 		{
 			float		fX = (TILECX >> 1) + float(TILECX * j);
 			float		fY = (TILECY >> 1) + float(TILECY * i);
-			CObj*	pTile = CAbstractFactory<CTile>::Create(fX, fY,0.f);
+			CObj*	pTile = CAbstractFactory<CTile>::Create(fX, fY);
 			m_vecTile.push_back(pTile);
-			if (i == 0)
+			if ((i>=0&&i<3)||(i>=TILEY-3&&i<=TILEY)||(j >= 0 && j<3)|| (j >= TILEX - 3 && j <= TILEX))
 			{
 				dynamic_cast<CTile*>(pTile)->Set_Option(1);
 			}
@@ -50,7 +50,9 @@ void CTileMgr::Late_Update()
 void CTileMgr::Render(HDC hDC)
 {
 	for (auto& iter : m_vecTile)
+	{
 		iter->Render(hDC);
+	}
 }
 
 void CTileMgr::Release()
