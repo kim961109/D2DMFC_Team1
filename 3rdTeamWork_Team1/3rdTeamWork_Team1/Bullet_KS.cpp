@@ -13,8 +13,9 @@ CBullet_KS::CBullet_KS(float _fAngle, D3DXVECTOR3 vA, D3DXVECTOR3 vB)
 	m_tInfo.vPos.y = 0.5f * (vA.y + vB.y);
 	m_tInfo.vPos.z = 0.5f * (vA.z + vB.z);
 	m_tInfo.vDir = { 1,0,0 };
-}
 
+	m_bDead = false;
+}
 
 CBullet_KS::~CBullet_KS()
 {
@@ -30,9 +31,17 @@ void CBullet_KS::Initialize(void)
 
 int CBullet_KS::Update(void)
 {
-	Move_Bullet_KS();
+	if (m_bDead)
+		return OBJ_DEAD;
 
-	return 0;
+	m_tRect.left = m_tInfo.vPos.x - 5.f;
+	m_tRect.top = m_tInfo.vPos.y - 5.f;
+	m_tRect.right = m_tInfo.vPos.x + 5.f;
+	m_tRect.bottom = m_tInfo.vPos.y + 5.f;
+
+	Move_Bullet_KS();
+	
+	return OBJ_NOEVENT;
 }
 
 void CBullet_KS::Late_Update(void)
@@ -41,7 +50,7 @@ void CBullet_KS::Late_Update(void)
 
 void CBullet_KS::Render(HDC hDC)
 {
-	Ellipse(hDC, m_tInfo.vPos.x - 5.f, m_tInfo.vPos.y - 5.f, m_tInfo.vPos.x + 5.f, m_tInfo.vPos.y + 5.f);
+	Ellipse(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 }
 
 void CBullet_KS::Release(void)

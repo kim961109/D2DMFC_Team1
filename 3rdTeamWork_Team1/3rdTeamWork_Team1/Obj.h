@@ -21,6 +21,8 @@ public:
 	OBJINFO Get_ObjInfo(void) { return m_tObjInfo; }
 	RECT Get_Rect(void) { return m_tRect; }
 	INFO Get_Info(void) { return m_tInfo; }
+
+	void Set_Dead() { m_bDead = true; }
   
 	void Set_Pos(float _fX, float _fY, float _fZ) { m_tInfo.vPos.x = _fX; m_tInfo.vPos.y = _fY; m_tInfo.vPos.z = _fZ; }
 

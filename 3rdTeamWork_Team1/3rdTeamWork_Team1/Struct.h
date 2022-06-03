@@ -19,14 +19,14 @@ typedef struct tagObjInfo
 	float fCX;
 	float fCY;
 
-}OBJINFO;
+}OBJINFO, UIINFO;
 
-typedef struct tagUIInfo
-{
-	float fX;
-	float fY;
-
-	float fCX;
-	float fCY;
-
-}UIINFO;
+//typedef struct tagUIInfo
+//{
+//	float fX;
+//	float fY;
+//
+//	float fCX;
+//	float fCY;
+//
+//}UIINFO;

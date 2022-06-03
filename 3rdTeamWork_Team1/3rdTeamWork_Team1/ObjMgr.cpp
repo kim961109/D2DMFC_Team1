@@ -39,11 +39,21 @@ void CObjMgr::Render(HDC hDC)
 
 void CObjMgr::Update(void)
 {
+	
 	for (int i = 0; i < OBJ_End; ++i)
 	{
-		for (auto& iter : m_ObjList[i])
+		//for (auto& iter : m_ObjList[i])
+		for (auto& iter = m_ObjList[i].begin() ; iter != m_ObjList[i].end();)
 		{
-			iter->Update();
+			if ((*iter)->Update() == OBJ_DEAD)
+			{
+				Safe_Delete(*iter);
+				iter = m_ObjList[i].erase(iter);
+			}
+			else
+			{
+				++iter;
+			}
 		}
 	}
 }
