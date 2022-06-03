@@ -1,10 +1,12 @@
 #pragma once
 enum OBJID
 {
-	OBJ_Player,
-	OBJ_SNAKE,
 	OBJ_Item,
+	OBJ_Player,
+	OBJ_PlayerChild,
+	OBJ_SNAKE,
 	OBJ_Bullet,
+	OBJ_Monster,
 	OBJ_End
 };
 

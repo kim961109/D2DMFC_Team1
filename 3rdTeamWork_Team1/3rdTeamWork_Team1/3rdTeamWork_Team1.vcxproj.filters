@@ -79,23 +79,33 @@
     <Filter Include="02. Scene\03.Scene_KJE\Tile_KJE">
       <UniqueIdentifier>{302ab07d-9683-4ce0-83bf-84db47fd69ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Scene\04.Scene_KS\Player_KS">
-      <UniqueIdentifier>{2a65d3c5-f33e-434a-97ef-75de3005a94b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Scene\04.Scene_KS\Bullet_KS">
-      <UniqueIdentifier>{65fb6f5f-7bbc-4512-ad03-9bc830d20d9e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04.UI">
       <UniqueIdentifier>{8b50a7ed-d6d6-476c-bfd7-3b8128c6cee1}</UniqueIdentifier>
     </Filter>
     <Filter Include="99.Design\08.UIMgr">
       <UniqueIdentifier>{e29c332a-5f4f-440b-b099-62fb8c4aa14f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Scene\04.Scene_KS\01.UI_PlayerHp">
+    <Filter Include="02. Scene\04.Scene_KS\UI_KS">
+      <UniqueIdentifier>{db2adcdb-ae7e-4191-97ef-de4a07adda8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\UI_KS\01.UI_PlayerHp">
       <UniqueIdentifier>{a3df4341-9920-4f3f-b019-f54b23332e65}</UniqueIdentifier>
     </Filter>
+
     <Filter Include="02. Scene\03.Scene_KJE\Apple_KJE">
       <UniqueIdentifier>{386b7bad-3312-4dfa-8c27-73efe9c1b32c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\Obj_KS">
+      <UniqueIdentifier>{83baa121-3dbc-42c7-9d1b-adeefc0e3f2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\Obj_KS\Bullet_KS">
+      <UniqueIdentifier>{65fb6f5f-7bbc-4512-ad03-9bc830d20d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\Obj_KS\Player_KS">
+      <UniqueIdentifier>{2a65d3c5-f33e-434a-97ef-75de3005a94b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\Obj_KS\Monster_KS">
+      <UniqueIdentifier>{871c7ff1-5616-4aea-91f0-8c2edd09b6c7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -193,7 +203,7 @@
       <Filter>02. Scene\03.Scene_KJE\Tile_KJE</Filter>
     </ClInclude>
     <ClInclude Include="Player_KS.h">
-      <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
+      <Filter>02. Scene\04.Scene_KS\Obj_KS\Player_KS</Filter>
     </ClInclude>
     <ClInclude Include="PlayerJini.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
@@ -205,7 +215,7 @@
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClInclude>
     <ClInclude Include="Bullet_KS.h">
-      <Filter>02. Scene\04.Scene_KS\Bullet_KS</Filter>
+      <Filter>02. Scene\04.Scene_KS\Obj_KS\Bullet_KS</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>04.UI</Filter>
@@ -214,13 +224,21 @@
       <Filter>99.Design\01.Factory</Filter>
     </ClInclude>
     <ClInclude Include="UI_PlayerHp.h">
-      <Filter>02. Scene\04.Scene_KS\01.UI_PlayerHp</Filter>
+      <Filter>02. Scene\04.Scene_KS\UI_KS\01.UI_PlayerHp</Filter>
     </ClInclude>
     <ClInclude Include="UIMgr.h">
       <Filter>99.Design\08.UIMgr</Filter>
     </ClInclude>
+
     <ClInclude Include="Apple.h">
       <Filter>02. Scene\03.Scene_KJE\Apple_KJE</Filter>
+    </ClInclude>
+
+    <ClInclude Include="Jelly.h">
+      <Filter>02. Scene\01.Scene_jini</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster_KS.h">
+      <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -291,22 +309,24 @@
       <Filter>02. Scene\03.Scene_KJE\Tile_KJE</Filter>
     </ClCompile>
     <ClCompile Include="Player_KS.cpp">
-      <Filter>02. Scene\04.Scene_KS\Player_KS</Filter>
+      <Filter>02. Scene\04.Scene_KS\Obj_KS\Player_KS</Filter>
     </ClCompile>
     <ClCompile Include="PlayerJini.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClCompile>
+
     <ClCompile Include="Jelly.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+
     <ClCompile Include="Bullet_KS.cpp">
-      <Filter>02. Scene\04.Scene_KS\Bullet_KS</Filter>
+      <Filter>02. Scene\04.Scene_KS\Obj_KS\Bullet_KS</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>04.UI</Filter>
     </ClCompile>
     <ClCompile Include="UI_PlayerHp.cpp">
-      <Filter>02. Scene\04.Scene_KS\01.UI_PlayerHp</Filter>
+      <Filter>02. Scene\04.Scene_KS\UI_KS\01.UI_PlayerHp</Filter>
     </ClCompile>
     <ClCompile Include="UIMgr.cpp">
       <Filter>99.Design\08.UIMgr</Filter>
@@ -314,8 +334,16 @@
     <ClCompile Include="PlayerMS.cpp">
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClCompile>
+
     <ClCompile Include="Apple.cpp">
       <Filter>02. Scene\03.Scene_KJE\Apple_KJE</Filter>
+    </ClCompile>
+
+    <ClCompile Include="Jelly.cpp">
+      <Filter>02. Scene\01.Scene_jini</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster_KS.cpp">
+      <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

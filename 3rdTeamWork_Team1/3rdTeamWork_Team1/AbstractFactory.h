@@ -24,12 +24,12 @@ public:
 	}
 
 
-	static CObj*	Create(float _fX, float _fY)//m_tObjInfo Initialize 
+	static CObj*&	Create(float _fX, float _fY)//m_tObjInfo Initialize 
 	{
 		CObj*	pObj = new T;
-
 		pObj->Set_ObjPos(_fX, _fY);
 		pObj->Initialize();
+		
 		return pObj;
 	}
 
@@ -37,15 +37,23 @@ public:
 	static CObj*& Create_SetPos(float _fX, float _fY, float _fZ)
 	{
 		CObj* pObj = new T();
-		pObj->Set_Pos(_fX, _fY, _fZ);
 		pObj->Initialize();
-
+		pObj->Set_Pos(_fX, _fY, _fZ);
+		
 		return pObj;
 	}
 
 	static CObj*& Create_Bullet(float _fAngle, D3DXVECTOR3 vA, D3DXVECTOR3 vB)
 	{
 		CObj* pObj = new T(_fAngle, vA, vB);
+		pObj->Initialize();
+
+		return pObj;
+	}
+
+	static CObj*& Create_Monster(D3DXVECTOR3 vPos)
+	{
+		CObj* pObj = new T(vPos);
 		pObj->Initialize();
 
 		return pObj;

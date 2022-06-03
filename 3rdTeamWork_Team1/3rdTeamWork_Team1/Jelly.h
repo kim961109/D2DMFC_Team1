@@ -10,6 +10,7 @@ public:
 // 여기
 public :
 	const float&	Get_PlusScale() const { return m_fPlusScale; }
+	const float&	Get_Radius() { return m_fRadius; }
 
 public:
 	virtual void Initialize(void) override;
@@ -26,6 +27,7 @@ private :
 	int		m_iScale;
 
 	// 여기
+	float	m_fRadius;
 	float	m_fPlusScale;
 
 };

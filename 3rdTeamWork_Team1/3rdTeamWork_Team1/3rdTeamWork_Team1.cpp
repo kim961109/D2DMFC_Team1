@@ -54,18 +54,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	while (true)
 	{
-		// PM_REMOVE   : ¸Þ½ÃÁö¸¦ ÀÐ¾î¿È°ú µ¿½Ã¿¡ ¸Þ½ÃÁö Å¥¿¡¼­ Á¦°Å
-		// PM_NOREMOVE : ¸Þ½ÃÁö Å¥¿¡ ¸Þ½ÃÁö°¡ Á¸ÀçÇÏ´ÂÁö¸¸ ÆÄ¾Ç, ¸¸¾à ¸Þ½ÃÁö¸¦ ¾ò¾î¿À·Á¸é GetMessage¸¦ ´Ù½Ã È£ÃâÇØ¾ß ÇÔ
+		// PM_REMOVE   : ë©”ì‹œì§€ë¥¼ ì½ì–´ì˜´ê³¼ ë™ì‹œì— ë©”ì‹œì§€ íì—ì„œ ì œê±°
+		// PM_NOREMOVE : ë©”ì‹œì§€ íì— ë©”ì‹œì§€ê°€ ì¡´ìž¬í•˜ëŠ”ì§€ë§Œ íŒŒì•…, ë§Œì•½ ë©”ì‹œì§€ë¥¼ ì–»ì–´ì˜¤ë ¤ë©´ GetMessageë¥¼ ë‹¤ì‹œ í˜¸ì¶œí•´ì•¼ í•¨
 
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
 			if (WM_QUIT == msg.message)
 				break;
 
-			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) // ¸Þ´º ±â´ÉÀÇ ´ÜÃàÅ°°¡ Á¦´ë·Î ÀÛµ¿ÇÏµµ·Ï °Ë»çÇÏ´Â ÇÔ¼ö
+			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) // ë©”ë‰´ ê¸°ëŠ¥ì˜ ë‹¨ì¶•í‚¤ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ë„ë¡ ê²€ì‚¬í•˜ëŠ” í•¨ìˆ˜
 			{
-				TranslateMessage(&msg);	// Å°º¸µå ¸Þ¼¼Áö¸¦ °¡°øÇÏ¿© ÇÁ·Î±×·¥¿¡¼­ ½±°Ô »ç¿ëÇÒ ¼ö ÀÖµµ·Ï ¹ø¿ªÇÏ´Â ÇÔ¼ö
-				DispatchMessage(&msg);	// ½Ã½ºÅÛ ¸Þ¼¼Áö Å¥¿¡¼­ ²¨³½ ¸Þ¼¼Áö¸¦ ÇÁ·Î±×·¥¿¡¼­ Ã³¸®(WndProc È£Ãâ) ÇÏµµ·Ï Àü´Þ
+				TranslateMessage(&msg);	// í‚¤ë³´ë“œ ë©”ì„¸ì§€ë¥¼ ê°€ê³µí•˜ì—¬ í”„ë¡œê·¸ëž¨ì—ì„œ ì‰½ê²Œ ì‚¬ìš©í•  ìˆ˜ ìžˆë„ë¡ ë²ˆì—­í•˜ëŠ” í•¨ìˆ˜
+				DispatchMessage(&msg);	// ì‹œìŠ¤í…œ ë©”ì„¸ì§€ íì—ì„œ êº¼ë‚¸ ë©”ì„¸ì§€ë¥¼ í”„ë¡œê·¸ëž¨ì—ì„œ ì²˜ë¦¬(WndProc í˜¸ì¶œ) í•˜ë„ë¡ ì „ë‹¬
 			}
 		}
 
@@ -75,7 +75,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			{
 				pMainGame->Update();
 				pMainGame->Late_Update();
-
 				pMainGame->Render();
 
 				dwOldTime = GetTickCount();

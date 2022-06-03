@@ -40,6 +40,7 @@ void CMainGame::Update(void)
 {
 	//CScrollMgr::Get_Instance()->Scroll_Lock(); //필요시 스크롤락 켜기.
 	CSceneMgr::Get_Instance()->Update();
+	CScrollMgr::Get_Instance()->Scroll_Lock();// 스크롤 락.
 
 }
 

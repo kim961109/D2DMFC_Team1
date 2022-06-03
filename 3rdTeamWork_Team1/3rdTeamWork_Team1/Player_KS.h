@@ -2,6 +2,7 @@
 #include "Obj.h"
 #include "KeyMgr.h"
 #include "ObjMgr.h"
+#include "ScrollMgr.h"
 #include "AbstractFactory.h"
 #include "Bullet_KS.h"
 
@@ -23,6 +24,7 @@ private:
 	void		Key_Input(void);
 	void		Key_Shoot(void);
 	void        Change_GunAngle(void);
+	void        Offset(void);
 
 
 private:
@@ -37,5 +39,7 @@ private:
 	float               m_fSpeed;//플레이어의 이동속도.
 
 	int                 m_iHp;
+
+	DWORD               dwPastTime;
 };
 
