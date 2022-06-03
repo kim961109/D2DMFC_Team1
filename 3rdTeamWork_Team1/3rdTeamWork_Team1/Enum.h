@@ -5,6 +5,7 @@ enum OBJID
 	OBJ_SNAKE,
 	OBJ_Item,
 	OBJ_Bullet,
+	OBJ_Monster,
 	OBJ_End
 };
 
