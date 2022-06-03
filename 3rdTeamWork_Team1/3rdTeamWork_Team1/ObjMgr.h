@@ -21,7 +21,7 @@ public:
 	void Delete_ID(OBJID eID);
 
 private:
-	std::list<CObj*> m_ObjList[OBJ_End];
+	std::list<CObj*> m_ObjList[OBJ_END];
 
 public:
 	static CObjMgr* Get_Instance(void)

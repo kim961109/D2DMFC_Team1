@@ -30,9 +30,9 @@ void CScene_KJE::Initialize(void)
 	CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKE, CAbstractFactory<CSnake_Head>::Create_SetPos(300.f, 400.f, 0.f));
 	CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKE, CAbstractFactory<CSnake_Body>::Create_SetPos(300.f, 425.f, 0.f));
 	CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKE, CAbstractFactory<CSnake_Body>::Create_SetPos(300.f, 450.f, 0.f));
-	CObjMgr::Get_Instance()->Add_Object(OBJ_Item, CAbstractFactory<CApple>::Create(300.f, 400.f));
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CApple>::Create(300.f, 400.f));
 	m_SnakeList = CObjMgr::Get_Instance()->Get_List(OBJ_SNAKE);
-	m_AppleList = CObjMgr::Get_Instance()->Get_List(OBJ_Item);
+	m_AppleList = CObjMgr::Get_Instance()->Get_List(OBJ_ITEM);
 }
 
 void CScene_KJE::Update(void)
@@ -53,7 +53,7 @@ void CScene_KJE::Late_Update(void)
 	CTileMgr::Get_Instance()->Late_Update();
 	CObjMgr::Get_Instance()->Late_Update();
 	CCollisionMgr::Collision_Snake_Apple(m_SnakeList, m_AppleList);
-	m_iApple = dynamic_cast<CApple*>(CObjMgr::Get_Instance()->Get_List(OBJ_Item).front())->Get_Apple();
+	m_iApple = dynamic_cast<CApple*>(CObjMgr::Get_Instance()->Get_List(OBJ_ITEM).front())->Get_Apple();
 }
 
 void CScene_KJE::Render(HDC hDC)

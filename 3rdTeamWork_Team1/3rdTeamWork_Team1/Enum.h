@@ -1,13 +1,13 @@
 #pragma once
 enum OBJID
 {
-	OBJ_Item,
-	OBJ_Player,
-	OBJ_PlayerChild,
+	OBJ_ITEM,
+	OBJ_PLAYER,
+	OBJ_PLAYERCHILD,
 	OBJ_SNAKE,
-	OBJ_Bullet,
-	OBJ_Monster,
-	OBJ_End
+	OBJ_BULLET,
+	OBJ_MONSTER,
+	OBJ_END
 };
 
-enum SCENEID { SC_Main, SC_Jini, SC_MinSungJJang, SC_KJE, SC_KS, SC_End };
+enum SCENEID { SC_MAIN, SC_JINI, SC_KMS, SC_KJE, SC_KS, SC_END };

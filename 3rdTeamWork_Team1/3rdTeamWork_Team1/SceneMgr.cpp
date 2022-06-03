@@ -3,7 +3,7 @@
 
 CSceneMgr* CSceneMgr::m_pInstance = nullptr;
 CSceneMgr::CSceneMgr()
-	: m_pScene(nullptr), m_eCurScene(SC_End), m_ePreScene(SC_End)
+	: m_pScene(nullptr), m_eCurScene(SC_END), m_ePreScene(SC_END)
 {
 }
 
@@ -22,15 +22,15 @@ void CSceneMgr::Scene_Change(SCENEID eID)    // 추후 SceneExchange함수 만들어 기
 
 		switch (m_eCurScene)
 		{
-		case SC_Main:
+		case SC_MAIN:
 			m_pScene = new CScene_Main;
 			break;
 
-		case SC_Jini:
+		case SC_JINI:
 			m_pScene = new CScene_jini;
 			break;
 
-		case SC_MinSungJJang:
+		case SC_KMS:
 			m_pScene = new CScene_MinSungJJang;
 			break;
 

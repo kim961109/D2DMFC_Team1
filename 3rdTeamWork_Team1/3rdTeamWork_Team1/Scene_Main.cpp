@@ -49,11 +49,11 @@ void CScene_Main::Key_Input(void)
 {
 	if (CKeyMgr::Get_Instance()->Key_Down('1'))
 	{
-		CSceneMgr::Get_Instance()->Scene_Change(SC_Jini);
+		CSceneMgr::Get_Instance()->Scene_Change(SC_JINI);
 	}
 	else if (CKeyMgr::Get_Instance()->Key_Down('2'))
 	{
-		CSceneMgr::Get_Instance()->Scene_Change(SC_MinSungJJang);
+		CSceneMgr::Get_Instance()->Scene_Change(SC_KMS);
 	}
 	else if (CKeyMgr::Get_Instance()->Key_Down('3'))
 	{

@@ -15,12 +15,12 @@ CScene_KS::~CScene_KS()
 void CScene_KS::Initialize(void)
 {
 	//플레이어 생성.
-	CObjMgr::Get_Instance()->Add_Object(OBJ_Player, CAbstractFactory<CPlayer_KS>::Create_Player());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayer_KS>::Create_Player());
 	//몬스터 생성.
 	D3DXVECTOR3 vMonsterPos[5];//몬스터의 초기화 위치를 담을 벡터배열.
 	vMonsterPos[0] = { 300, 200,0 };
 
-	CObjMgr::Get_Instance()->Add_Object(OBJ_Monster, CAbstractFactory<CMonster_KS>::Create_Monster(vMonsterPos[0]));
+	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonster_KS>::Create_Monster(vMonsterPos[0]));
 
 	//UI 생성.
 	CUIMgr::Get_Instance()->Add_UI(CUIFactory<CUI_PlayerHp>::Create_UIPlayerHP());
@@ -37,11 +37,11 @@ void CScene_KS::Update(void)
 
 void CScene_KS::Late_Update(void)
 {
-	if (CObjMgr::Get_Instance()->Get_List(OBJ_Bullet).empty())
+	if (CObjMgr::Get_Instance()->Get_List(OBJ_BULLET).empty())
 	{
 		cout << "0000000000000000000000000000000000000000000000000000000000000" << endl;
 	}
-	CCollisionMgr::Collision_BulletKS(CObjMgr::Get_Instance()->Get_List(OBJ_Bullet), CObjMgr::Get_Instance()->Get_List(OBJ_Monster));
+	CCollisionMgr::Collision_BulletKS(CObjMgr::Get_Instance()->Get_List(OBJ_BULLET), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER));
 	CObjMgr::Get_Instance()->Late_Update();
 }
 
@@ -61,8 +61,8 @@ void CScene_KS::Render(HDC hDC)
 
 void CScene_KS::Release(void)
 {
-	CObjMgr::Get_Instance()->Delete_ID(OBJ_Player);
-	CObjMgr::Get_Instance()->Delete_ID(OBJ_Bullet);
-	CObjMgr::Get_Instance()->Delete_ID(OBJ_Monster);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYER);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_BULLET);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_MONSTER);
 	CUIMgr::Get_Instance()->Delete_UI();
 }

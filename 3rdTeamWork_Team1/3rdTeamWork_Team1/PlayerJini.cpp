@@ -215,9 +215,9 @@ void CPlayerJini::Key_Input()
 		//m_fScale *= 0.5;
 
 		// 분신 생성 및 크기 셋팅
-		//CObjMgr::Get_Instance()->Add_Object(OBJ_Player, CAbsractFactory<CPlayer>::Create(0.f, 0.f, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
-		//CObjMgr::Get_Instance()->Get_ListBack(OBJ_Player)->Set_Scale(m_fScale);
-		//CObjMgr::Get_Instance()->Get_ListBack(OBJ_Player)->Set_Tag("자식");
+		//CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbsractFactory<CPlayer>::Create(0.f, 0.f, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
+		//CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYER)->Set_Scale(m_fScale);
+		//CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYER)->Set_Tag("자식");
 
 		// 
 	}
@@ -231,9 +231,9 @@ void CPlayerJini::Attack()
 	float   fPosX = (m_tInfo.vPos.x ) + ( m_tInfo.vDir.x * m_fRadius);
 	float	fPosY = (m_tInfo.vPos.y ) + ( m_tInfo.vDir.y * m_fRadius);
 
-	CObjMgr::Get_Instance()->Add_Object(OBJ_PlayerChild, CAbstractFactory<CPlayerJini>::Create_SetPos(fPosX, fPosY, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
-	dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PlayerChild))->Set_Scale(m_fScale * 0.41);
-	dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PlayerChild))->Set_Tag("자식");
+	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYERCHILD, CAbstractFactory<CPlayerJini>::Create_SetPos(fPosX, fPosY, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
+	dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_Scale(m_fScale * 0.41);
+	dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_Tag("자식");
 	
 	m_fScale *= 0.59;
 	

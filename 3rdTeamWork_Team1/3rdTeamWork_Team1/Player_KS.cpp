@@ -170,7 +170,7 @@ void CPlayer_KS::Key_Shoot(void)
 
 		if (dwPastTime + 150 < GetTickCount())
 		{
-			CObjMgr::Get_Instance()->Add_Object(OBJ_Bullet, CAbstractFactory<CBullet_KS>::Create_Bullet(m_fGunAngle, vBullet[0], vBullet[1]));
+			CObjMgr::Get_Instance()->Add_Object(OBJ_BULLET, CAbstractFactory<CBullet_KS>::Create_Bullet(m_fGunAngle, vBullet[0], vBullet[1]));
 
 			dwPastTime = GetTickCount();
 		}

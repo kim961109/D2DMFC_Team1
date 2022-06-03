@@ -15,7 +15,7 @@ CScene_MinSungJJang::~CScene_MinSungJJang()
 
 void CScene_MinSungJJang::Initialize(void)
 {
-	CObjMgr::Get_Instance()->Add_Object(OBJ_Player, CAbstractFactory<CPlayerMS>::Create_Player());
+	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayerMS>::Create_Player());
 }
 
 void CScene_MinSungJJang::Update(void)

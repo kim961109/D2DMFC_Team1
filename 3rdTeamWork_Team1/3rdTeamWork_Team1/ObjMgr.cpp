@@ -13,7 +13,7 @@ CObjMgr::~CObjMgr()
 
 void CObjMgr::Add_Object(OBJID eID, CObj * pObj)
 {
-	if ((eID >= OBJ_End) || (pObj == nullptr))
+	if ((eID >= OBJ_END) || (pObj == nullptr))
 	{
 		return;
 	}
@@ -22,7 +22,7 @@ void CObjMgr::Add_Object(OBJID eID, CObj * pObj)
 
 void CObjMgr::Render(HDC hDC)
 {
-	for (int i = 0; i < OBJ_End; ++i)
+	for (int i = 0; i < OBJ_END; ++i)
 	{
 		for (auto& iter : m_ObjList[i])
 		{
@@ -34,7 +34,7 @@ void CObjMgr::Render(HDC hDC)
 void CObjMgr::Update(void)
 {
 	
-	for (int i = 0; i < OBJ_End; ++i)
+	for (int i = 0; i < OBJ_END; ++i)
 	{
 		for (auto& iter = m_ObjList[i].begin();
 			iter != m_ObjList[i].end(); )
@@ -64,7 +64,7 @@ void CObjMgr::Update(void)
 
 		}
 	}
-	for (int i = 0; i < OBJ_End; ++i)
+	for (int i = 0; i < OBJ_END; ++i)
 	{
 		for (auto& iter = m_ObjList[i].begin();
 			iter != m_ObjList[i].end(); )
@@ -84,7 +84,7 @@ void CObjMgr::Update(void)
 
 void CObjMgr::Late_Update(void)
 {
-	for (int i = 0; i < OBJ_End; ++i)
+	for (int i = 0; i < OBJ_END; ++i)
 	{
 		for (auto& iter : m_ObjList[i])
 		{
