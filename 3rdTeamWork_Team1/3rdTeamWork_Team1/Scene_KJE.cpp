@@ -45,14 +45,15 @@ void CScene_KJE::Update(void)
 		m_iMilliSecond = 0;
 		m_iSecond += 1;
 	}
+
 }
 
 void CScene_KJE::Late_Update(void)
 {
 	CTileMgr::Get_Instance()->Late_Update();
 	CObjMgr::Get_Instance()->Late_Update();
-	CCollisionMgr::Collision_Snake_Apple(m_SnakeList,m_AppleList);
-
+	CCollisionMgr::Collision_Snake_Apple(m_SnakeList, m_AppleList);
+	m_iApple = dynamic_cast<CApple*>(CObjMgr::Get_Instance()->Get_List(OBJ_Item).front())->Get_Apple();
 }
 
 void CScene_KJE::Render(HDC hDC)

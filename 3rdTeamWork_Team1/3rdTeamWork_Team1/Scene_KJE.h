@@ -22,5 +22,6 @@ private:
 	int		m_iMilliSecond;
 	int		m_iSecond;
 	int		m_iApple;
+	
 };
 

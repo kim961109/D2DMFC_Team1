@@ -6,6 +6,7 @@
 CApple::CApple()
 {
 	m_bDead = false;
+	m_iApple = 0;
 }
 
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CollisionMgr.h"
 #include"SceneMgr.h"
+#include"Apple.h"
 
 CCollisionMgr::CCollisionMgr()
 {
@@ -40,6 +41,7 @@ void CCollisionMgr::Collision_Snake_Apple(list<CObj*> _Snake, list<CObj*> _Apple
 				//Apple->Set_Dead();
 				srand(unsigned int(time(NULL)));
 				Apple->Set_ObjPos(rand() % (WINCX - 140)+70, rand() % (WINCY - 140)+70);
+				dynamic_cast<CApple*>(Apple)->Set_ApplePlus();
 			}
 		}
 	}
