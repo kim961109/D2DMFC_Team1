@@ -20,12 +20,6 @@ void CObjMgr::Add_Object(OBJID eID, CObj * pObj)
 	m_ObjList[eID].push_back(pObj);
 }
 
-// ¿©±â
-CObj * CObjMgr::Get_ListBack(OBJID eID)
-{
-	return m_ObjList[eID].back();
-}
-
 void CObjMgr::Render(HDC hDC)
 {
 	for (int i = 0; i < OBJ_End; ++i)
@@ -42,8 +36,21 @@ void CObjMgr::Update(void)
 	
 	for (int i = 0; i < OBJ_End; ++i)
 	{
+		for (auto& iter = m_ObjList[i].begin();
+			iter != m_ObjList[i].end(); )
+		{
+			int iResult = (*iter)->Update();
+
+			if (OBJ_DEAD == iResult)
+			{
+				Safe_Delete<CObj*>(*iter);
+				iter = m_ObjList[i].erase(iter);
+			}
+			else
+				++iter;
+
 		//for (auto& iter : m_ObjList[i])
-		for (auto& iter = m_ObjList[i].begin() ; iter != m_ObjList[i].end();)
+		/*for (auto& iter = m_ObjList[i].begin() ; iter != m_ObjList[i].end();)
 		{
 			if ((*iter)->Update() == OBJ_DEAD)
 			{
@@ -53,7 +60,8 @@ void CObjMgr::Update(void)
 			else
 			{
 				++iter;
-			}
+			}*/
+
 		}
 	}
 }
@@ -66,7 +74,7 @@ void CObjMgr::Late_Update(void)
 		{
 			iter->Late_Update();
 
-			if (m_ObjList[i].empty()) // ½ÅÀÌ ¹Ù²ğ¶§ ¿ÀºêÁ§Æ®¸¦ ÀüºÎ »èÁ¦ÇÏ¿© Late_Update¿¡¼­ ·±Å¸ÀÓ¿¡·¯°¡ ³ª´Â°É ¹æÁö.
+			if (m_ObjList[i].empty()) // ì‹ ì´ ë°”ë€”ë•Œ ì˜¤ë¸Œì íŠ¸ë¥¼ ì „ë¶€ ì‚­ì œí•˜ì—¬ Late_Updateì—ì„œ ëŸ°íƒ€ì„ì—ëŸ¬ê°€ ë‚˜ëŠ”ê±¸ ë°©ì§€.
 			{
 				return;
 			}

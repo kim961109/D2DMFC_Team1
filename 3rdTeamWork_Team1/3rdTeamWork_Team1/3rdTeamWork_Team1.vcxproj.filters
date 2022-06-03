@@ -225,8 +225,13 @@
     <ClInclude Include="UIMgr.h">
       <Filter>99.Design\08.UIMgr</Filter>
     </ClInclude>
+
+    <ClInclude Include="Jelly.h">
+      <Filter>02. Scene\01.Scene_jini</Filter>
+    </ClInclude>
     <ClInclude Include="Monster_KS.h">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -302,9 +307,11 @@
     <ClCompile Include="PlayerJini.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClCompile>
+
     <ClCompile Include="Jelly.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+
     <ClCompile Include="Bullet_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Bullet_KS</Filter>
     </ClCompile>
@@ -320,8 +327,13 @@
     <ClCompile Include="PlayerMS.cpp">
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClCompile>
+
+    <ClCompile Include="Jelly.cpp">
+      <Filter>02. Scene\01.Scene_jini</Filter>
+    </ClCompile>
     <ClCompile Include="Monster_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

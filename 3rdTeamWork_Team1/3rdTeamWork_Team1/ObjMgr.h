@@ -10,9 +10,10 @@ public:
 
 public:
 	void Add_Object(OBJID eID, CObj* pObj);
-	// ¿©±â
-	CObj* Get_ListBack(OBJID eID);
+
+	CObj* Get_ListBack(OBJID eID)			{ return m_ObjList[eID].back(); }
 	list<CObj*>& Get_List(OBJID eID) {return m_ObjList[eID];}
+
 	void Render(HDC hDC);
 	void Update(void);
 	void Late_Update(void);
