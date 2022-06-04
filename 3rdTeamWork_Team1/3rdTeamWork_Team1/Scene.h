@@ -3,7 +3,7 @@ class CScene
 {
 public:
 	CScene();
-	~CScene();
+	virtual ~CScene();
 
 public:
 	virtual void	Initialize(void) PURE;

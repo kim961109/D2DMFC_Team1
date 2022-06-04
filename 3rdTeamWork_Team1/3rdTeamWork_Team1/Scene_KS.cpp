@@ -31,16 +31,14 @@ void CScene_KS::Initialize(void)
 
 void CScene_KS::Update(void)
 {
+	Scene_ChangeKey();
+
 	CObjMgr::Get_Instance()->Update();
 	CUIMgr::Get_Instance()->Update();
 }
 
 void CScene_KS::Late_Update(void)
 {
-	if (CObjMgr::Get_Instance()->Get_List(OBJ_BULLET).empty())
-	{
-		cout << "0000000000000000000000000000000000000000000000000000000000000" << endl;
-	}
 	CCollisionMgr::Collision_BulletKS(CObjMgr::Get_Instance()->Get_List(OBJ_BULLET), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER));
 	CObjMgr::Get_Instance()->Late_Update();
 }
@@ -65,4 +63,12 @@ void CScene_KS::Release(void)
 	CObjMgr::Get_Instance()->Delete_ID(OBJ_BULLET);
 	CObjMgr::Get_Instance()->Delete_ID(OBJ_MONSTER);
 	CUIMgr::Get_Instance()->Delete_UI();
+}
+
+void CScene_KS::Scene_ChangeKey(void)
+{
+	if (CKeyMgr::Get_Instance()->Key_Down('1'))
+	{
+		CSceneMgr::Get_Instance()->Scene_Change(SC_MAIN);
+	}
 }
