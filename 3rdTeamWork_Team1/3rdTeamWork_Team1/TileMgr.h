@@ -14,6 +14,7 @@ public:
 	void		Late_Update();
 	void		Render(HDC hDC);
 	void		Release();
+	vector<CObj*>&		Get_Tile() { return m_vecTile; }
 
 public:
 	static		CTileMgr*		Get_Instance(void)

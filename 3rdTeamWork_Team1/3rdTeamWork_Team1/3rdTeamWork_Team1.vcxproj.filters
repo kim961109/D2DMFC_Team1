@@ -106,6 +106,18 @@
     <Filter Include="02. Scene\04.Scene_KS\Obj_KS\Monster_KS">
       <UniqueIdentifier>{871c7ff1-5616-4aea-91f0-8c2edd09b6c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Scene\00.Scene_Main\OBJ_Main">
+      <UniqueIdentifier>{282e1282-3243-4dce-8ceb-c358f36cfb3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\00.Scene_Main\OBJ_Main\01. OBJ_Ball">
+      <UniqueIdentifier>{3092e590-7fc6-4ad0-8ef6-3b6bce978388}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\00.Scene_Main\OBJ_Main\02.OBJ_STICK">
+      <UniqueIdentifier>{f3d2a17c-ea8a-48f6-bec0-3c491264753a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\00.Scene_Main\OBJ_Main\03.OBJ_Collision">
+      <UniqueIdentifier>{102dddb7-ecbb-4248-be5d-788e4b3f254b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -234,8 +246,18 @@
     <ClInclude Include="Monster_KS.h">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
     </ClInclude>
+
     <ClInclude Include="Jelly.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>02. Scene\00.Scene_Main\OBJ_Main\01. OBJ_Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="Stick.h">
+      <Filter>02. Scene\00.Scene_Main\OBJ_Main\02.OBJ_STICK</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Collision.h">
+      <Filter>02. Scene\00.Scene_Main\OBJ_Main\03.OBJ_Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -311,6 +333,11 @@
     <ClCompile Include="PlayerJini.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClCompile>
+
+    <ClCompile Include="Jelly.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+
     <ClCompile Include="Bullet_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Bullet_KS</Filter>
     </ClCompile>
@@ -335,8 +362,19 @@
     <ClCompile Include="Monster_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
     </ClCompile>
+
     <ClCompile Include="Jelly.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>02. Scene\00.Scene_Main\OBJ_Main\01. OBJ_Ball</Filter>
+    </ClCompile>
+    <ClCompile Include="Stick.cpp">
+      <Filter>02. Scene\00.Scene_Main\OBJ_Main\02.OBJ_STICK</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Collision.cpp">
+      <Filter>02. Scene\00.Scene_Main\OBJ_Main\03.OBJ_Collision</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

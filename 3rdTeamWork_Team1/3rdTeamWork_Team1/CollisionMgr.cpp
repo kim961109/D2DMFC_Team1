@@ -30,7 +30,7 @@ void CCollisionMgr::Collision_Rect(list<CObj*> _Dest, list<CObj*> _Sour)
 		}
 	}
 }
-
+//SCENE_KJE
 void CCollisionMgr::Collision_Snake_Apple(list<CObj*> _Snake, list<CObj*> _Apple)
 {
 	RECT		rc{};
@@ -41,11 +41,28 @@ void CCollisionMgr::Collision_Snake_Apple(list<CObj*> _Snake, list<CObj*> _Apple
 		{
 			if (IntersectRect(&rc, &(Snake->Get_Rect()), &(Apple->Get_Rect())))
 			{
-				//Apple->Set_Dead();
 				srand(unsigned int(time(NULL)));
 				Apple->Set_ObjPos(rand() % (WINCX - 140)+70, rand() % (WINCY - 140)+70);
 				dynamic_cast<CApple*>(Apple)->Set_ApplePlus();
+				dynamic_cast<CSnake_Head*>(Snake)->GrowUp();
+				
+
       }
+		}
+	}
+}
+void CCollisionMgr::Collision_Snake_Tile(list<CObj*> _Snake, vector<CObj*> _Tile)
+{
+	RECT		rc{};
+
+	for (auto& Snake : _Snake)
+	{
+		for (auto& Tile : _Tile)
+		{
+			if (IntersectRect(&rc, &(Snake->Get_Rect()), &(Tile->Get_Rect())))
+			{
+				Snake->Set_Dead();
+			}
 		}
 	}
 }
@@ -85,8 +102,19 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 					//   fRadiusDest = dynamic_cast<CPlayerJini*>(Dest)->Get_Radius();
 					//  fRadiusSour = dynamic_cast<CMonster*>(Sour)->Get_Radius();
 					//   break;
+
+					//jeongeun
+				case 4: //Snake - Apple
+					srand(unsigned int(time(NULL)));
+					Sour->Set_ObjPos(rand() % (WINCX - 140) + 70, rand() % (WINCY - 140) + 70);
+					dynamic_cast<CApple*>(Sour)->Set_ApplePlus();
+					break;
+
+				case 5://Snake - Tile
+					break;
 				}
-      }
+
+			}
 		}
 	}
 }
@@ -130,7 +158,7 @@ void CCollisionMgr::Collision_Sphere2(list<CObj*> _Dest, list<CObj*> _Sour)
 	//	}
 	//}
 }
-	
+
 bool CCollisionMgr::Check_Sphere(CObj* pDest, CObj* pSour, int _index)
 {
 	// abs : Àý´ë°ªÀ» ±¸ÇØÁÖ´Â ÇÔ¼ö
@@ -156,6 +184,13 @@ bool CCollisionMgr::Check_Sphere(CObj* pDest, CObj* pSour, int _index)
 		//case 3:
 		//   fRadius = dynamic_cast<CPlayerJini*>(pDest)->Get_Radius() + dynamic_cast<CMonster*>(pSour)->Get_Radius();
 		//   break;
+
+	case 4: //Snake - Apple
+		//float	fRadius = (pDest->Get_Info().fCX + pSour->Get_Info().fCX) * 0.5f;
+		
+		break;
+	case 5: //Snake - Tile
+		break;
 	}
 
 
@@ -198,6 +233,63 @@ void CCollisionMgr::Collision_BulletKS(list<CObj*>& _Dest, list<CObj*>& _Sour)
 			{
 				++Dest;
 			}*/
+		}
+	}
+}
+
+bool CCollisionMgr::Check_Rect(CObj* pDest, CObj* pSour, float *pX, float* pY)
+{
+	float		fWidth = abs(pDest->Get_ObjInfo().fX - pSour->Get_ObjInfo().fX);
+	float		fHeight = abs(pDest->Get_ObjInfo().fY - pSour->Get_ObjInfo().fY);
+
+	float		fCX = (pDest->Get_ObjInfo().fCX + pSour->Get_ObjInfo().fCX) * 0.5f;
+	float		fCY = (pDest->Get_ObjInfo().fCY + pSour->Get_ObjInfo().fCY) * 0.5f;
+
+	if ((fCX > fWidth) && (fCY > fHeight))
+	{
+		*pX = fCX - fWidth;
+		*pY = fCY - fHeight;
+
+		return true;
+	}
+
+	return false;
+}
+
+                                 // 고정되어 있는 물체      // 움직이는 물체		
+void CCollisionMgr::Collision_RectEx(list<CObj*> _Dest, list<CObj*> _Sour)// 고정된 물체가 움직이는 물체를 밀어내는 용도.
+{
+	for (auto& Dest : _Dest)
+	{
+		for (auto& Sour : _Sour)
+		{
+			float	fX = 0.f, fY = 0.f;
+
+			if (Check_Rect(Dest, Sour, &fX, &fY))
+			{
+				// 상하 충돌
+				if (fX > fY)
+				{
+					// 상 충돌
+					if (Dest->Get_ObjInfo().fY > Sour->Get_ObjInfo().fY)
+						static_cast<CBall*>(Sour)->Change_MoveY();
+
+					else // 하 충돌
+						static_cast<CBall*>(Sour)->Change_MoveY();
+				}
+				// 좌우 충돌
+				else
+				{
+					// 좌 충돌
+					if (Dest->Get_ObjInfo().fX > Sour->Get_ObjInfo().fX)
+						static_cast<CBall*>(Sour)->Change_MoveX();
+
+					// 우 충돌
+					else
+						static_cast<CBall*>(Sour)->Change_MoveX();
+				}
+
+			}
 		}
 	}
 }

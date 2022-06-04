@@ -20,6 +20,11 @@ void CObjMgr::Add_Object(OBJID eID, CObj * pObj)
 	m_ObjList[eID].push_back(pObj);
 }
 
+void CObjMgr::Add_ObjectMain(CObj * pObj)
+{
+	m_MainCollisionVec.push_back(pObj);
+}
+
 void CObjMgr::Render(HDC hDC)
 {
 	for (int i = 0; i < OBJ_END; ++i)
@@ -28,6 +33,11 @@ void CObjMgr::Render(HDC hDC)
 		{
 			iter->Render(hDC);
 		}
+	}
+
+	for (auto& iter : m_MainCollisionVec)
+	{
+		iter->Render(hDC);
 	}
 }
 
@@ -80,6 +90,11 @@ void CObjMgr::Update(void)
 				++iter;
 		}
 	}
+	
+	for (auto& iter = m_MainCollisionVec.begin();iter != m_MainCollisionVec.end();++iter)
+	{
+		int iResult = (*iter)->Update();
+	}
 }
 
 void CObjMgr::Late_Update(void)
@@ -96,6 +111,12 @@ void CObjMgr::Late_Update(void)
 			}
 		}
 	}
+
+	for (auto& iter : m_MainCollisionVec)
+	{
+		iter->Late_Update();
+	}
+
 }
 
 void CObjMgr::Delete_ID(OBJID eID)
@@ -104,4 +125,10 @@ void CObjMgr::Delete_ID(OBJID eID)
 		Safe_Delete(iter);
 
 	m_ObjList[eID].clear();
+
+	for (auto& iter : m_MainCollisionVec)
+	{
+		Safe_Delete(iter);
+	}
+	m_MainCollisionVec.clear();
 }

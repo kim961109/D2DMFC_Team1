@@ -58,4 +58,28 @@ public:
 
 		return pObj;
 	}
+
+	static CObj*& Create_Ball(D3DXVECTOR3 vPos)
+	{
+		CObj* pObj = new T(vPos);
+		pObj->Initialize();
+
+		return pObj;
+	}
+
+	static CObj*& Create_Stick()
+	{
+		CObj* pObj = new T;
+		pObj->Initialize();
+
+		return pObj;
+	}
+
+	static CObj*& Create_CollisionKS(float _fX, float _fY, float _fCX, float _fCY)
+	{
+		CObj* pObj = new T(_fX, _fY, _fCX, _fCY);
+		pObj->Initialize();
+
+		return pObj;
+	}
 };

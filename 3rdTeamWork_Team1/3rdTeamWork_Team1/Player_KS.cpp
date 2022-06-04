@@ -18,7 +18,7 @@ void CPlayer_KS::Initialize(void)
 	dwPastTime = GetTickCount();
 
 	m_tInfo.vPos = { 400.f, 300.f, 0.f };
-	m_fSpeed = 5.f;
+	m_fSpeed = 3.f;
 	m_fGunAngle = 0.f;
 	m_fBodyAngle = 0.f;
 	m_tInfo.vLook = { 1.f, 0.f, 0.f };
@@ -45,6 +45,16 @@ int CPlayer_KS::Update(void)
 	if (0 >= m_iHp)
 	{
 		return OBJ_DEAD;
+	}
+
+	//로컬 좌표를 모두 초기화.
+	for (int i = 0; i < 4; ++i)
+	{
+		m_vBodyPoint[i] = m_vOriginBodyPoint[i];
+		m_vBodyPoint[i] -= { 400.f, 300.f, 0.f };
+
+		m_vGunPoint[i] = m_vOriginGunPoint[i];
+		m_vGunPoint[i] -= { 400.f, 300.f, 0.f };
 	}
 
 	//총구가 바라보는 방향으로의 각도를 구함.
@@ -112,18 +122,6 @@ void CPlayer_KS::Render(HDC hDC)
 		LineTo(hDC, (int)m_vGunPoint[i].x + iScrollX, (int)m_vGunPoint[i].y + iScrollY);
 	}
 	LineTo(hDC, (int)m_vGunPoint[0].x + iScrollX, (int)m_vGunPoint[0].y + iScrollY);
-
-
-
-	//로컬 좌표를 모두 초기화.
-	for (int i = 0; i < 4; ++i)
-	{
-		m_vBodyPoint[i] = m_vOriginBodyPoint[i];
-		m_vBodyPoint[i] -= { 400.f, 300.f, 0.f };
-
-		m_vGunPoint[i] = m_vOriginGunPoint[i];
-		m_vGunPoint[i] -= { 400.f, 300.f, 0.f };
-	}
 }
 
 void CPlayer_KS::Release(void)
