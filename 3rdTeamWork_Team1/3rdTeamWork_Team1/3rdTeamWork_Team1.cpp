@@ -82,6 +82,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 	}
 
+	pMainGame->Release();
 	Safe_Delete<CMainGame*>(pMainGame);
 
     return (int) msg.wParam;

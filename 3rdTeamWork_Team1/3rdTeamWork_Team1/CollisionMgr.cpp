@@ -157,3 +157,60 @@ void CCollisionMgr::Collision_BulletKS(list<CObj*>& _Dest, list<CObj*>& _Sour)
 		}
 	}
 }
+
+bool CCollisionMgr::Check_Rect(CObj* pDest, CObj* pSour, float *pX, float* pY)
+{
+	float		fWidth = abs(pDest->Get_ObjInfo().fX - pSour->Get_ObjInfo().fX);
+	float		fHeight = abs(pDest->Get_ObjInfo().fY - pSour->Get_ObjInfo().fY);
+
+	float		fCX = (pDest->Get_ObjInfo().fCX + pSour->Get_ObjInfo().fCX) * 0.5f;
+	float		fCY = (pDest->Get_ObjInfo().fCY + pSour->Get_ObjInfo().fCY) * 0.5f;
+
+	if ((fCX > fWidth) && (fCY > fHeight))
+	{
+		*pX = fCX - fWidth;
+		*pY = fCY - fHeight;
+
+		return true;
+	}
+
+	return false;
+}
+
+                                 // 고정되어 있는 물체      // 움직이는 물체		
+void CCollisionMgr::Collision_RectEx(list<CObj*> _Dest, list<CObj*> _Sour)// 고정된 물체가 움직이는 물체를 밀어내는 용도.
+{
+	for (auto& Dest : _Dest)
+	{
+		for (auto& Sour : _Sour)
+		{
+			float	fX = 0.f, fY = 0.f;
+
+			if (Check_Rect(Dest, Sour, &fX, &fY))
+			{
+				// 상하 충돌
+				if (fX > fY)
+				{
+					// 상 충돌
+					if (Dest->Get_ObjInfo().fY > Sour->Get_ObjInfo().fY)
+						static_cast<CBall*>(Sour)->Change_MoveY();
+
+					else // 하 충돌
+						static_cast<CBall*>(Sour)->Change_MoveY();
+				}
+				// 좌우 충돌
+				else
+				{
+					// 좌 충돌
+					if (Dest->Get_ObjInfo().fX > Sour->Get_ObjInfo().fX)
+						static_cast<CBall*>(Sour)->Change_MoveX();
+
+					// 우 충돌
+					else
+						static_cast<CBall*>(Sour)->Change_MoveX();
+				}
+
+			}
+		}
+	}
+}

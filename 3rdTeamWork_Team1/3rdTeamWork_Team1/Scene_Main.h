@@ -4,6 +4,10 @@
 #include "ObjMgr.h"
 #include "KeyMgr.h"
 #include "SceneMgr.h"
+#include "CollisionMgr.h"
+#include "Ball.h"
+#include "Stick.h"
+#include "Obj_Collision.h"
 
 class CScene_Main :
 	public CScene
