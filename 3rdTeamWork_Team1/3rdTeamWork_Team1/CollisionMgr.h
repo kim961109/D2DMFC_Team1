@@ -14,6 +14,7 @@ public:
 	static void		Collision_Rect(list<CObj*> _Dest, list<CObj*> _Sour);
 	static void		Collision_Snake_Apple(list<CObj*> _Snake, list<CObj*> _Apple);
 	static void		Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _index);
+	static void		Collision_Sphere2(list<CObj*> _Dest, list<CObj*> _Sour);
 	static bool		Check_Sphere(CObj* pDest, CObj* pSour, int _index);
 	static void		Collision_BulletKS(list<CObj*>& _Dest, list<CObj*>& _Sour);
 

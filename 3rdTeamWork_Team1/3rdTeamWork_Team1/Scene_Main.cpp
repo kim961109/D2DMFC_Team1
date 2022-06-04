@@ -42,6 +42,7 @@ void CScene_Main::Render(HDC hDC)
 
 void CScene_Main::Release(void)
 {
+
 	//CObjMgr::Get_Instance()->Delete_ID(OBJ_MyButton);// 신이 바뀔때 그 신의 객체 모두 삭제
 }
 

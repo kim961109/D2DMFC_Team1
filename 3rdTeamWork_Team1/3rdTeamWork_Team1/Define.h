@@ -27,3 +27,9 @@
 
 #define     VK_MAX       0xff
 
+
+extern bool g_bZoomOut_Jini;
+extern bool g_bZoomIn_Jini;
+
+extern float g_fRenderPercent;
+extern float g_fScaleCount;

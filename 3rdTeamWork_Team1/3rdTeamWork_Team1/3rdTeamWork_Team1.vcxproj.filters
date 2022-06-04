@@ -91,7 +91,6 @@
     <Filter Include="02. Scene\04.Scene_KS\UI_KS\01.UI_PlayerHp">
       <UniqueIdentifier>{a3df4341-9920-4f3f-b019-f54b23332e65}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="02. Scene\03.Scene_KJE\Apple_KJE">
       <UniqueIdentifier>{386b7bad-3312-4dfa-8c27-73efe9c1b32c}</UniqueIdentifier>
     </Filter>
@@ -208,9 +207,6 @@
     <ClInclude Include="PlayerJini.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClInclude>
-    <ClInclude Include="Jelly.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerMS.h">
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClInclude>
@@ -229,16 +225,17 @@
     <ClInclude Include="UIMgr.h">
       <Filter>99.Design\08.UIMgr</Filter>
     </ClInclude>
-
     <ClInclude Include="Apple.h">
       <Filter>02. Scene\03.Scene_KJE\Apple_KJE</Filter>
     </ClInclude>
-
     <ClInclude Include="Jelly.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClInclude>
     <ClInclude Include="Monster_KS.h">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
+    </ClInclude>
+    <ClInclude Include="Jelly.h">
+      <Filter>02. Scene\01.Scene_jini</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -314,11 +311,6 @@
     <ClCompile Include="PlayerJini.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClCompile>
-
-    <ClCompile Include="Jelly.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-
     <ClCompile Include="Bullet_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Bullet_KS</Filter>
     </ClCompile>
@@ -334,16 +326,17 @@
     <ClCompile Include="PlayerMS.cpp">
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClCompile>
-
     <ClCompile Include="Apple.cpp">
       <Filter>02. Scene\03.Scene_KJE\Apple_KJE</Filter>
     </ClCompile>
-
     <ClCompile Include="Jelly.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClCompile>
     <ClCompile Include="Monster_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
+    </ClCompile>
+    <ClCompile Include="Jelly.cpp">
+      <Filter>02. Scene\01.Scene_jini</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

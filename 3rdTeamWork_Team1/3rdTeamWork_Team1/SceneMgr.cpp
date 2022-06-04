@@ -10,6 +10,7 @@ CSceneMgr::CSceneMgr()
 
 CSceneMgr::~CSceneMgr()
 {
+	Release();
 }
 
 void CSceneMgr::Scene_Change(SCENEID eID)    // 추후 SceneExchange함수 만들어 기존 씬:farm만 저장 시킴.멤버변수로.
