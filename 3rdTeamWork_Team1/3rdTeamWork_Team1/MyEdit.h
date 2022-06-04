@@ -1,17 +1,10 @@
 #pragma once
 #include "Scene.h"
-#include "BmpMgr.h"
-#include "ObjMgr.h"
-#include "KeyMgr.h"
-#include "SceneMgr.h"
-#include "AbstractFactory.h"
-#include "PlayerMS.h"
-class CScene_MinSungJJang :
-	public CScene
+class CMyEdit :	public CScene
 {
 public:
-	CScene_MinSungJJang();
-	virtual ~CScene_MinSungJJang();
+	CMyEdit();
+	virtual ~CMyEdit();
 
 public:
 	virtual void Initialize(void) override;
@@ -21,6 +14,10 @@ public:
 	virtual void Release(void) override;
 
 private:
-	TCHAR*		m_pFrameKey;
+	void		Key_Input(void);
+
+private:
+	float		m_fSpeed = 5.f;
+
 };
 

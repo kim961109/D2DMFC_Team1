@@ -2,11 +2,11 @@
 
 #include "Obj.h"
 
-class CTile :	public CObj
+class CTileMS : public CObj
 {
 public:
-	CTile();
-	virtual ~CTile();
+	CTileMS();
+	virtual ~CTileMS();
 
 public:
 	virtual void Initialize(void) override;
@@ -27,9 +27,8 @@ private:
 	int			m_iDrawID;
 	int			m_iOption;
 
-	int		m_iTileColorR;
-	int		m_iTileColorG;
-	int		m_iTileColorB;
+
+
 
 };
 

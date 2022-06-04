@@ -170,6 +170,7 @@
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Monster_KS.h" />
     <ClInclude Include="MyBmp.h" />
+    <ClInclude Include="MyEdit.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjMgr.h" />
     <ClInclude Include="Player.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TileMS.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIFactory.h" />
     <ClInclude Include="UIMgr.h" />
@@ -208,6 +210,7 @@
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Monster_KS.cpp" />
     <ClCompile Include="MyBmp.cpp" />
+    <ClCompile Include="MyEdit.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjMgr.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -230,6 +233,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TileMS.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIMgr.cpp" />
     <ClCompile Include="UI_PlayerHp.cpp" />
