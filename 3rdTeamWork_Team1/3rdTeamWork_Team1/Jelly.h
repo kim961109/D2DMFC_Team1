@@ -7,9 +7,10 @@ public:
 	CJelly();
 	virtual ~CJelly();
 
-// 여기
-public :
+	// 여기
+public:
 	const float&	Get_PlusScale() const { return m_fPlusScale; }
+	const float&	Get_Scale() const { return m_iScale; }
 	const float&	Get_Radius() { return m_fRadius; }
 
 public:
@@ -19,16 +20,14 @@ public:
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
 
-private :
+private:
 	int		m_iPlayerColorR;
 	int		m_iPlayerColorG;
 	int		m_iPlayerColorB;
 
 	int		m_iScale;
 
-	// 여기
 	float	m_fRadius;
 	float	m_fPlusScale;
-
 };
 

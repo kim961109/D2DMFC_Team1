@@ -23,7 +23,7 @@ void CJelly::Initialize(void)
 	m_iPlayerColorB = (rand() % 256 * m_iColor) % 256;
 
 	m_iScale = rand() % 6 + 8;
-	
+
 	// ¿©±â
 	m_fPlusScale = m_iScale * 0.0005f;
 	m_fRadius = m_iScale;
@@ -52,10 +52,10 @@ void CJelly::Render(HDC hDC)
 	HPEN oldPen = (HPEN)SelectObject(hDC, myPen);
 
 	Ellipse(hDC,
-		int(m_tInfo.vPos.x - m_iScale + iScrollX),
-		int(m_tInfo.vPos.y - m_iScale + iScrollY),
-		int(m_tInfo.vPos.x + m_iScale + iScrollX),
-		int(m_tInfo.vPos.y + m_iScale + iScrollY));
+		int(m_tInfo.vPos.x - m_iScale * g_fRenderPercent + iScrollX),
+		int(m_tInfo.vPos.y - m_iScale * g_fRenderPercent + iScrollY),
+		int(m_tInfo.vPos.x + m_iScale * g_fRenderPercent + iScrollX),
+		int(m_tInfo.vPos.y + m_iScale * g_fRenderPercent + iScrollY));
 
 	SelectObject(hDC, oldBrush);
 	DeleteObject(myBrush);

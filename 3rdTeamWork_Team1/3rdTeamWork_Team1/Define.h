@@ -11,6 +11,7 @@
 #define     VK_A         0x41
 #define     VK_S         0x53
 #define     VK_D         0x44
+#define     VK_Z         0x5A
 
 #define		OBJ_NOEVENT  0
 #define		OBJ_DEAD	 1
@@ -33,3 +34,9 @@
 
 #define     VK_MAX       0xff
 
+
+extern bool g_bZoomOut_Jini;
+extern bool g_bZoomIn_Jini;
+
+extern float g_fRenderPercent;
+extern float g_fScaleCount;
