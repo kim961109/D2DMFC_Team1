@@ -30,8 +30,6 @@ void CTile::Initialize(void)
 
 int CTile::Update(void)
 {
-	if (m_bDead)
-		return OBJ_DEAD;
 
 	Update_Rect();
 
@@ -74,6 +72,7 @@ void CTile::Render(HDC hDC)
 		SelectObject(hDC, oldBrush);
 		DeleteObject(myBrush);
 	}
+
 }
 
 void CTile::Release(void)

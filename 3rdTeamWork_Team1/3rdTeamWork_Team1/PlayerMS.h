@@ -23,6 +23,21 @@ private:
 	D3DXVECTOR3			m_vOriginPoint[4];
 	D3DXVECTOR3			vLook;
 
+
+	D3DXVECTOR3			m_vleftPoint[4];
+	D3DXVECTOR3			m_vOriginleftPoint[4];
+
+	D3DXVECTOR3			m_vrightPoint[4];
+	D3DXVECTOR3			m_vOriginrightPoint[4];
+
+	D3DXVECTOR3			m_vleftDownPoint[4];
+	D3DXVECTOR3			m_vOriginleftDownPoint[4];
+
+	D3DXVECTOR3			m_vrightDownPoint[4];
+	D3DXVECTOR3			m_vOriginrightDownPoint[4];
+
+	TCHAR*		m_pFrameKey;
+
 	float		m_fSpeed;
 	float		m_fAngle = 0;
 };

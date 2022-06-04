@@ -23,6 +23,12 @@
 #define		TILEX		 40
 #define		TILEY		 30
 
+#define		TILEDX		50
+#define		TILEDY		50
+
+#define		TILEA		40
+#define		TILEB		30
+
 #define		JINIMAPCX		160
 #define		JINIMAPCY		120
 

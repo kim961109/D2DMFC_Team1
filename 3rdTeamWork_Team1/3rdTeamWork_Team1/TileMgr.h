@@ -14,6 +14,11 @@ public:
 	void		Late_Update();
 	void		Render(HDC hDC);
 	void		Release();
+
+	void		Picking_Tile(POINT _pt, const int& _iDrawID, const int& _iOption);
+	void		Save_Tile(void);
+	void		Load_Tile(void);
+
 	vector<CObj*>&		Get_Tile() { return m_vecTile; }
 
 public:
