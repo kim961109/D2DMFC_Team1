@@ -18,6 +18,7 @@ public:
 private:
 	list<CObj*> m_SnakeList;
 	list<CObj*> m_AppleList;
+	vector<CObj*>m_vecTile;
 
 	int		m_iMilliSecond;
 	int		m_iSecond;
