@@ -300,10 +300,10 @@ void CPlayerJini::Key_Input()
 		AttackRound();
 	}
 
-	if (CKeyMgr::Get_Instance()->Key_Down(VK_ESCAPE))
+	/*if (CKeyMgr::Get_Instance()->Key_Down(VK_ESCAPE))
 	{
 		CSceneMgr::Get_Instance()->Scene_Change(SC_MAIN);
-	}
+	}*/
 
 	if (CKeyMgr::Get_Instance()->Key_Down('1'))
 	{

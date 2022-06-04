@@ -20,28 +20,30 @@ CTileMgr::~CTileMgr()
 void CTileMgr::Initialize()
 {
 	//m_CheckScene = SC_JINI;
-	if (SC_KJE == CSceneMgr::Get_Instance()->Get_SceneID()) {
+	if (SC_KJE == CSceneMgr::Get_Instance()->Get_SceneID()) 
+	{
 		for (int i = 0; i < TILEY; ++i)
 		{
 			for (int j = 0; j < TILEX; ++j)
-        {
-        if ((i>=0&&i<3)||(i>=TILEY-3&&i<=TILEY)||(j >= 0 && j<3)|| (j >= TILEX - 3 && j <= TILEX))
-        {
-          float		fX = (TILECX >> 1) + float(TILECX * j);
-          float		fY = (TILECY >> 1) + float(TILECY * i);
-          CObj*	pTile = CAbstractFactory<CTile>::Create(fX, fY);
-          m_vecTile.push_back(pTile);
+			{
+				if ((i >= 0 && i < 3) || (i >= TILEY - 3 && i <= TILEY) || (j >= 0 && j < 3) || (j >= TILEX - 3 && j <= TILEX))
+				{
+					float		fX = (TILECX >> 1) + float(TILECX * j);
+					float		fY = (TILECY >> 1) + float(TILECY * i);
+					CObj*	pTile = CAbstractFactory<CTile>::Create(fX, fY);
+					m_vecTile.push_back(pTile);
 
-          if ((i >= 0 && i < 3) || (i >= TILEY - 3 && i <= TILEY) || (j >= 0 && j < 3) || (j >= TILEX - 3 && j <= TILEX))
-          {
-            dynamic_cast<CTile*>(pTile)->Set_Option(1);
-          }
-          //dynamic_cast<CTile*>(pTile)->Set_Option(1);
-
-        }
+					if ((i >= 0 && i < 3) || (i >= TILEY - 3 && i <= TILEY) || (j >= 0 && j < 3) || (j >= TILEX - 3 && j <= TILEX))
+					{
+						dynamic_cast<CTile*>(pTile)->Set_Option(1);
+					}
+					//dynamic_cast<CTile*>(pTile)->Set_Option(1);
+				}
+			}
 		}
 	}
-	if (SC_KMS == CSceneMgr::Get_Instance()->Get_SceneID()) {
+	if (SC_KMS == CSceneMgr::Get_Instance()->Get_SceneID()) 
+	{
 		for (int i = 0; i < TILEB; ++i)
 		{
 			for (int j = 0; j < TILEA; ++j)
@@ -54,9 +56,6 @@ void CTileMgr::Initialize()
 			}
 		}
 	}
-	
-
-	
 }
 
 void CTileMgr::Update()
