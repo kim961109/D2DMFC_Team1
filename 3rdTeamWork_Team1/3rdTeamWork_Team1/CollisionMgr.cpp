@@ -45,6 +45,7 @@ void CCollisionMgr::Collision_Snake_Apple(list<CObj*> _Snake, list<CObj*> _Apple
 				Apple->Set_ObjPos(rand() % (WINCX - 140)+70, rand() % (WINCY - 140)+70);
 				dynamic_cast<CApple*>(Apple)->Set_ApplePlus();
 				dynamic_cast<CSnake_Head*>(Snake)->GrowUp();
+				
 
       }
 		}

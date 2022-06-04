@@ -16,6 +16,7 @@ public:
 	
 public:
 	D3DXVECTOR3 Get_Pos() { return m_tInfo.vPos; }
+	INFO Get_Info() { return m_tInfo; }
 
 	void		GrowUp();
 
@@ -39,6 +40,8 @@ private:
 	int		m_iSnakeColorG;
 	int		m_iSnakeColorB;
 
+	vector<CObj*>	m_vecBody;
+	
 
 };
 

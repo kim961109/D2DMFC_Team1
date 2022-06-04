@@ -24,7 +24,7 @@ void CSnake_Head::Initialize(void)
 	m_vPoint[1] = { m_tInfo.vPos.x + 10.f,  m_tInfo.vPos.y - 10.f, 0.f };
 	m_vPoint[2] = { m_tInfo.vPos.x + 10.f,  m_tInfo.vPos.y + 10.f, 0.f };
 	m_vPoint[3] = { m_tInfo.vPos.x - 10.f,  m_tInfo.vPos.y + 10.f, 0.f };
-	//m_fRadius = 10;
+	m_fRadius = 10;
 	for (int i = 0; i < 4; ++i)
 	{
 		m_vOriginPoint[i] = m_vPoint[i];//키누를때만움직이게하려고 originpoint 만듬
@@ -38,7 +38,6 @@ void CSnake_Head::Initialize(void)
 	m_iSnakeColorR = rand() % 256;
 	m_iSnakeColorG = rand() % 256;
 	m_iSnakeColorB = rand() % 256;
-	
 }
 
 int CSnake_Head::Update(void)
@@ -73,6 +72,7 @@ int CSnake_Head::Update(void)
 	m_tRect.top = m_tInfo.vPos.y - 10.f;
 	m_tRect.right = m_tInfo.vPos.x + 10.f;
 	m_tRect.bottom = m_tInfo.vPos.y + 10.f;
+	
 	return 0;
 }
 
@@ -114,6 +114,7 @@ void CSnake_Head::Render(HDC hDC)
 	DeleteObject(myBrush);
 	SelectObject(hDC, oldPen);
 	DeleteObject(myPen);
+
 }
 
 void CSnake_Head::Release(void)
@@ -154,9 +155,13 @@ void CSnake_Head::Key_Input(void)
 }
 void CSnake_Head::GrowUp()
 {
+	D3DXVECTOR3 m_vNewPos;
+	m_vNewPos = m_tInfo.vPos - m_tInfo.vDir * m_fRadius * 2.f;
+	//float   fPosX = (m_tInfo.vPos.x) + (m_tInfo.vDir.x * m_fRadius);
+	//float	fPosY = (m_tInfo.vPos.y) - (m_tInfo.vDir.y * m_fRadius);
 
-	float   fPosX = (m_tInfo.vPos.x) - (m_tInfo.vDir.x * 20);
-	float	fPosY = (m_tInfo.vPos.y) + (m_tInfo.vDir.y * 20);
+	//CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKEBODY, CAbstractFactory<CSnake_Body>::Create_SetPos(fPosX, fPosY, 0.f));
+	CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKEBODY, CAbstractFactory<CSnake_Body>::Create_SetPos(m_vNewPos.x, m_vNewPos.y, 0.f));
+	m_vecBody.push_back(CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKEBODY));
 
-	CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKE, CAbstractFactory<CSnake_Body>::Create_SetPos(fPosX, fPosY, 0.f));
 }
