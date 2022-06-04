@@ -1,13 +1,18 @@
 #include "stdafx.h"
 #include "Snake_Head.h"
+#include "ObjMgr.h"
+#include "AbstractFactory.h"
+#include "Snake_Body.h"
 
 
 CSnake_Head::CSnake_Head()
 {
+	m_bDead = false;
 }
 
 CSnake_Head::~CSnake_Head()
 {
+	Release();
 }
 
 void CSnake_Head::Initialize(void)
@@ -19,18 +24,30 @@ void CSnake_Head::Initialize(void)
 	m_vPoint[1] = { m_tInfo.vPos.x + 10.f,  m_tInfo.vPos.y - 10.f, 0.f };
 	m_vPoint[2] = { m_tInfo.vPos.x + 10.f,  m_tInfo.vPos.y + 10.f, 0.f };
 	m_vPoint[3] = { m_tInfo.vPos.x - 10.f,  m_tInfo.vPos.y + 10.f, 0.f };
-
+	//m_fRadius = 10;
 	for (int i = 0; i < 4; ++i)
 	{
 		m_vOriginPoint[i] = m_vPoint[i];//키누를때만움직이게하려고 originpoint 만듬
 	}
 
 	m_fAngle = 0.f;
-	m_fSpeed = 3.f;
+	m_fSpeed = 1.f;
+
+	// 색상 랜덤 설정
+	srand(unsigned int(time(NULL)));
+	m_iSnakeColorR = rand() % 256;
+	m_iSnakeColorG = rand() % 256;
+	m_iSnakeColorB = rand() % 256;
+	
 }
 
 int CSnake_Head::Update(void)
 {
+	if (m_bDead)
+	{
+		return OBJ_DEAD;
+	}
+
 	if (GetTickCount() - m_dKeyInput > 300)
 	{
 		Key_Input();
@@ -65,24 +82,38 @@ void CSnake_Head::Late_Update(void)
 
 void CSnake_Head::Render(HDC hDC)
 {
-	MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
+	/*MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
 
 	for (int i = 0; i < 4; ++i)
 	{
 		LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
 
-		if (i > 1)
+	/*	if (i > 1)
 			continue;
-
-		Ellipse(hDC,
+	
+			Ellipse(hDC,
 			(int)m_vPoint[i].x - 5,
 			(int)m_vPoint[i].y - 5,
 			(int)m_vPoint[i].x + 5,
 			(int)m_vPoint[i].y + 5);
 	}
+	LineTo(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y);*/
+	//Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+	HBRUSH myBrush = (HBRUSH)CreateSolidBrush(RGB(m_iSnakeColorR, m_iSnakeColorG, m_iSnakeColorB));
+	HBRUSH oldBrush = (HBRUSH)SelectObject(hDC, myBrush);
+	HPEN myPen = (HPEN)CreatePen(PS_SOLID, 1, RGB(m_iSnakeColorR, m_iSnakeColorG, m_iSnakeColorB));
+	HPEN oldPen = (HPEN)SelectObject(hDC, myPen);
 
-	LineTo(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y);
-	Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+	Ellipse(hDC,
+		int(m_vPoint[0].x),
+		int(m_vPoint[1].y),
+		int(m_vPoint[2].x),
+		int(m_vPoint[3].y));
+
+	SelectObject(hDC, oldBrush);
+	DeleteObject(myBrush);
+	SelectObject(hDC, oldPen);
+	DeleteObject(myPen);
 }
 
 void CSnake_Head::Release(void)
@@ -120,5 +151,12 @@ void CSnake_Head::Key_Input(void)
 		m_fAngle += D3DXToRadian(90.f);
 		m_dKeyInput = GetTickCount();
 	}
+}
+void CSnake_Head::GrowUp()
+{
 
+	float   fPosX = (m_tInfo.vPos.x) - (m_tInfo.vDir.x * 20);
+	float	fPosY = (m_tInfo.vPos.y) + (m_tInfo.vDir.y * 20);
+
+	CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKE, CAbstractFactory<CSnake_Body>::Create_SetPos(fPosX, fPosY, 0.f));
 }

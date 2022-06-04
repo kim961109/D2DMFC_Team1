@@ -9,6 +9,10 @@
 #include"Apple.h"
 #include"CollisionMgr.h"
 
+#define m_SnakeList CObjMgr::Get_Instance()->Get_List(OBJ_SNAKE)
+#define m_AppleList CObjMgr::Get_Instance()->Get_List(OBJ_ITEM)
+#define m_vecTile   CTileMgr::Get_Instance()->Get_Tile()
+
 CScene_KJE::CScene_KJE()
 {
 	m_iMilliSecond = 0;
@@ -28,11 +32,10 @@ void CScene_KJE::Initialize(void)
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Scene_KJE.bmp", L"Scene_KJE");
 	CTileMgr::Get_Instance()->Initialize();
 	CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKE, CAbstractFactory<CSnake_Head>::Create_SetPos(300.f, 400.f, 0.f));
-	CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKE, CAbstractFactory<CSnake_Body>::Create_SetPos(300.f, 425.f, 0.f));
-	CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKE, CAbstractFactory<CSnake_Body>::Create_SetPos(300.f, 450.f, 0.f));
-	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CApple>::Create(300.f, 400.f));
-	m_SnakeList = CObjMgr::Get_Instance()->Get_List(OBJ_SNAKE);
-	m_AppleList = CObjMgr::Get_Instance()->Get_List(OBJ_ITEM);
+	CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CApple>::Create(300.f, 370.f));
+	//m_SnakeList = CObjMgr::Get_Instance()->Get_List(OBJ_SNAKE);
+	//m_AppleList = CObjMgr::Get_Instance()->Get_List(OBJ_ITEM);
+	//m_vecTile = CTileMgr::Get_Instance()->Get_Tile();
 }
 
 void CScene_KJE::Update(void)
@@ -45,7 +48,6 @@ void CScene_KJE::Update(void)
 		m_iMilliSecond = 0;
 		m_iSecond += 1;
 	}
-
 }
 
 void CScene_KJE::Late_Update(void)
@@ -54,11 +56,11 @@ void CScene_KJE::Late_Update(void)
 	CObjMgr::Get_Instance()->Late_Update();
 	CCollisionMgr::Collision_Snake_Apple(m_SnakeList, m_AppleList);
 	m_iApple = dynamic_cast<CApple*>(CObjMgr::Get_Instance()->Get_List(OBJ_ITEM).front())->Get_Apple();
+	CCollisionMgr::Collision_Snake_Tile(m_SnakeList, m_vecTile);
 }
 
 void CScene_KJE::Render(HDC hDC)
 {
-
 	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Scene_KJE");
 	BitBlt(hDC, 0, 0, WINCX, WINCY, hMemDC, 0, 0, SRCCOPY);
 	CTileMgr::Get_Instance()->Render(hDC);

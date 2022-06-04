@@ -13,6 +13,9 @@ public:
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
 
+public:
+	void Get_HeadPos(D3DXVECTOR3 _Pos) { m_HeadPos = _Pos; }
+
 
 private:
 	void		Key_Input(void);
@@ -24,6 +27,7 @@ private:
 
 	float		m_fSpeed;
 	float		m_fAngle;
+	D3DXVECTOR3	m_HeadPos;
 
 };
 

@@ -30,7 +30,7 @@ void CCollisionMgr::Collision_Rect(list<CObj*> _Dest, list<CObj*> _Sour)
 		}
 	}
 }
-
+//SCENE_KJE
 void CCollisionMgr::Collision_Snake_Apple(list<CObj*> _Snake, list<CObj*> _Apple)
 {
 	RECT		rc{};
@@ -41,11 +41,27 @@ void CCollisionMgr::Collision_Snake_Apple(list<CObj*> _Snake, list<CObj*> _Apple
 		{
 			if (IntersectRect(&rc, &(Snake->Get_Rect()), &(Apple->Get_Rect())))
 			{
-				//Apple->Set_Dead();
 				srand(unsigned int(time(NULL)));
 				Apple->Set_ObjPos(rand() % (WINCX - 140)+70, rand() % (WINCY - 140)+70);
 				dynamic_cast<CApple*>(Apple)->Set_ApplePlus();
+				dynamic_cast<CSnake_Head*>(Snake)->GrowUp();
+
       }
+		}
+	}
+}
+void CCollisionMgr::Collision_Snake_Tile(list<CObj*> _Snake, vector<CObj*> _Tile)
+{
+	RECT		rc{};
+
+	for (auto& Snake : _Snake)
+	{
+		for (auto& Tile : _Tile)
+		{
+			if (IntersectRect(&rc, &(Snake->Get_Rect()), &(Tile->Get_Rect())))
+			{
+				Snake->Set_Dead();
+			}
 		}
 	}
 }
@@ -82,12 +98,24 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 					//   fRadiusDest = dynamic_cast<CPlayerJini*>(Dest)->Get_Radius();
 					//  fRadiusSour = dynamic_cast<CMonster*>(Sour)->Get_Radius();
 					//   break;
+
+					//jeongeun
+				case 4: //Snake - Apple
+					srand(unsigned int(time(NULL)));
+					Sour->Set_ObjPos(rand() % (WINCX - 140) + 70, rand() % (WINCY - 140) + 70);
+					dynamic_cast<CApple*>(Sour)->Set_ApplePlus();
+					break;
+
+				case 5://Snake - Tile
+					break;
 				}
-      }
+
+			}
 		}
 	}
 }
-	
+
+
 bool CCollisionMgr::Check_Sphere(CObj* pDest, CObj* pSour, int _index)
 {
 	// abs : Àý´ë°ªÀ» ±¸ÇØÁÖ´Â ÇÔ¼ö
@@ -112,6 +140,13 @@ bool CCollisionMgr::Check_Sphere(CObj* pDest, CObj* pSour, int _index)
 		//case 3:
 		//   fRadius = dynamic_cast<CPlayerJini*>(pDest)->Get_Radius() + dynamic_cast<CMonster*>(pSour)->Get_Radius();
 		//   break;
+
+	case 4: //Snake - Apple
+		//float	fRadius = (pDest->Get_Info().fCX + pSour->Get_Info().fCX) * 0.5f;
+		
+		break;
+	case 5: //Snake - Tile
+		break;
 	}
 
 
