@@ -82,6 +82,8 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 				switch (_index)
 				{
 				case 1: //Player - Player
+					if ((_index == 1) & dynamic_cast<CPlayerJini*>(Sour)->Get_bBirth())
+						continue;
 					dynamic_cast<CPlayerJini*>(Dest)->Set_ScalePlus(dynamic_cast<CPlayerJini*>(Sour)->Get_Scale());
 					Sour->Set_Dead(true);
 
@@ -92,6 +94,7 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 
 						//if (fRadiusDest > fRadiusSour)
 					dynamic_cast<CPlayerJini*>(Dest)->Set_ScalePlus(dynamic_cast<CJelly*>(Sour)->Get_PlusScale());
+					dynamic_cast<CPlayerJini*>(Dest)->Set_Score(dynamic_cast<CJelly*>(Sour)->Get_Scale());
 					Sour->Set_Dead(true);
 
 					break;
@@ -116,6 +119,45 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 	}
 }
 
+void CCollisionMgr::Collision_Sphere2(list<CObj*> _Dest, list<CObj*> _Sour)
+{
+
+	//for (auto& Dest : _Dest)
+	//{
+	//	for (auto& Sour : _Sour)
+	//	{
+	//		if (Check_Sphere(Dest, Sour, _index))
+	//		{
+	//			float   fRadiusDest;
+	//			float   fRadiusSour;
+
+	//			switch (_index)
+	//			{
+	//			case 1: //Player - Player
+	//				if ((_index == 1) & dynamic_cast<CPlayerJini*>(Sour)->Get_bBirth())
+	//					continue;
+	//				dynamic_cast<CPlayerJini*>(Dest)->Set_ScalePlus(dynamic_cast<CPlayerJini*>(Sour)->Get_Scale());
+	//				Sour->Set_Dead(true);
+
+	//				break;
+	//			case 2: //Player - Jelly
+	//					//fRadiusDest = dynamic_cast<CPlayerJini*>(Dest)->Get_Radius();
+	//					//fRadiusSour = dynamic_cast<CJelly*>(Sour)->Get_Radius();
+
+	//					//if (fRadiusDest > fRadiusSour)
+	//				dynamic_cast<CPlayerJini*>(Dest)->Set_ScalePlus(dynamic_cast<CJelly*>(Sour)->Get_PlusScale());
+	//				Sour->Set_Dead(true);
+
+	//				break;
+	//				//case 3: //Player - Monster
+	//				//   fRadiusDest = dynamic_cast<CPlayerJini*>(Dest)->Get_Radius();
+	//				//  fRadiusSour = dynamic_cast<CMonster*>(Sour)->Get_Radius();
+	//				//   break;
+	//			}
+	//		}
+	//	}
+	//}
+}
 
 bool CCollisionMgr::Check_Sphere(CObj* pDest, CObj* pSour, int _index)
 {
@@ -133,10 +175,11 @@ bool CCollisionMgr::Check_Sphere(CObj* pDest, CObj* pSour, int _index)
 		//if (dynamic_cast<CPlayerJini*>(pDest)->Get_Tag() == dynamic_cast<CPlayerJini*>(pSour)->Get_Tag())
 		//	return 0;
 		fRadius = dynamic_cast<CPlayerJini*>(pDest)->Get_Radius() + dynamic_cast<CPlayerJini*>(pSour)->Get_Radius();
-		fRadius *= 0.7f;
+		fRadius = fRadius * 0.7f * g_fRenderPercent;
 		break;
 	case 2:
 		fRadius = dynamic_cast<CPlayerJini*>(pDest)->Get_Radius() + dynamic_cast<CJelly*>(pSour)->Get_Radius();
+		fRadius *= g_fRenderPercent;
 		break;
 		//case 3:
 		//   fRadius = dynamic_cast<CPlayerJini*>(pDest)->Get_Radius() + dynamic_cast<CMonster*>(pSour)->Get_Radius();

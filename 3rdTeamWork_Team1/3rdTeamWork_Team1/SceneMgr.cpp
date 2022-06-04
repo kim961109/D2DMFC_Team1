@@ -10,7 +10,7 @@ CSceneMgr::CSceneMgr()
 
 CSceneMgr::~CSceneMgr()
 {
-	//Release();
+	Release();
 }
 
 void CSceneMgr::Scene_Change(SCENEID eID)

@@ -19,14 +19,16 @@ CPlayerJini::~CPlayerJini()
 void CPlayerJini::Initialize(void)
 {
 	//m_tInfo.vPos	= { 400.f, 300.f, 0.f };
-	m_vPosMiniMap	= { 0.f, 0.f, 0.f };
-	m_tInfo.vDir	= { 1.f, 0.f, 0.f };
-	m_vDirLocal		= { 1.f, 0.f, 0.f };
+	m_vPosMiniMap = { 0.f, 0.f, 0.f };
+	m_tInfo.vDir = { 1.f, 0.f, 0.f };
+	m_vDirLocal = { 1.f, 0.f, 0.f };
 
-	m_tInfo.vLook	= { 1.f, 0.f, 0.f };
-	m_fSpeed		= 1.f;
-	m_fAngle		= 0.f;
-	m_fScale		= 1.0f;
+	m_tInfo.vLook = { 1.f, 0.f, 0.f };
+	m_fSpeed = 1.f;
+	m_fAngle = 0.f;
+	m_fScale = 4.9f;
+	m_fScaleSum = 0.f;
+	m_fScore = 0.f;
 	//m_fEllipse		= 50.f;
 
 	m_vBodyLocal[0] = { -50.f, 0.f, 0.f }; //left
@@ -34,7 +36,7 @@ void CPlayerJini::Initialize(void)
 	m_vBodyLocal[2] = { 50.f, 0.f, 0.f }; //right
 	m_vBodyLocal[3] = { 0.f, 50.f, 0.f }; //bottom
 
-	// 색상 랜덤 설정
+										  // 색상 랜덤 설정
 	srand(unsigned int(time(NULL)));
 	m_iPlayerColorR = rand() % 256;
 	m_iPlayerColorG = rand() % 256;
@@ -43,20 +45,57 @@ void CPlayerJini::Initialize(void)
 	m_fDistanceMouse = 0.f;
 
 	m_strName = "순수하짐";
-	m_strTag = "부모"; 
+	m_strTag = "부모";
 	lstrcpy(m_szName, L"순수하짐");
+
+	m_dwAttackMove = GetTickCount();
+	m_bMouseMove = false;
+	m_bBirth = false;
+
+	m_vAttackPos = { 0.f, 0.f, 0.f };
+	m_vAttackDir = { 0.f, 0.f, 0.f };
+
 }
 
 int CPlayerJini::Update(void)
 {
-	if(m_bDead)
+	if (m_bDead)
 		return OBJ_DEAD;
+
+	if (m_strTag != "부모")
+		m_bBirth = true;
 
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
 
 	// 크기에 따른 속도 지정
-	m_fSpeed = m_fScale * 2.0f / (m_fScale * m_fScale * 0.8f);
+	m_fSpeed = 1.5f / m_fScale;
+	if (m_fSpeed > 3.f)
+		m_fSpeed = 3.f;
+	else if (m_fSpeed < 0.5f)
+		m_fSpeed = 0.5f;
+
+	// 분열 공격 시, 이동
+	if (m_bBirth & m_strTag != "부모")
+	{
+		if(m_strTag == "자식")
+			m_tInfo.vPos += m_vAttackDir * 5.f * g_fRenderPercent;
+		else
+			m_tInfo.vPos += m_vAttackDir * 4.f * g_fRenderPercent;
+
+		if (GetTickCount() - m_dwAttackMove > 300)
+		{
+			m_bBirth = false;
+			m_fSpeed = 1.f / m_fScale;
+			if (m_fSpeed > 3.f)
+				m_fSpeed = 3.f;
+			else if (m_fSpeed < 0.5f)
+				m_fSpeed = 0.5f;
+			m_vAttackDir = { 0.f, 0.f, 0.f };
+		}
+	}
+
+
 
 	// 마우스 방향연산
 	m_vMouseTemp = ::Get_Mouse();
@@ -71,12 +110,14 @@ int CPlayerJini::Update(void)
 	m_fDistanceMouse = sqrtf(_DistanceX * _DistanceX + _DistanceY * _DistanceY);
 
 	// 마우스 방향 이동 
-	if (m_fDistanceMouse > 10.0f) // 마우스랑 일정거리 이상 가까워지면 이동안하게 (떨림방지)
+	if (!m_bBirth & m_fDistanceMouse > 10.0f) // 마우스랑 일정거리 이상 가까워지면 이동안하게 (떨림방지)
 	{
-			m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+		m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
 		//m_tInfo.vPos.y += m_tInfo.vDir.y * m_fSpeed;
 	}
 
+
+	// 화면 안벗어나게
 	if (0 > m_tInfo.vPos.x)
 		m_tInfo.vPos.x = 0.f;
 	else if (2400 < m_tInfo.vPos.x)
@@ -100,14 +141,14 @@ int CPlayerJini::Update(void)
 	{
 		D3DXVec3TransformCoord(&m_vBody[i], &m_vBodyLocal[i], &m_tInfo.matWorld);
 	}
-	
+
 	// 반지름 계산해두기
 	m_fRadius = (m_vBody[2].x - m_vBody[0].x) * 0.5;
-	
-	if(m_strTag == "부모")
+
+	if (m_strTag == "부모")
 		Offset();
 
-	cout << "vPos.x = " << m_tInfo.vPos.x << "vPos.y = " << m_tInfo.vPos.y << endl;
+	cout << "vPos.x = " << m_tInfo.vPos.x << "\t vPos.y = " << m_tInfo.vPos.y << "\t m_fScale = " << m_fScale << "\t m_fScore = " << m_fScore << "\t m_fScaleSum = " << m_fScaleSum << endl;
 
 	m_vPosMiniMap.x = m_tInfo.vPos.x / 2400.f * JINIMAPCX;
 	m_vPosMiniMap.y = m_tInfo.vPos.y / 1800.f * JINIMAPCY;
@@ -117,6 +158,57 @@ int CPlayerJini::Update(void)
 
 void CPlayerJini::Late_Update(void)
 {
+	m_fScaleSum = 0.f;
+	list<CObj*> listTemp = CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERCHILD);
+
+	if (listTemp.size() > 0)
+	{
+		for (auto& _iter : listTemp)
+		{
+			m_fScaleSum += dynamic_cast<CPlayerJini*>(_iter)->Get_Scale();
+		}
+		m_fScaleSum += m_fScale;
+	}
+	else
+		m_fScaleSum = m_fScale;
+
+	// 일정크기 이상 커지면 줌 아웃
+	if (m_fScaleSum > 5.f * (g_fScaleCount + 1.f))
+	{
+		++g_fScaleCount;
+		m_fRenderPercentTemp = g_fRenderPercent * 0.5f;
+		g_bZoomOut_Jini = true;
+	}
+
+	// 일정크기 이상 작아지면 줌 인
+	if ((g_fScaleCount != 0.f) && m_fScaleSum < (5.f * g_fScaleCount))
+	{
+		--g_fScaleCount;
+		m_fRenderPercentTemp = g_fRenderPercent * 2.f;
+		g_bZoomIn_Jini = true;
+	}
+
+	if (g_bZoomOut_Jini & g_fRenderPercent > m_fRenderPercentTemp)
+		g_fRenderPercent -= 0.01f;
+	else
+		g_bZoomOut_Jini = false;
+
+	if (g_bZoomIn_Jini & g_fRenderPercent < m_fRenderPercentTemp)
+		g_fRenderPercent += 0.01f;
+	else
+		g_bZoomIn_Jini = false;
+
+
+	//else
+	//	//g_bScaleChange_Jini = false;
+
+	//if (g_bScaleChange_Jini)
+	//{
+	//	float m_fScaleGoal = m_fScale * 0.4f;
+	//	
+	//	while (m_fScale > m_fScaleGoal)
+	//		m_fScale -= 0.1f;
+	//}
 }
 
 void CPlayerJini::Render(HDC hDC)
@@ -130,11 +222,17 @@ void CPlayerJini::Render(HDC hDC)
 	HPEN myPen = (HPEN)CreatePen(PS_SOLID, 1, RGB(m_iPlayerColorR, m_iPlayerColorG, m_iPlayerColorB));
 	HPEN oldPen = (HPEN)SelectObject(hDC, myPen);
 
+	//Ellipse(hDC,
+	//	int(m_vBody[0].x + iScrollX),
+	//	int(m_vBody[1].y + iScrollY),
+	//	int(m_vBody[2].x + iScrollX),
+	//	int(m_vBody[3].y + iScrollY));
+
 	Ellipse(hDC,
-		int(m_vBody[0].x + iScrollX),
-		int(m_vBody[1].y + iScrollY),
-		int(m_vBody[2].x + iScrollX),
-		int(m_vBody[3].y + iScrollY));
+		int(m_tInfo.vPos.x - ((m_fRadius + 100 / m_fRadius)) * g_fRenderPercent + iScrollX),
+		int(m_tInfo.vPos.y - ((m_fRadius + 100 / m_fRadius)) * g_fRenderPercent + iScrollY),
+		int(m_tInfo.vPos.x + ((m_fRadius + 100 / m_fRadius)) * g_fRenderPercent + iScrollX),
+		int(m_tInfo.vPos.y + ((m_fRadius + 100 / m_fRadius)) * g_fRenderPercent + iScrollY));
 
 	Ellipse(hDC,
 		int(m_vPosMiniMap.x - 3.f + WINCX - JINIMAPCX),
@@ -153,8 +251,8 @@ void CPlayerJini::Render(HDC hDC)
 
 	LOGFONT m_labelFontInfo{};
 	m_labelFontInfo.lfCharSet = 129;
-	m_labelFontInfo.lfHeight = m_fScale * 1.5 * 12;
-	m_labelFontInfo.lfWidth = m_fScale * 1.5 * 6;
+	m_labelFontInfo.lfHeight = m_fScale * g_fRenderPercent * 1.5 * 12;
+	m_labelFontInfo.lfWidth = m_fScale * g_fRenderPercent * 1.5 * 6;
 	//m_labelFontInfo.lfWeight = FW_BOLD;
 
 	HFONT textFont, oldFont;
@@ -164,19 +262,17 @@ void CPlayerJini::Render(HDC hDC)
 	SetBkColor(hDC, RGB(m_iPlayerColorR, m_iPlayerColorG, m_iPlayerColorB));
 	SetTextColor(hDC, RGB(255, 255, 255));
 
-	TextOut(hDC, m_tInfo.vPos.x - m_fRadius * 0.7 + iScrollX, m_tInfo.vPos.y - m_fRadius * 0.2 + iScrollY, m_szName, lstrlen(m_szName));
-	
+	TextOut(hDC, m_tInfo.vPos.x - m_fRadius * 0.7 * g_fRenderPercent + iScrollX, m_tInfo.vPos.y - m_fRadius * 0.2 * g_fRenderPercent + iScrollY, m_szName, lstrlen(m_szName));
+
 	SelectObject(hDC, oldFont);
 	DeleteObject(textFont);
 
-	
 }
 
 void CPlayerJini::Release(void)
 {
-} 
+}
 
-//
 void CPlayerJini::Offset()
 {
 	int		iOffSetX = WINCX >> 1;
@@ -189,18 +285,6 @@ void CPlayerJini::Offset()
 	CScrollMgr::Get_Instance()->Set_EScrollX(-m_tInfo.vPos.x + iOffSetX);
 	CScrollMgr::Get_Instance()->Set_EScrollY(-m_tInfo.vPos.y + iOffSetY);
 
-	//if (iOffSetX - iItvX > m_tInfo.vPos.x + iScrollX)
-	//	CScrollMgr::Get_Instance()->Set_ScrollX(m_fSpeed);
-
-	//if (iOffSetX + iItvX < m_tInfo.vPos.x + iScrollX)
-	//	CScrollMgr::Get_Instance()->Set_ScrollX(-m_fSpeed);
-
-	//if (iOffSetY - iItvY > m_tInfo.vPos.y + iScrollY)
-	//	CScrollMgr::Get_Instance()->Set_ScrollY(m_fSpeed);
-
-	//if (iOffSetY + iItvY < m_tInfo.vPos.y + iScrollY)
-	//	CScrollMgr::Get_Instance()->Set_ScrollY(-m_fSpeed);
-
 }
 
 // 여기
@@ -208,39 +292,87 @@ void CPlayerJini::Key_Input()
 {
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
-		Attack();
-
-		// 함수를 따로 떼던가
-		// 먼저 크기를 반으로 나누고
-		//m_fScale *= 0.5;
-
-		// 분신 생성 및 크기 셋팅
-		//CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbsractFactory<CPlayer>::Create(0.f, 0.f, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
-		//CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYER)->Set_Scale(m_fScale);
-		//CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYER)->Set_Tag("자식");
-
-		// 
+		Attack(m_tInfo.vDir, 0.35f);
 	}
+
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_CONTROL))
+	{
+		AttackRound();
+	}
+
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_ESCAPE))
+	{
+		CSceneMgr::Get_Instance()->Scene_Change(SC_MAIN);
+	}
+
+	if (CKeyMgr::Get_Instance()->Key_Down('1'))
+	{
+		m_fScale = 4.5f;
+	}
+
 }
 
-void CPlayerJini::Attack()
+void CPlayerJini::Attack(D3DXVECTOR3 _vDir, float _fGiveScale)
 {
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
 
-	float   fPosX = (m_tInfo.vPos.x ) + ( m_tInfo.vDir.x * m_fRadius);
-	float	fPosY = (m_tInfo.vPos.y ) + ( m_tInfo.vDir.y * m_fRadius);
+	float   fPosX = (m_tInfo.vPos.x) + (_vDir.x * m_fRadius);
+	float	fPosY = (m_tInfo.vPos.y) + (_vDir.y * m_fRadius);
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYERCHILD, CAbstractFactory<CPlayerJini>::Create_SetPos(fPosX, fPosY, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
-	dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_Scale(m_fScale * 0.41);
+																														   //CObjMgr::Get_Instance()->Add_Object(OBJ_PlayerChild, CAbstractFactory<CPlayerJini>::Create_SetPos(m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f)); 
+
+	dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_Scale(m_fScale * _fGiveScale);
 	dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_Tag("자식");
-	
-	m_fScale *= 0.59;
-	
-	cout << "vPos.x = " << m_tInfo.vPos.x << "vPos.y = " << m_tInfo.vPos.y << endl;
-	cout << "new vPos.x = " << fPosX << "new vPos.y = " << fPosY << endl;
-	cout << "iScrollX = " << iScrollX << "iScrollY = " << iScrollY << endl;
-	cout << "vDir.x = " << m_tInfo.vDir.x << "vDir.y = " << m_tInfo.vDir.y << endl;
+	dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_AttackDir(_vDir);
+	//dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PlayerChild))->Set_AttackPos();
+
+
+
+	m_fScale *= (1.f - _fGiveScale);
+
+	//cout << "vPos.x = " << m_tInfo.vPos.x << "vPos.y = " << m_tInfo.vPos.y << endl;
+	//cout << "new vPos.x = " << fPosX << "new vPos.y = " << fPosY << endl;
+	//cout << "iScrollX = " << iScrollX << "iScrollY = " << iScrollY << endl;
+	//cout << "vDir.x = " << m_tInfo.vDir.x << "vDir.y = " << m_tInfo.vDir.y << endl;
 
 }
+
+void CPlayerJini::AttackRound()
+{
+	// 8방향 각도
+	D3DXVECTOR3		m_vDirTemp[8] =
+	{ { 0.f, -1.f, 0.f },
+	{ 0.5f, -0.5f, 0.f },
+	{ 1.f, 0.f, 0.f },
+	{ 0.5f, 0.5f, 0.f },
+	{ 0.f, 1.f, 0.f },
+	{ -0.5f, 0.5f, 0.f },
+	{ -1.f, 0.f, 0.f },
+	{ -0.5f, -0.5f, 0.f }
+	};
+
+	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+
+	srand(unsigned int(time(NULL)));
+	int		iRandom = rand() % 4 + 5;
+
+	for (int i = 0; i < iRandom; ++i)
+	{
+		float   fPosX = (m_tInfo.vPos.x) + (m_vDirTemp[i].x * m_fRadius );
+		float	fPosY = (m_tInfo.vPos.y) + (m_vDirTemp[i].y * m_fRadius );
+
+		CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYERCHILD, CAbstractFactory<CPlayerJini>::Create_SetPos(fPosX, fPosY, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
+		dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_Scale(m_fScale * 0.1f);
+		dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_Tag("다자녀");
+		dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_AttackDir(m_vDirTemp[i]);
+
+
+	}
+
+	m_fScale *= (10 - iRandom) * 0.1f;
+}
+
 

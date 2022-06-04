@@ -14,21 +14,21 @@ CScene_Main::~CScene_Main()
 
 void CScene_Main::Initialize(void)
 {
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/MainGame.bmp", L"MainGame");//¸ÞÀÎ °ÔÀÓ È­¸é.
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/MainGame.bmp", L"MainGame");//ë©”ì¸ ê²Œìž„ í™”ë©´.
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_BALL, CAbstractFactory<CBall>::Create_Ball({ 230.f, (WINCY >> 1), 0.f }));
 	CObjMgr::Get_Instance()->Add_Object(OBJ_STICK, CAbstractFactory<CStick>::Create_Stick());
 
-	//Ãæµ¹Ã¼ »ý¼º.
-	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(230.f, 120.f, 280.f,10.f));//»óÁÂ
-	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(230.f, 475.f, 280.f, 10.f));//ÇÏÁÂ
-	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(580.f, 120.f, 280.f, 10.f));//»ó¿ì
-	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(580.f, 475.f, 280.f, 10.f));//ÇÏ¿ì
-	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(755.f, 295.f, 10.f, 270.f));//¿ì
-	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(55.f, 295.f, 10.f, 270.f));//ÁÂ
+	//ì¶©ëŒì²´ ìƒì„±.
+	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(230.f, 120.f, 280.f,10.f));//ìƒì¢Œ
+	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(230.f, 475.f, 280.f, 10.f));//í•˜ì¢Œ
+	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(580.f, 120.f, 280.f, 10.f));//ìƒìš°
+	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(580.f, 475.f, 280.f, 10.f));//í•˜ìš°
+	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(755.f, 295.f, 10.f, 270.f));//ìš°
+	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(55.f, 295.f, 10.f, 270.f));//ì¢Œ
 
-	// 6°³ÀÇ ±¸¸Û¿¡ °¢°¢ ¿ÀºêÁ§Æ®¸¦ ³õ¾Æ Ãæµ¹ Ã³¸®¸¦ ÇØÁÜ.(¾À ÀüÈ¯)-¾À Ã¼ÀÎÁö¸¦ ÇÒ °´Ã¼¸¦ ´ãÀ» vector¿¡ 6°³ °´Ã¼ ´ã°í 
-	CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(230.f, 120.f, 50.f, 50.f));//³ª°¡±â
+	// 6ê°œì˜ êµ¬ë©ì— ê°ê° ì˜¤ë¸Œì íŠ¸ë¥¼ ë†“ì•„ ì¶©ëŒ ì²˜ë¦¬ë¥¼ í•´ì¤Œ.(ì”¬ ì „í™˜)-ì”¬ ì²´ì¸ì§€ë¥¼ í•  ê°ì²´ë¥¼ ë‹´ì„ vectorì— 6ê°œ ê°ì²´ ë‹´ê³  
+	CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(230.f, 120.f, 50.f, 50.f));//ë‚˜ê°€ê¸°
 	//CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(230.f, 120.f, 280.f, 10.f));//jini
 	//CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(230.f, 120.f, 280.f, 10.f));//KMS
 	//CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(230.f, 120.f, 280.f, 10.f));//Random
@@ -39,7 +39,7 @@ void CScene_Main::Initialize(void)
 
 void CScene_Main::Update(void)
 {
-	// Å° ÀÔ·ÂÀ» ¹Þ¾Æ¼­ ºÎµ¿ÇÑ ¾À(°ÔÀÓ)À¸·Î ÀüÈ¯.
+	// í‚¤ ìž…ë ¥ì„ ë°›ì•„ì„œ ë¶€ë™í•œ ì”¬(ê²Œìž„)ìœ¼ë¡œ ì „í™˜.
 	Key_Input();
 
 	CObjMgr::Get_Instance()->Update();
@@ -53,7 +53,7 @@ void CScene_Main::Late_Update(void)
 
 void CScene_Main::Render(HDC hDC)
 {
-	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"MainGame");  //°ÔÀÓ ½ÃÀÛ½Ã ¹öÆ° µÚÀÇ È­¸é.
+	HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"MainGame");  //ê²Œìž„ ì‹œìž‘ì‹œ ë²„íŠ¼ ë’¤ì˜ í™”ë©´.
 	BitBlt(hDC, 0, 0, WINCX, WINCY, hMemDC, 0, 0, SRCCOPY);
 
 	CObjMgr::Get_Instance()->Render(hDC);
