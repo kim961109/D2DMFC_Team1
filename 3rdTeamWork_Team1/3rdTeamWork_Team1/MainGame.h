@@ -19,6 +19,9 @@ public:
 	void	Render(void);			// 매 프레임마다 출력하는 함수
 	void	Release(void);			// 동적할당한 포인터를 해제하는 함수
 
+public:
+	void    Reset_Scene(void);  // 모든 씬에서 부터 강제로 메인 화면으로 돌아옴.
+
 private:
 	HDC		m_hDC;
 	DWORD m_dwTime;

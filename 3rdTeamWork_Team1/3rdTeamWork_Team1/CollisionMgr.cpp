@@ -209,30 +209,7 @@ void CCollisionMgr::Collision_BulletKS(list<CObj*>& _Dest, list<CObj*>& _Sour)
 			{
 				(*Dest)->Set_Dead();
 				static_cast<CMonster_KS*>(*Sour)->Set_Damage();
-				/*Dest = _Dest.erase(Dest);
-				if (Dest == _Dest.end())
-				{
-					return;
-				}
-				else
-				{
-					++Dest;
-				}
-				static_cast<CMonster_KS*>(*Sour)->Set_Damage();
-
-				if (0 == static_cast<CMonster_KS*>(*Sour)->Get_Hp())
-				{
-					Sour = _Sour.erase(Sour);
-					if (Sour == _Sour.end())
-					{
-						return;
-					}
-				}*/
 			}
-		/*	else
-			{
-				++Dest;
-			}*/
 		}
 	}
 }
@@ -290,6 +267,59 @@ void CCollisionMgr::Collision_RectEx(list<CObj*> _Dest, list<CObj*> _Sour)// 고
 				}
 
 			}
+		}
+	}
+}
+
+                                         // 당구공                // 충돌체.
+void CCollisionMgr::Collision_Choose(list<CObj*> _Dest, vector<CObj*> _Sour)
+{
+	RECT		rc{};
+
+	for (auto& Dest = _Dest.begin(); Dest != _Dest.end(); ++Dest)
+	{
+		if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[0])->Get_Rect())))//나가기
+		{
+			PostQuitMessage(0);
+		}
+		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[1])->Get_Rect())))//지니
+		{
+			CSceneMgr::Get_Instance()->Scene_Change(SC_JINI);
+		}
+		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[2])->Get_Rect())))//민성
+		{
+			CSceneMgr::Get_Instance()->Scene_Change(SC_KMS);
+		}
+		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[3])->Get_Rect())))//랜덤
+		{
+			//srand(unsigned int(time(NULL)));
+			int		iRandomA = rand() % 2;
+			int     iRandomB = rand() % 2 + 1;
+			int     iGame = 3 * iRandomA + iRandomB;
+			switch (iGame)
+			{
+			case 1:
+				CSceneMgr::Get_Instance()->Scene_Change(SC_JINI);
+				break;
+			case 2:
+				CSceneMgr::Get_Instance()->Scene_Change(SC_KMS);
+				break;
+			case 4:
+				CSceneMgr::Get_Instance()->Scene_Change(SC_KJE);
+				break;
+			case 5:
+				CSceneMgr::Get_Instance()->Scene_Change(SC_KS);
+				break;
+			}
+			//CSceneMgr::Get_Instance()->Scene_Change(SC_KMS);
+		}
+		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[2])->Get_Rect())))//정은
+		{
+			CSceneMgr::Get_Instance()->Scene_Change(SC_KJE);
+		}
+		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[2])->Get_Rect())))//성
+		{
+			CSceneMgr::Get_Instance()->Scene_Change(SC_KS);
 		}
 	}
 }

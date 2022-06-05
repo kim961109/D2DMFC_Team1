@@ -18,6 +18,7 @@ public:
 	virtual void Release(void) override;
 
 	void Update_CollisionPos(void);
+	void Update_BallRect(void);
 
 public:
 	void Set_Move(D3DXVECTOR3 _vMove) { m_vMoveDir = _vMove; }

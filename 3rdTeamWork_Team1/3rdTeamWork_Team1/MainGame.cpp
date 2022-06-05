@@ -41,7 +41,7 @@ void CMainGame::Update(void)
 	//CScrollMgr::Get_Instance()->Scroll_Lock(); //필요시 스크롤락 켜기.
 	CSceneMgr::Get_Instance()->Update();
 	CScrollMgr::Get_Instance()->Scroll_Lock();// 스크롤 락.
-
+	Reset_Scene();
 }
 
 void CMainGame::Late_Update(void)
@@ -89,4 +89,12 @@ void CMainGame::Release(void)
 	CKeyMgr::Get_Instance()->Destroy_Instance();
 
 	ReleaseDC(g_hWnd, m_hDC);
+}
+
+void CMainGame::Reset_Scene(void)
+{
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_0))
+	{
+		CSceneMgr::Get_Instance()->Scene_Change(SC_MAIN);
+	}
 }

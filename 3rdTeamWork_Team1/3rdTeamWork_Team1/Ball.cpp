@@ -61,6 +61,7 @@ int CBall::Update(void)
 	cout << m_tInfo.vPos.x << "\t" << m_tInfo.vPos.y << endl;
 
 	Update_CollisionPos();
+	Update_BallRect();
 	return OBJ_NOEVENT;
 }
 
@@ -93,6 +94,14 @@ void CBall::Update_CollisionPos(void)
 {
 	m_tObjInfo.fX = m_tInfo.vPos.x;
 	m_tObjInfo.fY = m_tInfo.vPos.y;
+}
+
+void CBall::Update_BallRect(void)
+{
+	m_tRect.left = m_tObjInfo.fX - 15.f;
+	m_tRect.top = m_tObjInfo.fY - 15.f;
+	m_tRect.right = m_tObjInfo.fX + 15.f;
+	m_tRect.bottom = m_tObjInfo.fY + 15.f;
 }
 
 void CBall::Reset_Ball(void)
