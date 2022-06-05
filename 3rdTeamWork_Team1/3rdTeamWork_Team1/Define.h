@@ -12,6 +12,7 @@
 #define     VK_S         0x53
 #define     VK_D         0x44
 #define     VK_Z         0x5A
+#define     VK_0         0x30
 
 #define		OBJ_NOEVENT  0
 #define		OBJ_DEAD	 1

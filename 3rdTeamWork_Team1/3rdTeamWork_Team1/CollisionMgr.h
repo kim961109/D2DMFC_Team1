@@ -20,6 +20,7 @@ public:
 	static void		Collision_BulletKS(list<CObj*>& _Dest, list<CObj*>& _Sour);
 	static bool     Check_Rect(CObj * pDest, CObj * pSour, float * pX, float * pY);
 	static void     Collision_RectEx(list<CObj*> _Dest, list<CObj*> _Sour);
+	static void     Collision_Choose(list<CObj*> _Dest, vector<CObj*> _Sour);
 
 };
 

@@ -79,5 +79,7 @@ void CScene_KJE::Render(HDC hDC)
 void CScene_KJE::Release(void)
 {
 	//CObjMgr::Get_Instance()->Delete_ID(OBJ_MyButton);// 신이 바뀔때 그 신의 객체 모두 삭제
-
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_SNAKE);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_ITEM);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_SNAKEBODY);
 }
