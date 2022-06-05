@@ -14,6 +14,8 @@ CScene_KS::~CScene_KS()
 
 void CScene_KS::Initialize(void)
 {
+	CScrollMgr::Get_Instance()->Set_EScrollX(0);
+	CScrollMgr::Get_Instance()->Set_EScrollY(0);
 	//플레이어 생성.
 	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayer_KS>::Create_Player());
 	//몬스터 생성.
