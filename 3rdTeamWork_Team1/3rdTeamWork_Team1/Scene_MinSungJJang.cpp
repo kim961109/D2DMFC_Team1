@@ -62,4 +62,6 @@ void CScene_MinSungJJang::Render(HDC hDC)
 void CScene_MinSungJJang::Release(void)
 {
 	CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYER);
+
+	CTileMgr::Get_Instance()->Release();
 }
