@@ -300,10 +300,6 @@
     <ClInclude Include="Wall.h">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\WALL_KS</Filter>
     </ClInclude>
-
-    <ClInclude Include="Result.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Scene_MinSungJJang.h">
       <Filter>02. Scene\02.Scene_MinSungJJang\SceneMS</Filter>
     </ClInclude>
@@ -312,6 +308,9 @@
     </ClInclude>
     <ClInclude Include="SceneMS_Lose.h">
       <Filter>02. Scene\02.Scene_MinSungJJang\SceneMS</Filter>
+    </ClInclude>
+    <ClInclude Include="Result.h">
+      <Filter>02. Scene\01.Scene_jini</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -444,10 +443,6 @@
     <ClCompile Include="Obj.cpp">
       <Filter>01.OBJ</Filter>
     </ClCompile>
-
-    <ClCompile Include="Result.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Scene_MinSungJJang.cpp">
       <Filter>02. Scene\02.Scene_MinSungJJang\SceneMS</Filter>
     </ClCompile>
@@ -456,6 +451,9 @@
     </ClCompile>
     <ClCompile Include="SceneMS_Lose.cpp">
       <Filter>02. Scene\02.Scene_MinSungJJang\SceneMS</Filter>
+    </ClCompile>
+    <ClCompile Include="Result.cpp">
+      <Filter>02. Scene\01.Scene_jini</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

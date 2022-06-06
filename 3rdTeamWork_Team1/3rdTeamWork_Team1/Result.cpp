@@ -15,7 +15,7 @@ CResult::~CResult()
 
 void CResult::Initialize(void)
 {
-	lstrcpy(m_szTitle, L"지니의 세포키우기");
+	lstrcpy(m_szTitle, L"지니의 세포들");
 	lstrcpy(m_szGameOver, L"GAME OVER");
 	lstrcpy(m_szName, L"< 순수하짐님 게임결과 >");
 	lstrcpy(m_szSelect, L">> 다시하기         >> 메인으로");
@@ -54,7 +54,7 @@ void CResult::Render(HDC hDC)
 	HPEN myPen = (HPEN)CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
 	HPEN oldPen = (HPEN)SelectObject(hDC, myPen);
 
-	Rectangle(hDC, 45.f + 185.f * m_iSelect, 425.f, 45.f + 185.f * m_iSelect + 150.f, 475.f);
+	Rectangle(hDC, 45.f + 185.f * g_iSelect, 425.f, 45.f + 185.f * g_iSelect + 150.f, 475.f);
 
 	SelectObject(hDC, oldPen);
 	DeleteObject(myPen);
@@ -73,7 +73,7 @@ void CResult::Render(HDC hDC)
 	SetBkColor(hDC, RGB(255, 255, 255));
 	SetTextColor(hDC, RGB(0, 10, 17));
 
-	TextOut(hDC, 270.f, 150.f, m_szTitle, lstrlen(m_szTitle));
+	TextOut(hDC, 300.f, 150.f, m_szTitle, lstrlen(m_szTitle));
 	TextOut(hDC, 300.f, 200.f, m_szGameOver, lstrlen(m_szGameOver));
 
 	SelectObject(hDC, oldFont);
@@ -129,30 +129,4 @@ void CResult::Release(void)
 
 void CResult::Key_Input()
 {
-	if (CKeyMgr::Get_Instance()->Key_Down(VK_RETURN))
-	{
-		if (m_iSelect == 1)
-		{
-			CSceneMgr::Get_Instance()->Scene_Change(SC_MAIN);
-			CSceneMgr::Get_Instance()->Scene_Change(SC_JINI);
-		}
-		else
-		{
-			CSceneMgr::Get_Instance()->Scene_Change(SC_MAIN);
-		}
-	}
-
-	if (CKeyMgr::Get_Instance()->Key_Down(VK_RIGHT))
-	{
-		++m_iSelect;
-		if (m_iSelect > 2)
-			m_iSelect = 1;
-	}
-
-	if (CKeyMgr::Get_Instance()->Key_Down(VK_LEFT))
-	{
-		--m_iSelect;
-		if (m_iSelect < 1)
-			m_iSelect = 2;
-	}
 }

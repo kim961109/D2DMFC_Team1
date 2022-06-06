@@ -39,7 +39,6 @@ public:
 	void		Phase();
 	void		Late_Initialize();
 
-
 private:
 	float	m_fSpeed;
 	float	m_fAngle;
@@ -51,11 +50,6 @@ private:
 
 	D3DXVECTOR3		m_vDirLocal;
 	D3DXVECTOR3		m_vLookLocal;
-
-	//D3DXVECTOR3		m_vPosScreen;
-	//D3DXVECTOR3		m_vDirBefore;
-	//D3DXVECTOR3		m_vMouseTemp;
-	//D3DXVECTOR3		m_vPosMiniMap;
 
 	int		m_iPlayerColorR;
 	int		m_iPlayerColorG;

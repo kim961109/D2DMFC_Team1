@@ -21,7 +21,6 @@ void CPlayerJini::Initialize(void)
 {
 	g_dwPlayTime = GetTickCount();
 
-	//m_tInfo.vPos	= { 400.f, 300.f, 0.f };
 	m_vPosMiniMap = { 0.f, 0.f, 0.f };
 	m_tInfo.vDir = { 1.f, 0.f, 0.f };
 	m_vDirLocal = { 1.f, 0.f, 0.f };
@@ -30,9 +29,6 @@ void CPlayerJini::Initialize(void)
 	m_fSpeed = 1.f;
 	m_fAngle = 0.f;
 	m_fScale = 1.0f;
-	//m_fScaleSum = 0.f;
-	//m_fScore = 0.f;
-	//m_fEllipse		= 50.f;
 
 	m_vBodyLocal[0] = { -50.f, 0.f, 0.f }; //left
 	m_vBodyLocal[1] = { 0.f, -50.f, 0.f }; //top
@@ -64,17 +60,14 @@ void CPlayerJini::Initialize(void)
 
 	m_vAttackPos = { 0.f, 0.f, 0.f };
 	m_vAttackDir = { 0.f, 0.f, 0.f };
-
-	//m_dwDeathTime = long(0);
 }
 
 int CPlayerJini::Update(void)
 {
 	if (m_bDead)
 	{
-
 		CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CResult>::Create_SetPos(200.f, 100.f, 0.f));
-
+		g_bGameOver = true;
 		return OBJ_DEAD;
 	}
 
@@ -127,7 +120,6 @@ int CPlayerJini::Update(void)
 	if (!m_bBirth & m_fDistanceMouse > 10.0f) // 마우스랑 일정거리 이상 가까워지면 이동안하게 (떨림방지)
 	{
 		m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
-		//m_tInfo.vPos.y += m_tInfo.vDir.y * m_fSpeed;
 	}
 
 
@@ -301,8 +293,6 @@ void CPlayerJini::Render(HDC hDC)
 
 void CPlayerJini::Release(void)
 {
-	CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYERJINI);
-	CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYERCHILD);
 }
 
 void CPlayerJini::Offset()
@@ -319,7 +309,6 @@ void CPlayerJini::Offset()
 
 }
 
-// 여기
 void CPlayerJini::Key_Input()
 {
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
@@ -327,22 +316,11 @@ void CPlayerJini::Key_Input()
 		Attack(m_tInfo.vDir, 0.35f);
 	}
 
-	//if (CKeyMgr::Get_Instance()->Key_Down(VK_CONTROL))
-	//{
-	//	AttackRound();
-	//}
-
-	/*if (CKeyMgr::Get_Instance()->Key_Down(VK_ESCAPE))
-	{
-		CSceneMgr::Get_Instance()->Scene_Change(SC_MAIN);
-	}*/
-
 	if (CKeyMgr::Get_Instance()->Key_Down('1'))
 	{
 		g_fScore = 6990.f * (g_fScaleCount + 1.f);
 		m_fScale = 4.5f;
 	}
-
 }
 
 void CPlayerJini::Attack(D3DXVECTOR3 _vDir, float _fGiveScale)
@@ -359,16 +337,8 @@ void CPlayerJini::Attack(D3DXVECTOR3 _vDir, float _fGiveScale)
 	m_Child->Set_Scale(m_fScale * _fGiveScale);
 	m_Child->Set_Tag("자식");
 	m_Child->Set_AttackDir(_vDir);
-	//dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PlayerChild))->Set_AttackPos();
-
 
 	m_fScale *= (1.f - _fGiveScale);
-
-	//cout << "vPos.x = " << m_tInfo.vPos.x << "vPos.y = " << m_tInfo.vPos.y << endl;
-	//cout << "new vPos.x = " << fPosX << "new vPos.y = " << fPosY << endl;
-	//cout << "iScrollX = " << iScrollX << "iScrollY = " << iScrollY << endl;
-	//cout << "vDir.x = " << m_tInfo.vDir.x << "vDir.y = " << m_tInfo.vDir.y << endl;
-
 }
 
 void CPlayerJini::AttackRound()

@@ -18,6 +18,8 @@ public:
 
 public :
 	void		Bublle_Sort(int _list[4], int n);
+	void		Key_Input();
+
 private:
 	DWORD	m_dwJellyCreate;
 	DWORD	m_dwJellyCreate2;

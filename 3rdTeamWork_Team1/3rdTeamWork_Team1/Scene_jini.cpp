@@ -10,13 +10,12 @@
 #include "MonsterJini.h"
 #include "Result.h"
 
-
+bool g_bGameOver = false;
+int g_iSelect = 2;
 bool g_bZoomOut_Jini = false;
 bool g_bZoomIn_Jini = false;
-
 float g_fRenderPercent = 1.0f;
 float g_fScaleCount = 0.f;
-
 float g_fScore = 0.f;
 float g_fScoreKS = 0.f;
 float g_fScoreKJE = 0.f;
@@ -36,12 +35,23 @@ CScene_jini::~CScene_jini()
 
 void CScene_jini::Initialize(void)
 {
-	// ¿©±âºÎÅÍ
+	// ì „ì—­ë³€ìˆ˜ë“¤
+	g_bGameOver = false;
+	g_iSelect = 2;
+	g_bZoomOut_Jini = false;
+	g_bZoomIn_Jini = false;
+	g_fRenderPercent = 1.0f;
+	g_fScaleCount = 0.f;
+	g_fScore = 0.f;
+	g_fScoreKS = 0.f;
+	g_fScoreKJE = 0.f;
+	g_fScoreKMS = 0.f;
+
+
+	// Scene
 	m_dwJellyCreate = GetTickCount();
 	m_dwJellyCreate2 = GetTickCount();
 	m_dwCollisionJelly = GetTickCount() - long(1000);
-
-	//CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CResult>::Create_SetPos(200.f, 100.f, 0.f));
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYERJINI, CAbstractFactory<CPlayerJini>::Create_SetPos(1200.f, 900.f, 0.f));
 	m_pPlayer = CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERJINI);
@@ -65,42 +75,42 @@ void CScene_jini::Initialize(void)
 
 void CScene_jini::Update(void)
 {
-	//if (m_pPlayer == nullptr)
-	//{
-	//	//Release();
-	//	//CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CResult>::Create_SetPos(200.f, 100.f, 0.f));
-	//}
+	Key_Input();
 
-	if (GetTickCount() - m_dwJellyCreate > 500)
+	if (!g_bGameOver)
 	{
-		srand(unsigned int(time(NULL)));
-		float m_fPosXRandom = float(rand() * rand() % 800 + 800);
-		float m_fPosYRandom = float(rand() % 600 + 600);
+		if (GetTickCount() - m_dwJellyCreate > 500)
+		{
+			srand(unsigned int(time(NULL)));
+			float m_fPosXRandom = float(rand() * rand() % 800 + 800);
+			float m_fPosYRandom = float(rand() % 600 + 600);
 
-		CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CJelly>::Create_SetPos(m_fPosXRandom, m_fPosYRandom, 0.f));
-		m_dwJellyCreate = GetTickCount();
-	}
+			CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CJelly>::Create_SetPos(m_fPosXRandom, m_fPosYRandom, 0.f));
+			m_dwJellyCreate = GetTickCount();
+		}
 
-	if (GetTickCount() - m_dwJellyCreate2 > 200)
-	{
-		srand(unsigned int(time(NULL)));
-		float m_fPosXRandom2 = float(rand() * rand() % 2350 + 10);
-		float m_fPosYRandom2 = float(rand() % 1750 + 10);
+		if (GetTickCount() - m_dwJellyCreate2 > 200)
+		{
+			srand(unsigned int(time(NULL)));
+			float m_fPosXRandom2 = float(rand() * rand() % 2350 + 10);
+			float m_fPosYRandom2 = float(rand() % 1750 + 10);
 
-		CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CJelly>::Create_SetPos(m_fPosXRandom2, m_fPosYRandom2, 0.f));
-		m_dwJellyCreate2 = GetTickCount();
-	}
+			CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CJelly>::Create_SetPos(m_fPosXRandom2, m_fPosYRandom2, 0.f));
+			m_dwJellyCreate2 = GetTickCount();
+		}
 
-	CObjMgr::Get_Instance()->Update();
+		CObjMgr::Get_Instance()->Update();
 
-	int ListRank[4] = { (int)g_fScore, (int)g_fScoreKS, (int)g_fScoreKJE, (int)g_fScoreKMS };
-	m_vecRank = { m_pPlayer, m_pMonster1, m_pMonster2, m_pMonster3 };
 
-	Bublle_Sort(ListRank, 4);
+			int ListRank[4] = { (int)g_fScore, (int)g_fScoreKS, (int)g_fScoreKJE, (int)g_fScoreKMS };
+			m_vecRank = { m_pPlayer, m_pMonster1, m_pMonster2, m_pMonster3 };
 
-	for (int i = 0; i < 4; ++i)
-	{
-		m_vecRank[i]->Set_Rank(i);
+			Bublle_Sort(ListRank, 4);
+
+			for (int i = 0; i < 4; ++i)
+			{
+				m_vecRank[i]->Set_Rank(i);
+			}
 	}
 }
 
@@ -153,8 +163,14 @@ void CScene_jini::Release(void)
 	CObjMgr::Get_Instance()->Delete_ID(OBJ_ITEM);
 	CObjMgr::Get_Instance()->Delete_ID(OBJ_MONSTER);
 	CObjMgr::Get_Instance()->Delete_ID(OBJ_MONSTERCHILD);
+
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_UI);
+
+	CObjMgr::Get_Instance()->Destroy_Instance();
+
 	CObjMgr::Get_Instance()->Delete_ID(OBJ_MONSTERCHILD);
 	CObjMgr::Get_Instance()->Delete_ID(OBJ_UI);
+
 
 	//Safe_Delete<CObj*>(m_pPlayer);
 	//Safe_Delete<CObj*>(m_pMonster1);
@@ -169,10 +185,10 @@ void CScene_jini::Bublle_Sort(int _list[4], int n)
 
 	for(i = n-1; i > 0; i--)
 	{
-		 // 0 ~ (i-1)±îÁö ¹Ýº¹
+		 // 0 ~ (i-1)ê¹Œì§€ ë°˜ë³µ
 		for(j = 0; j < i; j++)
 		{
-			// j¹øÂ°¿Í j+1¹øÂ°ÀÇ ¿ä¼Ò°¡ Å©±â ¼øÀÌ ¾Æ´Ï¸é ±³È¯
+			// jë²ˆì§¸ì™€ j+1ë²ˆì§¸ì˜ ìš”ì†Œê°€ í¬ê¸° ìˆœì´ ì•„ë‹ˆë©´ êµí™˜
 			if(_list[j]<_list[j+1])
 			{
 				temp = _list[j];
@@ -184,5 +200,35 @@ void CScene_jini::Bublle_Sort(int _list[4], int n)
 				m_vecRank[j + 1] = pTemp;
 			}
 		}
+	}
+}
+
+void CScene_jini::Key_Input()
+{
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_RETURN))
+	{
+		if (g_iSelect == 1)
+		{
+			CSceneMgr::Get_Instance()->Scene_Change(SC_MAIN);
+			CSceneMgr::Get_Instance()->Scene_Change(SC_JINI);
+		}
+		else if (g_iSelect == 2)
+		{
+			CSceneMgr::Get_Instance()->Scene_Change(SC_MAIN);
+		}
+	}
+
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_RIGHT))
+	{
+		++g_iSelect;
+		if (g_iSelect > 2)
+			g_iSelect = 1;
+	}
+
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_LEFT))
+	{
+		--g_iSelect;
+		if (g_iSelect < 1)
+			g_iSelect = 2;
 	}
 }
