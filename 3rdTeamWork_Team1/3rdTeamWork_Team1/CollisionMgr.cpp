@@ -496,7 +496,7 @@ bool CCollisionMgr::Check_Snake(CObj* pDest, CObj* pSour)
 	float   fHeight = fabs(pDest->Get_Info().vPos.y - pSour->Get_Info().vPos.y);
 
 	float   fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
-	float   fRadius=1;
+	float   fRadius=5;
 
 	return fRadius > fDiagonal;
 }
