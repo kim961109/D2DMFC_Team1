@@ -169,6 +169,7 @@
     <ClInclude Include="Jelly.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="MonsterJini.h" />
     <ClInclude Include="Monster_KS.h" />
     <ClInclude Include="MyBmp.h" />
     <ClInclude Include="MyEdit.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="Jelly.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="MonsterJini.cpp" />
     <ClCompile Include="Monster_KS.cpp" />
     <ClCompile Include="MyBmp.cpp" />
     <ClCompile Include="MyEdit.cpp" />
