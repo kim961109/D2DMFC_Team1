@@ -50,7 +50,7 @@ void CObj_Collision::Render(HDC hDC)
 		0,
 		int(m_tObjInfo.fCX),				// 복사할 비트맵의 가로, 세로 길이
 		int(m_tObjInfo.fCY),
-		RGB(254, 255, 255));			// 제거하고자 하는 색상
+		RGB(255, 255, 255));			// 제거하고자 하는 색상
 }
 
 void CObj_Collision::Release(void)
