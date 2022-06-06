@@ -169,6 +169,7 @@
     <ClInclude Include="Jelly.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="MonsterJini.h" />
     <ClInclude Include="Monster_KS.h" />
     <ClInclude Include="MyBmp.h" />
     <ClInclude Include="MyEdit.h" />
@@ -177,7 +178,12 @@
     <ClInclude Include="Obj_Collision.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerMS.h" />
+
     <ClInclude Include="Scene_ShapeMoment.h" />
+
+    <ClInclude Include="Scene_LoseKS.h" />
+    <ClInclude Include="Scene_WinKS.h" />
+
     <ClInclude Include="Snake_Body.h" />
     <ClInclude Include="Snake_Head.h" />
     <ClInclude Include="Player_KS.h" />
@@ -202,6 +208,8 @@
     <ClInclude Include="UI_PlayerHp.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMgr.h" />
+    <ClInclude Include="Wall.h" />
+    <ClInclude Include="Zombie.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdTeamWork_Team1.cpp" />
@@ -213,6 +221,7 @@
     <ClCompile Include="Jelly.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="MonsterJini.cpp" />
     <ClCompile Include="Monster_KS.cpp" />
     <ClCompile Include="MyBmp.cpp" />
     <ClCompile Include="MyEdit.cpp" />
@@ -221,7 +230,12 @@
     <ClCompile Include="Obj_Collision.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerMS.cpp" />
+
     <ClCompile Include="Scene_ShapeMoment.cpp" />
+
+    <ClCompile Include="Scene_LoseKS.cpp" />
+    <ClCompile Include="Scene_WinKS.cpp" />
+
     <ClCompile Include="Snake_Body.cpp" />
     <ClCompile Include="Snake_Head.cpp" />
     <ClCompile Include="Player_KS.cpp" />
@@ -247,6 +261,8 @@
     <ClCompile Include="UI_PlayerHp.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMgr.cpp" />
+    <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3rdTeamWork_Team1.rc" />

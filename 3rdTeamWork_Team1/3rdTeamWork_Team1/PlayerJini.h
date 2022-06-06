@@ -8,14 +8,14 @@ public:
 	CPlayerJini();
 	virtual ~CPlayerJini();
 
-	// 여기
 public:
 	void	Set_ScalePlus(const float& _Scale)	{ m_fScale += _Scale; }
 	void	Set_Scale(const float& _Scale)		{ m_fScale = _Scale; }
 	void	Set_Tag(const string& _Tag)			{ m_strTag = _Tag; }
 	void	Set_AttackDir(D3DXVECTOR3 _vDir)	{ m_vAttackDir = _vDir; }
 	void	Set_AttackPos(D3DXVECTOR3 _vPos)	{ m_vAttackPos = _vPos; }
-	void	Set_Score(float _Score)				{ m_fScore += _Score; }
+	void	Set_Dir(D3DXVECTOR3 _vDir)			{ m_tInfo.vDir = _vDir; }
+
 
 	const float&	Get_Scale() { return m_fScale; }
 	const float&	Get_Radius() { return m_fRadius; }
@@ -43,10 +43,6 @@ private:
 	float	m_fSpeed;
 	float	m_fAngle;
 	float	m_fScale;
-	float	m_fScaleSum;
-
-	//float	m_fEllipse;
-
 	float	m_fRadius;
 
 	D3DXVECTOR3		m_vBodyLocal[4];
@@ -68,18 +64,15 @@ private:
 	float	m_fDistanceMouse;
 
 	//여기
-	string m_strName;
 	string m_strTag;   // 부모 or 자식
-
 	TCHAR	m_szName[64];
+	TCHAR	m_szScore[64];
 
 	bool	m_bBirth;
 	bool	m_bMouseMove;
 	D3DXVECTOR3		m_vAttackPos;
 	D3DXVECTOR3		m_vAttackDir;
 	DWORD			m_dwAttackMove;
-
-	int		m_fScore;
 
 	float	m_fRenderPercentTemp;
 

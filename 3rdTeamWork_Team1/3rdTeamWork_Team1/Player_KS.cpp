@@ -14,7 +14,7 @@ CPlayer_KS::~CPlayer_KS()
 
 void CPlayer_KS::Initialize(void)
 {
-	m_iHp = 100;
+	m_iHp = 200;
 	dwPastTime = GetTickCount();
 
 	m_tInfo.vPos = { 400.f, 300.f, 0.f };
@@ -86,11 +86,16 @@ int CPlayer_KS::Update(void)
 
 	Key_Shoot();// 여기서 총알 생성.
 
+	// 몬스터에게 넘겨줄 Obj좌표계산.
+	m_tObjInfo.fX = m_tInfo.vPos.x;
+	m_tObjInfo.fY = m_tInfo.vPos.y;
+	Update_RectKS();
+
 #ifdef _DEBUG
 
 	//system("cls");
-	cout << "플레이어 DIR좌표 : " << m_tInfo.vDir.x << "\t" << m_tInfo.vDir.y << "\t" << m_tInfo.vDir.z << endl;
-	cout << "플레이어 POS좌표 : " << m_tInfo.vPos.x << "\t" << m_tInfo.vPos.y << "\t" << m_tInfo.vPos.z << endl;
+	//cout << "플레이어 DIR좌표 : " << m_tInfo.vDir.x << "\t" << m_tInfo.vDir.y << "\t" << m_tInfo.vDir.z << endl;
+	//cout << "플레이어 POS좌표 : " << m_tInfo.vPos.x << "\t" << m_tInfo.vPos.y << "\t" << m_tInfo.vPos.z << endl;
 	//cout << "마우스 POS좌표 : " << ::Get_Mouse().x << "\t" << ::Get_Mouse().y << "\t" << ::Get_Mouse().z << endl;
 
 #endif // _DEBUG
@@ -122,6 +127,8 @@ void CPlayer_KS::Render(HDC hDC)
 		LineTo(hDC, (int)m_vGunPoint[i].x + iScrollX, (int)m_vGunPoint[i].y + iScrollY);
 	}
 	LineTo(hDC, (int)m_vGunPoint[0].x + iScrollX, (int)m_vGunPoint[0].y + iScrollY);
+
+	//Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 }
 
 void CPlayer_KS::Release(void)
@@ -198,7 +205,7 @@ void CPlayer_KS::Change_GunAngle(void)
 
 #ifdef _DEBUG
 
-	cout << "마우스 POS좌표 : " << New_MousePos.x << "\t" << New_MousePos.y << "\t" << New_MousePos.z << endl;
+	//cout << "마우스 POS좌표 : " << New_MousePos.x << "\t" << New_MousePos.y << "\t" << New_MousePos.z << endl;
 
 #endif // _DEBUG
 }
@@ -209,8 +216,8 @@ void CPlayer_KS::Offset(void)
 	int		iOffSetY = WINCY >> 1;
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
-	int		iItvX = 1;
-	int		iItvY = 1;
+	int		iItvX = 0;
+	int		iItvY = 0;
 
 	if (iOffSetX - iItvX > m_tInfo.vPos.x + iScrollX)
 		CScrollMgr::Get_Instance()->Set_ScrollX(m_fSpeed);
@@ -224,6 +231,17 @@ void CPlayer_KS::Offset(void)
 	if (iOffSetY + iItvY < m_tInfo.vPos.y + iScrollY)
 		CScrollMgr::Get_Instance()->Set_ScrollY(-m_fSpeed);
 
-	std::cout << "스크롤: " << CScrollMgr::Get_Instance()->Get_ScrollX() << "," << CScrollMgr::Get_Instance()->Get_ScrollY() << std::endl;
+	//std::cout << "스크롤: " << CScrollMgr::Get_Instance()->Get_ScrollX() << "," << CScrollMgr::Get_Instance()->Get_ScrollY() << std::endl;
 	
+}
+
+void CPlayer_KS::Update_RectKS(void)
+{
+	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+
+	m_tRect.left = m_tObjInfo.fX - 20.f + iScrollX;
+	m_tRect.top = m_tObjInfo.fY - 20.f + iScrollY;
+	m_tRect.right = m_tObjInfo.fX + 20.f + iScrollX;
+	m_tRect.bottom = m_tObjInfo.fY + 20.f + iScrollY;
 }

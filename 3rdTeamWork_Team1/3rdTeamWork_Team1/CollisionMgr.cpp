@@ -3,6 +3,7 @@
 #include"SceneMgr.h"
 #include"Apple.h"
 #include "PlayerJini.h"
+#include "MonsterJini.h"
 #include "Jelly.h"
 
 
@@ -81,27 +82,37 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 
 				switch (_index)
 				{
-				case 1: //Player - Player
+				case 1: // JINI : Player - Player
 					if ((_index == 1) & dynamic_cast<CPlayerJini*>(Sour)->Get_bBirth())
 						continue;
 					dynamic_cast<CPlayerJini*>(Dest)->Set_ScalePlus(dynamic_cast<CPlayerJini*>(Sour)->Get_Scale());
 					Sour->Set_Dead(true);
-
 					break;
-				case 2: //Player - Jelly
-					//fRadiusDest = dynamic_cast<CPlayerJini*>(Dest)->Get_Radius();
-					//fRadiusSour = dynamic_cast<CJelly*>(Sour)->Get_Radius();
 
-						//if (fRadiusDest > fRadiusSour)
+				case 2: // JINI : Player - Jelly
 					dynamic_cast<CPlayerJini*>(Dest)->Set_ScalePlus(dynamic_cast<CJelly*>(Sour)->Get_PlusScale());
-					dynamic_cast<CPlayerJini*>(Dest)->Set_Score(dynamic_cast<CJelly*>(Sour)->Get_Scale());
+					g_fScore += dynamic_cast<CJelly*>(Sour)->Get_Scale();
+					dynamic_cast<CJelly*>(Sour)->Set_ScaleZero();
 					Sour->Set_Dead(true);
-
 					break;
-					//case 3: //Player - Monster
-					//   fRadiusDest = dynamic_cast<CPlayerJini*>(Dest)->Get_Radius();
-					//  fRadiusSour = dynamic_cast<CMonster*>(Sour)->Get_Radius();
-					//   break;
+
+				case 3: // JINI : Player - Monster
+					fRadiusDest = dynamic_cast<CPlayerJini*>(Dest)->Get_Radius();
+					fRadiusSour = dynamic_cast<CMonsterJini*>(Sour)->Get_Radius();
+
+					if (fRadiusDest > fRadiusSour)
+					{
+						dynamic_cast<CPlayerJini*>(Dest)->Set_ScalePlus(dynamic_cast<CMonsterJini*>(Sour)->Get_Scale());
+						g_fScore += dynamic_cast<CMonsterJini*>(Sour)->Get_Scale();
+						Sour->Set_Dead(true);
+					}
+					else
+					{
+						dynamic_cast<CMonsterJini*>(Sour)->Set_ScalePlus(dynamic_cast<CPlayerJini*>(Dest)->Get_Scale());
+						g_fScore += dynamic_cast<CPlayerJini*>(Dest)->Get_Scale();
+						Dest->Set_Dead(true);
+					}
+				   break;
 
 					//jeongeun
 				case 4: //Snake - Apple
@@ -112,6 +123,20 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 
 				case 5://Snake - Tile
 					break;
+
+				case 6: // JINI : Monster - Jelly
+					dynamic_cast<CMonsterJini*>(Dest)->Set_ScalePlus(dynamic_cast<CJelly*>(Sour)->Get_PlusScale());
+					g_fScore += dynamic_cast<CJelly*>(Sour)->Get_Scale();
+					dynamic_cast<CJelly*>(Sour)->Set_ScaleZero();
+					Sour->Set_Dead(true);
+					break;
+				case 7: // JINI : Monster - Monster
+					if ((_index == 1) & dynamic_cast<CMonsterJini*>(Sour)->Get_bBirth())
+						continue;
+					dynamic_cast<CMonsterJini*>(Dest)->Set_ScalePlus(dynamic_cast<CMonsterJini*>(Sour)->Get_Scale());
+					Sour->Set_Dead(true);
+					break;
+
 				}
 
 			}
@@ -119,80 +144,49 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 	}
 }
 
-void CCollisionMgr::Collision_Sphere2(list<CObj*> _Dest, list<CObj*> _Sour)
-{
-
-	//for (auto& Dest : _Dest)
-	//{
-	//	for (auto& Sour : _Sour)
-	//	{
-	//		if (Check_Sphere(Dest, Sour, _index))
-	//		{
-	//			float   fRadiusDest;
-	//			float   fRadiusSour;
-
-	//			switch (_index)
-	//			{
-	//			case 1: //Player - Player
-	//				if ((_index == 1) & dynamic_cast<CPlayerJini*>(Sour)->Get_bBirth())
-	//					continue;
-	//				dynamic_cast<CPlayerJini*>(Dest)->Set_ScalePlus(dynamic_cast<CPlayerJini*>(Sour)->Get_Scale());
-	//				Sour->Set_Dead(true);
-
-	//				break;
-	//			case 2: //Player - Jelly
-	//					//fRadiusDest = dynamic_cast<CPlayerJini*>(Dest)->Get_Radius();
-	//					//fRadiusSour = dynamic_cast<CJelly*>(Sour)->Get_Radius();
-
-	//					//if (fRadiusDest > fRadiusSour)
-	//				dynamic_cast<CPlayerJini*>(Dest)->Set_ScalePlus(dynamic_cast<CJelly*>(Sour)->Get_PlusScale());
-	//				Sour->Set_Dead(true);
-
-	//				break;
-	//				//case 3: //Player - Monster
-	//				//   fRadiusDest = dynamic_cast<CPlayerJini*>(Dest)->Get_Radius();
-	//				//  fRadiusSour = dynamic_cast<CMonster*>(Sour)->Get_Radius();
-	//				//   break;
-	//			}
-	//		}
-	//	}
-	//}
-}
-
+// JINI
 bool CCollisionMgr::Check_Sphere(CObj* pDest, CObj* pSour, int _index)
 {
-	// abs : Àý´ë°ªÀ» ±¸ÇØÁÖ´Â ÇÔ¼ö
 	float   fWidth = fabs(pDest->Get_Info().vPos.x - pSour->Get_Info().vPos.x);
 	float   fHeight = fabs(pDest->Get_Info().vPos.y - pSour->Get_Info().vPos.y);
 
-	// sqrt : ·çÆ®¸¦ ¾º¿öÁÖ´Â ÇÔ¼ö
 	float   fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
 	float   fRadius;
 
 	switch (_index)
 	{
-	case 1:
-		//if (dynamic_cast<CPlayerJini*>(pDest)->Get_Tag() == dynamic_cast<CPlayerJini*>(pSour)->Get_Tag())
-		//	return 0;
+	case 1: // JINI : Player - Player
 		fRadius = dynamic_cast<CPlayerJini*>(pDest)->Get_Radius() + dynamic_cast<CPlayerJini*>(pSour)->Get_Radius();
 		fRadius = fRadius * 0.7f * g_fRenderPercent;
 		break;
-	case 2:
+
+	case 2: // JINI : Player - Jelly
 		fRadius = dynamic_cast<CPlayerJini*>(pDest)->Get_Radius() + dynamic_cast<CJelly*>(pSour)->Get_Radius();
 		fRadius *= g_fRenderPercent;
 		break;
-		//case 3:
-		//   fRadius = dynamic_cast<CPlayerJini*>(pDest)->Get_Radius() + dynamic_cast<CMonster*>(pSour)->Get_Radius();
-		//   break;
+
+	case 3: // JINI : Player - Monster
+		fRadius = dynamic_cast<CPlayerJini*>(pDest)->Get_Radius() + dynamic_cast<CMonsterJini*>(pSour)->Get_Radius();
+		fRadius *= g_fRenderPercent;
+		break;
 
 	case 4: //Snake - Apple
 		//float	fRadius = (pDest->Get_Info().fCX + pSour->Get_Info().fCX) * 0.5f;
-		
 		break;
+
 	case 5: //Snake - Tile
 		break;
-	}
 
+	case 6: // JINI : Monster - Jelly
+		fRadius = dynamic_cast<CMonsterJini*>(pDest)->Get_Radius() + dynamic_cast<CJelly*>(pSour)->Get_Radius();
+		fRadius *= g_fRenderPercent;
+		break;
+
+	case 7: // JINI : Monster - Monster
+		fRadius = dynamic_cast<CMonsterJini*>(pDest)->Get_Radius() + dynamic_cast<CMonsterJini*>(pSour)->Get_Radius();
+		fRadius = fRadius * 0.7f * g_fRenderPercent;
+		break;
+	}
 
 	return fRadius > fDiagonal;
 }
@@ -208,31 +202,8 @@ void CCollisionMgr::Collision_BulletKS(list<CObj*>& _Dest, list<CObj*>& _Sour)
 			if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((*Sour)->Get_Rect())))
 			{
 				(*Dest)->Set_Dead();
-				static_cast<CMonster_KS*>(*Sour)->Set_Damage();
-				/*Dest = _Dest.erase(Dest);
-				if (Dest == _Dest.end())
-				{
-					return;
-				}
-				else
-				{
-					++Dest;
-				}
-				static_cast<CMonster_KS*>(*Sour)->Set_Damage();
-
-				if (0 == static_cast<CMonster_KS*>(*Sour)->Get_Hp())
-				{
-					Sour = _Sour.erase(Sour);
-					if (Sour == _Sour.end())
-					{
-						return;
-					}
-				}*/
+				static_cast<CZombie*>(*Sour)->Set_Damage();
 			}
-		/*	else
-			{
-				++Dest;
-			}*/
 		}
 	}
 }
@@ -287,6 +258,113 @@ void CCollisionMgr::Collision_RectEx(list<CObj*> _Dest, list<CObj*> _Sour)// 고
 					// 우 충돌
 					else
 						static_cast<CBall*>(Sour)->Change_MoveX();
+				}
+
+			}
+		}
+	}
+}
+
+                                         // 당구공                // 충돌체.
+void CCollisionMgr::Collision_Choose(list<CObj*> _Dest, vector<CObj*> _Sour)
+{
+	RECT		rc{};
+
+	for (auto& Dest = _Dest.begin(); Dest != _Dest.end(); ++Dest)
+	{
+		if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[0])->Get_Rect())))//나가기
+		{
+			PostQuitMessage(0);
+		}
+		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[1])->Get_Rect())))//지니
+		{
+			CSceneMgr::Get_Instance()->Scene_Change(SC_JINI);
+		}
+		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[2])->Get_Rect())))//민성
+		{
+			CSceneMgr::Get_Instance()->Scene_Change(SC_KMS);
+		}
+		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[3])->Get_Rect())))//랜덤
+		{
+			//srand(unsigned int(time(NULL)));
+			int		iRandomA = rand() % 2;
+			int     iRandomB = rand() % 2 + 1;
+			int     iGame = 3 * iRandomA + iRandomB;
+			switch (iGame)
+			{
+			case 1:
+				CSceneMgr::Get_Instance()->Scene_Change(SC_JINI);
+				break;
+			case 2:
+				CSceneMgr::Get_Instance()->Scene_Change(SC_KMS);
+				break;
+			case 4:
+				CSceneMgr::Get_Instance()->Scene_Change(SC_KJE);
+				break;
+			case 5:
+				CSceneMgr::Get_Instance()->Scene_Change(SC_KS);
+				break;
+			}
+			//CSceneMgr::Get_Instance()->Scene_Change(SC_KMS);
+		}
+		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[4])->Get_Rect())))//정은
+		{
+			CSceneMgr::Get_Instance()->Scene_Change(SC_KJE);
+		}
+		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[5])->Get_Rect())))//성
+		{
+			CSceneMgr::Get_Instance()->Scene_Change(SC_KS);
+		}
+	}
+}
+
+                                       // 플레이어            //좀비.
+void CCollisionMgr::Collision_Zombie(list<CObj*> _Dest, list<CObj*> _Sour)
+{
+	RECT		rc{};
+	for (auto& Dest = _Dest.begin(); Dest != _Dest.end(); ++Dest)
+	{
+		for (auto& Sour = _Sour.begin(); Sour != _Sour.end(); ++Sour)
+		{
+			if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((*Sour)->Get_Rect())))
+			{
+				static_cast<CPlayer_KS*>(*Dest)->Set_Damage();
+			}
+		}
+	}
+}
+
+                                      // 고정                     // 플레이어
+void CCollisionMgr::Collision_RectKS(list<CObj*> _Dest, list<CObj*> _Sour)// 고정된 물체가 움직이는 물체를 밀어내는 용도.
+{
+	for (auto& Dest : _Dest)
+	{
+		for (auto& Sour : _Sour)
+		{
+			float	fX = 0.f, fY = 0.f;
+
+			if (Check_Rect(Dest, Sour, &fX, &fY))
+			{
+				// 상하 충돌
+				if (fX > fY)
+				{
+					// 상 충돌
+					if (Dest->Get_ObjInfo().fY > Sour->Get_ObjInfo().fY)
+						static_cast<CPlayer_KS*>(Sour)->Set_KSPosY(-fY);
+
+					else // 하 충돌
+						static_cast<CPlayer_KS*>(Sour)->Set_KSPosY(fY);
+				}
+				// 좌우 충돌
+				else
+				{
+					// 좌 충돌
+					if (Dest->Get_ObjInfo().fX > Sour->Get_ObjInfo().fX)
+						static_cast<CPlayer_KS*>(Sour)->Set_KSPosX(-fX);
+
+					// 우 충돌
+					else
+						static_cast<CPlayer_KS*>(Sour)->Set_KSPosX(fX);
 				}
 
 			}

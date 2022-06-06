@@ -13,6 +13,9 @@ public:
 	const float&	Get_Scale() const { return m_iScale; }
 	const float&	Get_Radius() { return m_fRadius; }
 
+	void	Set_ScaleZero() { m_iScale = 0; m_fPlusScale = 0; }
+
+
 public:
 	virtual void Initialize(void) override;
 	virtual int Update(void) override;

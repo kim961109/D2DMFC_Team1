@@ -28,7 +28,6 @@ CScene_KJE::~CScene_KJE()
 
 void CScene_KJE::Initialize(void)
 {
-
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Scene_KJE.bmp", L"Scene_KJE");
 	CTileMgr::Get_Instance()->Initialize();
 	CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKE, CAbstractFactory<CSnake_Head>::Create_SetPos(300.f, 400.f, 0.f));
@@ -47,6 +46,11 @@ void CScene_KJE::Update(void)
 	{
 		m_iMilliSecond = 0;
 		m_iSecond += 1;
+	}
+
+	if (CObjMgr::Get_Instance()->Get_List(OBJ_SNAKE).empty())
+	{
+		cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" << endl;
 	}
 }
 
@@ -79,5 +83,9 @@ void CScene_KJE::Render(HDC hDC)
 void CScene_KJE::Release(void)
 {
 	//CObjMgr::Get_Instance()->Delete_ID(OBJ_MyButton);// 신이 바뀔때 그 신의 객체 모두 삭제
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_SNAKE);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_ITEM);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_SNAKEBODY);
 
+	CTileMgr::Get_Instance()->Release();//씬이 종료시 타일을 모두 삭제.
 }
