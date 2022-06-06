@@ -27,7 +27,6 @@ void CMonsterJini::Initialize(void)
 	m_fSpeed = 1.f;
 	m_fAngle = 0.f;
 	m_fScale = 2.0f;
-	//m_fEllipse		= 50.f;
 
 	m_vBodyLocal[0] = { -50.f, 0.f, 0.f }; //left
 	m_vBodyLocal[1] = { 0.f, -50.f, 0.f }; //top
@@ -205,7 +204,6 @@ void CMonsterJini::Render(HDC hDC)
 	m_labelFontInfo.lfCharSet = 129;
 	m_labelFontInfo.lfHeight = m_fScale * g_fRenderPercent * 1.5 * 12;
 	m_labelFontInfo.lfWidth = m_fScale * g_fRenderPercent * 1.5 * 6;
-	//m_labelFontInfo.lfWeight = FW_BOLD;
 
 	HFONT textFont, oldFont;
 	textFont = CreateFontIndirect(&m_labelFontInfo);
@@ -258,7 +256,6 @@ void CMonsterJini::Attack(D3DXVECTOR3 _vDir, float _fGiveScale)
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTERCHILD, CAbstractFactory<CMonsterJini>::Create_MonsterJini(fPosX, fPosY, 0.f, m_iNameNum, m_fScale * _fGiveScale)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
 																														  
 	CMonsterJini* m_pChild = dynamic_cast<CMonsterJini*>((CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTERCHILD)));
-	//m_pChild->Set_Scale(m_fScale * _fGiveScale);
 	m_pChild->Set_Tag("자식");
 	m_pChild->Set_AttackDir(_vDir);
 	m_pChild->Set_Dir(m_tInfo.vDir);
@@ -296,7 +293,6 @@ void CMonsterJini::AttackRound()
 
 		CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonsterJini>::Create_MonsterJini(fPosX, fPosY, 0.f, m_iNameNum, m_fScale * 0.1f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
 		CMonsterJini* pMonster = dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER));
-		//pMonster->Set_Scale(m_fScale * 0.1f);
 		pMonster->Set_Tag("다자녀");
 		pMonster->Set_AttackDir(m_vDirTemp[i]);
 	}
@@ -308,11 +304,6 @@ void CMonsterJini::KeyInput()
 	if (CKeyMgr::Get_Instance()->Key_Down('Z'))
 	{
 		Attack(m_tInfo.vDir, 0.35f);
-	}
-	if (CKeyMgr::Get_Instance()->Key_Down('X'))
-	{
-		cout << "vDir.x = " << m_vPlayerDir.x << "\t vDir.y = " << m_vPlayerDir.y << endl;
-		//AttackRound();
 	}
 }
 

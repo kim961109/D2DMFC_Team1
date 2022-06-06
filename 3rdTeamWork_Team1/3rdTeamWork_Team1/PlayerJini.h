@@ -22,8 +22,6 @@ public:
 	const string&	Get_Tag() { return m_strTag; }
 	const bool&		Get_bBirth() { return m_bBirth; }
 
-	
-
 
 public:
 	virtual void Initialize(void) override;
@@ -81,9 +79,5 @@ private:
 	bool			m_bRoundAttack;
 
 	float	m_fRenderPercentTemp;
-
-	DWORD			m_dwDeathTime;
-
-
 };
 

@@ -46,4 +46,6 @@ extern float g_fScoreKS;
 extern float g_fScoreKJE;
 extern float g_fScoreKMS;
 extern DWORD g_dwPlayTime;
+extern bool g_bGameOver;
+extern int g_iSelect;
 

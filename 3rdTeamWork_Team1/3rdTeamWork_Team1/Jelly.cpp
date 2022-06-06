@@ -12,9 +12,6 @@ CJelly::~CJelly()
 
 void CJelly::Initialize(void)
 {
-	////임시 위치
-	//m_tInfo.vPos = { 600.f, 450.f, 0.f };
-
 	// 색상 랜덤 설정
 	int m_iColor = rand() % 100;
 	srand(unsigned int(time(NULL)));
@@ -24,7 +21,6 @@ void CJelly::Initialize(void)
 
 	m_iScale = rand() % 6 + 8;
 
-	// 여기
 	m_fPlusScale = m_iScale * 0.0005f;
 	m_fRadius = m_iScale;
 }
