@@ -6,12 +6,12 @@
 #include "SceneMgr.h"
 #include "AbstractFactory.h"
 #include "PlayerMS.h"
-class CScene_MinSungJJang :
+class CScene_ShapeMoment :
 	public CScene
 {
 public:
-	CScene_MinSungJJang();
-	virtual ~CScene_MinSungJJang();
+	CScene_ShapeMoment();
+	virtual ~CScene_ShapeMoment();
 
 public:
 	virtual void Initialize(void) override;
@@ -20,7 +20,7 @@ public:
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
 public:
-	void Key_Input();
+
 
 private:
 	TCHAR*		m_pFrameKey;

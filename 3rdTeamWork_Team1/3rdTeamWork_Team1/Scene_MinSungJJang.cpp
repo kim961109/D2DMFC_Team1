@@ -19,21 +19,23 @@ void CScene_MinSungJJang::Initialize(void)
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/경사로.bmp", L"경사로");
 
 	m_pFrameKey = L"경사로";
-	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayerMS>::Create_Player());
-	CTileMgr::Get_Instance()->Initialize();
+	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayerMS> ::Create_SetPos(100.f,400.f,0.f));
+	//CTileMgr::Get_Instance()->Initialize();
 }
 
 void CScene_MinSungJJang::Update(void)
 {
-	CTileMgr::Get_Instance()->Update();
+
 	
+	//CTileMgr::Get_Instance()->Update();
 	CObjMgr::Get_Instance()->Update();
 }
 
 void CScene_MinSungJJang::Late_Update(void)
 {
-	CTileMgr::Get_Instance()->Late_Update();
+	//CTileMgr::Get_Instance()->Late_Update();
 	CObjMgr::Get_Instance()->Late_Update();
+
 
 }
 
@@ -54,7 +56,7 @@ void CScene_MinSungJJang::Render(HDC hDC)
 		RGB(255, 255, 255));			// 제거하고자 하는 색상
 
 	//Rectangle(hDC, 0, 0, WINCX, WINCY);
-	CTileMgr::Get_Instance()->Render(hDC);
+	//CTileMgr::Get_Instance()->Render(hDC);
 	CObjMgr::Get_Instance()->Render(hDC);
 
 }
@@ -64,4 +66,9 @@ void CScene_MinSungJJang::Release(void)
 	CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYER);
 
 	CTileMgr::Get_Instance()->Release();
+}
+
+void CScene_MinSungJJang::Key_Input()
+{
+	
 }

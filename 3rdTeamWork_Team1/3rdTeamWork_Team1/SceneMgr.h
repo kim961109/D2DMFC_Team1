@@ -8,6 +8,7 @@
 #include "Scene_WinKS.h"
 #include "Scene_LoseKS.h"
 #include "Scene_MinSungJJang.h"
+#include "Scene_ShapeMoment.h"
 
 class CSceneMgr
 {
