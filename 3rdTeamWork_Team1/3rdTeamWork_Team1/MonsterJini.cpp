@@ -7,6 +7,7 @@
 
 CMonsterJini::CMonsterJini()
 {
+	m_pPlayer = nullptr;
 }
 
 
@@ -20,6 +21,7 @@ void CMonsterJini::Initialize(void)
 	//m_vPosMiniMap = { 0.f, 0.f, 0.f };
 	m_tInfo.vDir = { -1.f, 0.f, 0.f };
 	m_vDirLocal = { 1.f, 0.f, 0.f };
+	m_vPlayerLocal = { 0.f, 0.f, 0.f };
 
 	m_tInfo.vLook = { 1.f, 0.f, 0.f };
 	m_fSpeed = 1.f;
@@ -40,21 +42,36 @@ void CMonsterJini::Initialize(void)
 	m_iPlayerColorB = rand() * 27 % 256;
 
 	m_strTag = "부모";
-	lstrcpy(m_szName, L"성이");
 
 	m_dwAttackMove = GetTickCount();
-	//m_bMouseMove = false;
 	m_bBirth = false;
 
 	m_vAttackPos = { 0.f, 0.f, 0.f };
 	m_vAttackDir = { 0.f, 0.f, 0.f };
 
+	m_fPlayerDistance = 0.f;
+	m_vPlayerTemp = { 0.f, 0.f, 0.f };
+	m_dwAttackTime = GetTickCount();
 }
 
 int CMonsterJini::Update(void)
 {
 	if (m_bDead)
+	{
+		switch (m_iNameNum)
+		{
+		case 1:
+			g_fScoreKS = 0;
+			break;
+		case 2:
+			g_fScoreKJE = 0;
+			break;
+		case 3:
+			g_fScoreKMS = 0;
+			break;
+		}
 		return OBJ_DEAD;
+	}
 
 	if (m_strTag != "부모")
 		m_bBirth = true;
@@ -79,9 +96,9 @@ int CMonsterJini::Update(void)
 	if (m_bBirth & m_strTag != "부모")
 	{
 		if (m_strTag == "자식")
-			m_tInfo.vPos += m_vAttackDir * 5.f * g_fRenderPercent;
+			m_tInfo.vPos += m_vAttackDir * 2.f * g_fRenderPercent;
 		else
-			m_tInfo.vPos += m_vAttackDir * 4.f * g_fRenderPercent;
+			m_tInfo.vPos += m_vAttackDir * 2.f * g_fRenderPercent;
 
 		if (GetTickCount() - m_dwAttackMove > 300)
 		{
@@ -96,7 +113,8 @@ int CMonsterJini::Update(void)
 	}
 
 	// 디폴트 이동
-	m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+	if(!m_bBirth)
+		m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
 
 	// 월드행렬 만들기
 	D3DXMATRIX		matScale, matRotZ, matTrans;
@@ -115,14 +133,50 @@ int CMonsterJini::Update(void)
 	m_fRadius = (m_vBody[2].x - m_vBody[0].x) * 0.5;
 
 	//cout << "vPos.x = " << m_tInfo.vPos.x << "\t vPos.y = " << m_tInfo.vPos.y << "\t m_fScale = " << m_fScale << "\t m_fScore = " << m_fScore << "\t m_fScaleSum = " << m_fScaleSum << endl;
-	
-	
+	//cout << "vPos.x = " << m_tInfo.vPos.x << "\t vPos.y = " << m_tInfo.vPos.y << "\t m_fPlayerDistance = " << m_fPlayerDistance  << endl;
+
+	// 플레이어 거리, 방향
+	if (m_pPlayer)
+	{
+		m_vPlayerTemp.x = m_pPlayer->Get_Info().vPos.x;
+		m_vPlayerTemp.y = m_pPlayer->Get_Info().vPos.y;
+
+		// 플레이어 거리 재기
+		float _DistanceX = m_vPlayerTemp.x - m_tInfo.vPos.x;
+		float _DistanceY = m_vPlayerTemp.y - m_tInfo.vPos.y;
+		m_fPlayerDistance = sqrtf(_DistanceX * _DistanceX + _DistanceY * _DistanceY);
+
+		// 플레이어 방향연산
+		m_vPlayerLocal = m_vPlayerTemp - m_tInfo.vPos;
+		D3DXVec3Normalize(&m_vPlayerDir, &m_vPlayerLocal);
+	}
+
+	if (m_strTag == "부모")
+		Phase();
 
 	return OBJ_NOEVENT;
 }
 
 void CMonsterJini::Late_Update(void)
 {
+	int iScoreTemp;
+
+	// 점수 출력용
+	switch (m_iNameNum)
+	{
+	case 1:
+		iScoreTemp = (int)g_fScoreKS;
+		swprintf_s(m_szScore, L"성이 : %d", iScoreTemp);
+		break;
+	case 2:
+		iScoreTemp = (int)g_fScoreKJE;
+		swprintf_s(m_szScore, L"정은이 : %d", iScoreTemp);
+		break;
+	case 3:
+		iScoreTemp = (int)g_fScoreKMS;
+		swprintf_s(m_szScore, L"민성이 : %d", iScoreTemp);
+		break;
+	}
 }
 
 void CMonsterJini::Render(HDC hDC)
@@ -136,23 +190,11 @@ void CMonsterJini::Render(HDC hDC)
 	HPEN myPen = (HPEN)CreatePen(PS_SOLID, 1, RGB(m_iPlayerColorR, m_iPlayerColorG, m_iPlayerColorB));
 	HPEN oldPen = (HPEN)SelectObject(hDC, myPen);
 
-	//Ellipse(hDC,
-	//	int(m_vBody[0].x + iScrollX),
-	//	int(m_vBody[1].y + iScrollY),
-	//	int(m_vBody[2].x + iScrollX),
-	//	int(m_vBody[3].y + iScrollY));
-
 	Ellipse(hDC,
 		int(m_tInfo.vPos.x - ((m_fRadius + 100 / m_fRadius)) * g_fRenderPercent + iScrollX),
 		int(m_tInfo.vPos.y - ((m_fRadius + 100 / m_fRadius)) * g_fRenderPercent + iScrollY),
 		int(m_tInfo.vPos.x + ((m_fRadius + 100 / m_fRadius)) * g_fRenderPercent + iScrollX),
 		int(m_tInfo.vPos.y + ((m_fRadius + 100 / m_fRadius)) * g_fRenderPercent + iScrollY));
-
-	//Ellipse(hDC,
-	//	int(m_vPosMiniMap.x - 3.f + WINCX - JINIMAPCX),
-	//	int(m_vPosMiniMap.y - 3.f + WINCY - JINIMAPCY),
-	//	int(m_vPosMiniMap.x + 3.f + WINCX - JINIMAPCX),
-	//	int(m_vPosMiniMap.y + 3.f + WINCY - JINIMAPCY));
 
 	SelectObject(hDC, oldBrush);
 	DeleteObject(myBrush);
@@ -177,6 +219,28 @@ void CMonsterJini::Render(HDC hDC)
 	SelectObject(hDC, oldFont);
 	DeleteObject(textFont);
 
+	if (m_strTag == "부모")
+	{
+		// 점수 UI
+		LOGFONT m_labelFontInfo2{};
+		m_labelFontInfo2.lfCharSet = 129;
+		m_labelFontInfo2.lfHeight = 16;
+		m_labelFontInfo2.lfWidth = 8;
+		m_labelFontInfo.lfWeight = FW_BOLD;
+
+		HFONT textFont2, oldFont2;
+		textFont2 = CreateFontIndirect(&m_labelFontInfo2);
+		oldFont2 = (HFONT)SelectObject(hDC, textFont2);
+		SetBkMode(hDC, TRANSPARENT); // TRANSPARENT, OPAQUE
+		SetBkColor(hDC, RGB(0, 10, 17));
+		SetTextColor(hDC, RGB(255, 255, 255));
+
+		TextOut(hDC, 650.f, 10.f + 20.f * (m_iRank), m_szScore, lstrlen(m_szScore));
+
+		SelectObject(hDC, oldFont2);
+		DeleteObject(textFont2);
+	}
+
 }
 
 void CMonsterJini::Release(void)
@@ -191,19 +255,16 @@ void CMonsterJini::Attack(D3DXVECTOR3 _vDir, float _fGiveScale)
 	float   fPosX = (m_tInfo.vPos.x) + (_vDir.x * m_fRadius);
 	float	fPosY = (m_tInfo.vPos.y) + (_vDir.y * m_fRadius);
 
-	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTERCHILD, CAbstractFactory<CMonsterJini>::Create_SetPos(fPosX, fPosY, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
-																														   //CObjMgr::Get_Instance()->Add_Object(OBJ_PlayerChild, CAbstractFactory<CPlayerJini>::Create_SetPos(m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f)); 
+	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTERCHILD, CAbstractFactory<CMonsterJini>::Create_MonsterJini(fPosX, fPosY, 0.f, m_iNameNum, m_fScale * _fGiveScale)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
+																														  
+	CMonsterJini* m_pChild = dynamic_cast<CMonsterJini*>((CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTERCHILD)));
+	//m_pChild->Set_Scale(m_fScale * _fGiveScale);
+	m_pChild->Set_Tag("자식");
+	m_pChild->Set_AttackDir(_vDir);
+	m_pChild->Set_Dir(m_tInfo.vDir);
 
-	dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTERCHILD))->Set_Scale(m_fScale * _fGiveScale);
-	dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTERCHILD))->Set_Tag("자식");
-	dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTERCHILD))->Set_AttackDir(_vDir);
 
 	m_fScale *= (1.f - _fGiveScale);
-
-	//cout << "vPos.x = " << m_tInfo.vPos.x << "vPos.y = " << m_tInfo.vPos.y << endl;
-	//cout << "new vPos.x = " << fPosX << "new vPos.y = " << fPosY << endl;
-	//cout << "iScrollX = " << iScrollX << "iScrollY = " << iScrollY << endl;
-	//cout << "vDir.x = " << m_tInfo.vDir.x << "vDir.y = " << m_tInfo.vDir.y << endl;
 
 }
 
@@ -233,9 +294,9 @@ void CMonsterJini::AttackRound()
 		float   fPosX = (m_tInfo.vPos.x) + (m_vDirTemp[i].x * m_fRadius);
 		float	fPosY = (m_tInfo.vPos.y) + (m_vDirTemp[i].y * m_fRadius);
 
-		CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonsterJini>::Create_SetPos(fPosX, fPosY, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
+		CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonsterJini>::Create_MonsterJini(fPosX, fPosY, 0.f, m_iNameNum, m_fScale * 0.1f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
 		CMonsterJini* pMonster = dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER));
-		pMonster->Set_Scale(m_fScale * 0.1f);
+		//pMonster->Set_Scale(m_fScale * 0.1f);
 		pMonster->Set_Tag("다자녀");
 		pMonster->Set_AttackDir(m_vDirTemp[i]);
 	}
@@ -248,4 +309,45 @@ void CMonsterJini::KeyInput()
 	{
 		Attack(m_tInfo.vDir, 0.35f);
 	}
+	if (CKeyMgr::Get_Instance()->Key_Down('X'))
+	{
+		cout << "vDir.x = " << m_vPlayerDir.x << "\t vDir.y = " << m_vPlayerDir.y << endl;
+		//AttackRound();
+	}
+}
+
+void CMonsterJini::Phase()
+{
+	if (m_fPlayerDistance < 800.f)
+	{
+		if (GetTickCount() - m_dwAttackTime > (m_iNameNum) * 6000.f)
+		{
+			Attack(m_vPlayerDir, 0.35f);
+			m_dwAttackTime = GetTickCount();
+		}
+	}
+}
+
+void CMonsterJini::Late_Initialize()
+{
+	switch (m_iNameNum)
+	{
+	case KS:
+		lstrcpy(m_szName, L"성이");
+		g_fScoreKS = m_fScale * 800.f;
+		break;
+	case KJE:
+		lstrcpy(m_szName, L"정은이");
+		g_fScoreKJE = m_fScale * 800.f;
+		break;
+	case KMS:
+		lstrcpy(m_szName, L"민성이");
+		g_fScoreKMS = m_fScale * 800.f;
+		break;
+	}
+
+	srand(unsigned int(time(NULL)));
+	m_iPlayerColorR = rand() * m_iNameNum * 10 % 256;
+	m_iPlayerColorG = rand() * m_iNameNum * 18 % 256;
+	m_iPlayerColorB = rand() * m_iNameNum * 27 % 256;
 }

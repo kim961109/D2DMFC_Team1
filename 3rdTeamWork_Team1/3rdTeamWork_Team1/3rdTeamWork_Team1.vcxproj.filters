@@ -300,6 +300,10 @@
     <ClInclude Include="Wall.h">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\WALL_KS</Filter>
     </ClInclude>
+
+    <ClInclude Include="Result.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Scene_MinSungJJang.h">
       <Filter>02. Scene\02.Scene_MinSungJJang\SceneMS</Filter>
     </ClInclude>
@@ -439,6 +443,10 @@
     </ClCompile>
     <ClCompile Include="Obj.cpp">
       <Filter>01.OBJ</Filter>
+    </ClCompile>
+
+    <ClCompile Include="Result.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Scene_MinSungJJang.cpp">
       <Filter>02. Scene\02.Scene_MinSungJJang\SceneMS</Filter>

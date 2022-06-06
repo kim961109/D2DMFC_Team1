@@ -16,14 +16,22 @@ public:
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
 
+public :
+	void		Bublle_Sort(int _list[4], int n);
 private:
-
-	//¿©±â
 	DWORD	m_dwJellyCreate;
 	DWORD	m_dwJellyCreate2;
 	DWORD	m_dwCollisionJelly;
 
+
 	CObj*	m_pPlayer;
+	CObj*	m_pMonster1;
+	CObj*	m_pMonster2;
+	CObj*	m_pMonster3;
+
+	vector<CObj*> m_vecRank;
+
+
 
 };
 
