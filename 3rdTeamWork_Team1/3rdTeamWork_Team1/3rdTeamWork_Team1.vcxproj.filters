@@ -335,9 +335,6 @@
     <ClCompile Include="KeyMgr.cpp">
       <Filter>99.Design\03.KeyMgr</Filter>
     </ClCompile>
-    <ClCompile Include="ScrollMgr.cpp">
-      <Filter>99.Design\04.ScrollMgr</Filter>
-    </ClCompile>
     <ClCompile Include="SceneMgr.cpp">
       <Filter>99.Design\06.SceneMgr</Filter>
     </ClCompile>
@@ -454,6 +451,9 @@
     </ClCompile>
     <ClCompile Include="Result.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrollMgr.cpp">
+      <Filter>99.Design\05.CollisionMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -86,8 +86,8 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 				int		Num_Temp;
 				int		Num_TempMonster;
 
-				if (Dest->Get_Dead() == true || Sour->Get_Dead() == true)
-					continue;
+				//if (Dest->Get_Dead() == true || Sour->Get_Dead() == true)
+				//	continue;
 
 				switch (_index)
 				{

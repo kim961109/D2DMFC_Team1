@@ -27,6 +27,20 @@ void CScrollMgr::Scroll_Lock(void)
 		if (-660 > m_fScrollY)
 			m_fScrollY = -660;
 	}
+	else if (SC_JINI == CSceneMgr::Get_Instance()->Get_SceneID())
+	{
+		if (0.f < m_fScrollX)
+			m_fScrollX = 0.f;
+
+		if (0.f < m_fScrollY)
+			m_fScrollY = 0.f;
+
+		if (-1600 > m_fScrollX)
+			m_fScrollX = -1600;
+
+		if (-1200 > m_fScrollY)
+			m_fScrollY = -1200;
+	}
 	else
 	{
 		if (0.f < m_fScrollX)
