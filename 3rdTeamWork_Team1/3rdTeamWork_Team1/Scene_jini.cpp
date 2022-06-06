@@ -153,7 +153,8 @@ void CScene_jini::Release(void)
 	CObjMgr::Get_Instance()->Delete_ID(OBJ_ITEM);
 	CObjMgr::Get_Instance()->Delete_ID(OBJ_MONSTER);
 	CObjMgr::Get_Instance()->Delete_ID(OBJ_MONSTERCHILD);
-	CObjMgr::Get_Instance()->Destroy_Instance();
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_MONSTERCHILD);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_UI);
 
 	//Safe_Delete<CObj*>(m_pPlayer);
 	//Safe_Delete<CObj*>(m_pMonster1);
