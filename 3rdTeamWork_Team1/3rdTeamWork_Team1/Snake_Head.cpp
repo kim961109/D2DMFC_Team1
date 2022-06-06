@@ -198,8 +198,8 @@ void CSnake_Head::GrowUp()
 
 		CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKEBODY,
 			CAbstractFactory<CSnake_Body>::Create_SetPos(m_vNewPos.x, m_vNewPos.y, 0.f));
-		m_vecBody.push_back(CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKEBODY));*/
+		m_vecBody.push_back(CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKEBODY));
 
-	}
+	}*/
 }
 
