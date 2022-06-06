@@ -14,10 +14,11 @@ CScene_ShapeMoment::~CScene_ShapeMoment()
 
 void CScene_ShapeMoment::Initialize(void)
 {
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/ㄱ자이동.bmp", L"ㄱ자이동");
+	m_iLoseCount = 0;
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/T자이동.bmp", L"T자이동");
 
-	m_pFrameKey = L"ㄱ자이동";
-	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayerMS>::Create_SetPos(100.f,200.f,0.f));
+	m_pFrameKey = L"T자이동";
+	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayerMS>::Create_PlayerMS(420.f,540.f,0.f));
 }
 
 void CScene_ShapeMoment::Update(void)
@@ -28,6 +29,9 @@ void CScene_ShapeMoment::Update(void)
 void CScene_ShapeMoment::Late_Update(void)
 {
 	CObjMgr::Get_Instance()->Late_Update();
+	Reset();
+	Win_MS();
+	LoseCount();
 }
 
 void CScene_ShapeMoment::Render(HDC hDC)
@@ -42,9 +46,9 @@ void CScene_ShapeMoment::Render(HDC hDC)
 		hMemDC,							// 비트맵을 가지고 있는 DC
 		0,								// 비트맵 출력 시작 좌표, X,Y
 		0,
-		801,				// 복사할 비트맵의 가로, 세로 길이
-		601,
-		RGB(0, 0, 0));			// 제거하고자 하는 색상
+		800,				// 복사할 비트맵의 가로, 세로 길이
+		600,
+		RGB(255, 254, 255));			// 제거하고자 하는 색상
 
 								//Rectangle(hDC, 0, 0, WINCX, WINCY);
 								//CTileMgr::Get_Instance()->Render(hDC);
@@ -53,4 +57,40 @@ void CScene_ShapeMoment::Render(HDC hDC)
 
 void CScene_ShapeMoment::Release(void)
 {
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYER);
+}
+
+void CScene_ShapeMoment::Reset(void)
+{
+	float m_fXX = (CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER).front())->Get_Info().vPos.x;
+	float m_fYY = (CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER).front())->Get_Info().vPos.y;
+	if (m_fXX > 442.f)
+	{
+		static_cast<CPlayerMS*>(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER).front())->Set_PlayerMSPos({ 420.f,540.f,0.f });
+		m_iLoseCount += 1;
+	}
+	else if ((m_fXX < 420.f) && ((m_fYY < 260.f) || (m_fYY > 370.f)))
+	{
+		static_cast<CPlayerMS*>(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER).front())->Set_PlayerMSPos({ 420.f,540.f,0.f });
+		m_iLoseCount += 1;
+	}
+}
+
+void CScene_ShapeMoment::Win_MS(void)
+{
+	float m_fXX = (CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER).front())->Get_Info().vPos.x;
+	float m_fYY = (CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER).front())->Get_Info().vPos.y;
+	if ((m_fXX < 150.f) && ((m_fYY > 260.f) && (m_fYY < 370.f)))
+	{
+		//static_cast<CPlayerMS*>(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER).front())->Set_PlayerMSPos({ 420.f,540.f,0.f });
+		CSceneMgr::Get_Instance()->Scene_Change(SC_KSWIN);
+	}
+}
+
+void CScene_ShapeMoment::LoseCount()
+{
+	if (m_iLoseCount >= 5)
+	{
+		CSceneMgr::Get_Instance()->Scene_Change(SC_MSLOSE);
+	}
 }

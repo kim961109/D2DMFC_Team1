@@ -37,9 +37,30 @@ public:
 	static CObj*& Create_SetPos(float _fX, float _fY, float _fZ)
 	{
 		CObj* pObj = new T();
+		pObj->Set_Pos(_fX, _fY, _fZ);
+		pObj->Initialize();
+		
+		return pObj;
+	}
+
+
+	static CObj*& Create_MonsterJini(float _fX, float _fY, float _fZ, int _NameNum, float _scale)
+	{
+		CObj* pObj = new T();
 		pObj->Initialize();
 		pObj->Set_Pos(_fX, _fY, _fZ);
-		
+		dynamic_cast<CMonsterJini*>(pObj)->Set_NameNum(_NameNum);
+		dynamic_cast<CMonsterJini*>(pObj)->Set_Scale(_scale);
+		dynamic_cast<CMonsterJini*>(pObj)->Late_Initialize();
+    return pObj;
+	}
+
+	static CObj*& Create_PlayerMS(float _fX, float _fY, float _fZ)
+	{
+		CObj* pObj = new T(_fX, _fY, _fZ);
+		//pObj->Set_Pos(_fX, _fY, _fZ);
+		pObj->Initialize();
+
 		return pObj;
 	}
 

@@ -14,6 +14,7 @@ CScene_WinKS::~CScene_WinKS()
 
 void CScene_WinKS::Initialize(void)
 {
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/win.bmp", L"win");
 }
 
 void CScene_WinKS::Update(void)

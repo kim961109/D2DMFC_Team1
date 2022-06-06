@@ -81,6 +81,13 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 			{
 				float   fRadiusDest;
 				float   fRadiusSour;
+				float	fTemp;
+				float	fTempMonster;
+				int		Num_Temp;
+				int		Num_TempMonster;
+
+				if (Dest->Get_Dead() == true || Sour->Get_Dead() == true)
+					continue;
 
 				switch (_index)
 				{
@@ -101,16 +108,46 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 				case 3: // JINI : Player - Monster
 					fRadiusDest = dynamic_cast<CPlayerJini*>(Dest)->Get_Radius();
 					fRadiusSour = dynamic_cast<CMonsterJini*>(Sour)->Get_Radius();
+					fTemp = dynamic_cast<CPlayerJini*>(Dest)->Get_Scale();
+					fTempMonster = dynamic_cast<CMonsterJini*>(Sour)->Get_Scale();
+					Num_Temp = dynamic_cast<CMonsterJini*>(Sour)->Get_NameNum();
 
 					if (fRadiusDest > fRadiusSour)
 					{
 						dynamic_cast<CPlayerJini*>(Dest)->Set_ScalePlus(dynamic_cast<CMonsterJini*>(Sour)->Get_Scale());
-						g_fScore += dynamic_cast<CMonsterJini*>(Sour)->Get_Scale();
+						g_fScore += fTempMonster * 100.f;
+						switch (Num_Temp)
+						{
+						case 1:
+							g_fScoreKS -= fTempMonster * 100.f;
+							break;
+						case 2:
+							g_fScoreKJE -= fTempMonster * 100.f;
+							break;
+						case 3:
+							g_fScoreKMS -= fTempMonster * 100.f;
+							break;
+						}
 						Sour->Set_Dead(true);
 					}
 					else
 					{
 						dynamic_cast<CMonsterJini*>(Sour)->Set_ScalePlus(dynamic_cast<CPlayerJini*>(Dest)->Get_Scale());
+						switch (Num_Temp)
+						{
+						case 1:
+							g_fScoreKS += fTemp * 100.f;
+							g_fScore -= fTemp * 100.f;
+							break;
+						case 2:
+							g_fScoreKJE += fTemp * 100.f;
+							g_fScore -= fTemp * 100.f;
+							break;
+						case 3:
+							g_fScoreKMS += fTemp * 100.f;
+							g_fScore -= fTemp * 100.f;
+							break;
+						}
 						g_fScore += dynamic_cast<CPlayerJini*>(Dest)->Get_Scale();
 						Dest->Set_Dead(true);
 					}
@@ -125,17 +162,98 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 
 				case 6: // JINI : Monster - Jelly
 					dynamic_cast<CMonsterJini*>(Dest)->Set_ScalePlus(dynamic_cast<CJelly*>(Sour)->Get_PlusScale());
-					g_fScore += dynamic_cast<CJelly*>(Sour)->Get_Scale();
+					Num_Temp = dynamic_cast<CMonsterJini*>(Dest)->Get_NameNum();
+					switch (Num_Temp)
+					{
+					case 1:
+						g_fScoreKS += dynamic_cast<CJelly*>(Sour)->Get_Scale();
+						break;
+					case 2:
+						g_fScoreKJE += dynamic_cast<CJelly*>(Sour)->Get_Scale();
+						break;
+					case 3:
+						g_fScoreKMS += dynamic_cast<CJelly*>(Sour)->Get_Scale();
+						break;
+					}
 					dynamic_cast<CJelly*>(Sour)->Set_ScaleZero();
 					Sour->Set_Dead(true);
 					break;
+
 				case 7: // JINI : Monster - Monster
-					if ((_index == 1) & dynamic_cast<CMonsterJini*>(Sour)->Get_bBirth())
+					if (dynamic_cast<CMonsterJini*>(Sour)->Get_bBirth())
+						continue;
+					if (dynamic_cast<CMonsterJini*>(Dest)->Get_NameNum() != dynamic_cast<CMonsterJini*>(Sour)->Get_NameNum())
 						continue;
 					dynamic_cast<CMonsterJini*>(Dest)->Set_ScalePlus(dynamic_cast<CMonsterJini*>(Sour)->Get_Scale());
 					Sour->Set_Dead(true);
 					break;
 
+					//fRadiusDest = dynamic_cast<CMonsterJini*>(Dest)->Get_Radius();
+					//fRadiusSour = dynamic_cast<CMonsterJini*>(Sour)->Get_Radius();
+					//fTemp = dynamic_cast<CMonsterJini*>(Dest)->Get_Scale();
+					//fTempMonster = dynamic_cast<CMonsterJini*>(Sour)->Get_Scale();
+					//Num_Temp = dynamic_cast<CMonsterJini*>(Dest)->Get_NameNum();
+					//Num_TempMonster = dynamic_cast<CMonsterJini*>(Sour)->Get_NameNum();
+
+					//if (fRadiusDest > fRadiusSour)
+					//{
+					//	dynamic_cast<CMonsterJini*>(Dest)->Set_ScalePlus(dynamic_cast<CMonsterJini*>(Sour)->Get_Scale());
+					//	switch (Num_Temp)
+					//	{
+					//	case 1:
+					//		g_fScoreKS += fTempMonster * 100.f;
+					//		break;
+					//	case 2:
+					//		g_fScoreKJE += fTempMonster * 100.f;
+					//		break;
+					//	case 3:
+					//		g_fScoreKMS += fTempMonster * 100.f;
+					//		break;
+					//	}
+					//	switch (Num_TempMonster)
+					//	{
+					//	case 1:
+					//		g_fScoreKS -= fTempMonster * 100.f;
+					//		break;
+					//	case 2:
+					//		g_fScoreKJE -= fTempMonster * 100.f;
+					//		break;
+					//	case 3:
+					//		g_fScoreKMS -= fTempMonster * 100.f;
+					//		break;
+					//	}
+					//	Sour->Set_Dead(true);
+					//}
+					//else
+					//{
+					//	dynamic_cast<CMonsterJini*>(Sour)->Set_ScalePlus(dynamic_cast<CMonsterJini*>(Dest)->Get_Scale());
+					//	switch (Num_Temp)
+					//	{
+					//	case 1:
+					//		g_fScoreKS -= fTemp * 100.f;
+					//		break;
+					//	case 2:
+					//		g_fScoreKJE -= fTemp * 100.f;
+					//		break;
+					//	case 3:
+					//		g_fScoreKMS -= fTemp * 100.f;
+					//		break;
+					//	}
+					//	switch (Num_TempMonster)
+					//	{
+					//	case 1:
+					//		g_fScoreKS += fTemp * 100.f;
+					//		break;
+					//	case 2:
+					//		g_fScoreKJE += fTemp * 100.f;
+					//		break;
+					//	case 3:
+					//		g_fScoreKMS += fTemp * 100.f;
+					//		break;
+					//	}
+					//	Dest->Set_Dead(true);
+					//}
+					//break;
 				}
 
 			}

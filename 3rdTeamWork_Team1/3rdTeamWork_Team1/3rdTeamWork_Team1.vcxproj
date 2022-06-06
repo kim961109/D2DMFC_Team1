@@ -179,11 +179,13 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerMS.h" />
 
+    <ClInclude Include="Result.h" />
+
+    <ClInclude Include="SceneMS_Lose.h" />
     <ClInclude Include="Scene_ShapeMoment.h" />
 
     <ClInclude Include="Scene_LoseKS.h" />
     <ClInclude Include="Scene_WinKS.h" />
-
     <ClInclude Include="Snake_Body.h" />
     <ClInclude Include="Snake_Head.h" />
     <ClInclude Include="Player_KS.h" />
@@ -231,11 +233,13 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerMS.cpp" />
 
+    <ClCompile Include="Result.cpp" />
+
+    <ClCompile Include="SceneMS_Lose.cpp" />
     <ClCompile Include="Scene_ShapeMoment.cpp" />
 
     <ClCompile Include="Scene_LoseKS.cpp" />
     <ClCompile Include="Scene_WinKS.cpp" />
-
     <ClCompile Include="Snake_Body.cpp" />
     <ClCompile Include="Snake_Head.cpp" />
     <ClCompile Include="Player_KS.cpp" />

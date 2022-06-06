@@ -39,7 +39,6 @@ int CSnake_Body::Update(void)
 		return OBJ_DEAD;
 	}
 	//front 는 head를 따라가고  나머지는 바로앞에꺼 따라가게 
-
 	if (!CObjMgr::Get_Instance()->Get_List(OBJ_SNAKE).empty())
 
 	{
@@ -58,6 +57,7 @@ int CSnake_Body::Update(void)
 
 			// 벡터의 크기를 구해주는 함수
 			// float fLength = D3DXVec3Length(&m_tInfo.vDir);
+
 
 			// 두 방향 벡터의 내적을 수행하는 함수
 

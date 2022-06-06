@@ -15,6 +15,8 @@ public:
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
 
+public:
+	void Set_PlayerMSPos(D3DXVECTOR3 _vPos) { m_tInfo.vPos = _vPos; }
 
 private:
 	void		Key_Input(void);
@@ -23,7 +25,7 @@ private:
 	D3DXVECTOR3			m_vPoint[4];
 	D3DXVECTOR3			m_vOriginPoint[4];
 	D3DXVECTOR3			vLook;
-
+	D3DXVECTOR3			m_vFirstPos;
 
 	D3DXVECTOR3			m_vleftPoint[4];
 	D3DXVECTOR3			m_vOriginleftPoint[4];

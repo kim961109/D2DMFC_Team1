@@ -20,9 +20,12 @@ public:
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
 public:
-
+	void Reset(void);
+	void Win_MS(void);
+	void LoseCount();
 
 private:
 	TCHAR*		m_pFrameKey;
+	int         m_iLoseCount;
 };
 
