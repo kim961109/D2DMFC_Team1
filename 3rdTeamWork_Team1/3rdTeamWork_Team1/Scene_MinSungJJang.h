@@ -20,8 +20,6 @@ public:
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
 
-public:
-	void Key_Input();
 private:
 	TCHAR*		m_pFrameKey;
 };
