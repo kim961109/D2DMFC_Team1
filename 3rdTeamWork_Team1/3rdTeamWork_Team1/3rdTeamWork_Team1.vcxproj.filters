@@ -106,7 +106,6 @@
     <Filter Include="02. Scene\04.Scene_KS\Obj_KS\Monster_KS">
       <UniqueIdentifier>{871c7ff1-5616-4aea-91f0-8c2edd09b6c7}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="02. Scene\MyEdit">
       <UniqueIdentifier>{a6b2ec7f-d4c7-4c3c-aa4e-78479b29b689}</UniqueIdentifier>
     </Filter>
@@ -121,6 +120,21 @@
     </Filter>
     <Filter Include="02. Scene\00.Scene_Main\OBJ_Main\03.OBJ_Collision">
       <UniqueIdentifier>{102dddb7-ecbb-4248-be5d-788e4b3f254b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\Obj_KS\Zombie_KS">
+      <UniqueIdentifier>{3a7113c4-06ab-45e0-a993-69ff3c1337ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\Scene_KS">
+      <UniqueIdentifier>{e0ef78d7-3628-49ce-b404-a7f475b9b675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\Scene_KS\WIN">
+      <UniqueIdentifier>{6a7f70a2-7916-4235-a064-5e945fa506cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\Scene_KS\LOSE">
+      <UniqueIdentifier>{5d222663-ce1c-4101-a40c-f6f18ee1c7be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\04.Scene_KS\Obj_KS\WALL_KS">
+      <UniqueIdentifier>{5fbd88e6-bd57-46cc-b43a-0089a3fa8c3d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -202,9 +216,6 @@
     <ClInclude Include="Scene_KJE.h">
       <Filter>02. Scene\03.Scene_KJE</Filter>
     </ClInclude>
-    <ClInclude Include="Scene_KS.h">
-      <Filter>02. Scene\04.Scene_KS</Filter>
-    </ClInclude>
     <ClInclude Include="Snake_Head.h">
       <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
     </ClInclude>
@@ -247,10 +258,6 @@
     <ClInclude Include="Jelly.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClInclude>
-    <ClInclude Include="Monster_KS.h">
-      <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
-    </ClInclude>
-
     <ClInclude Include="TileMS.h">
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClInclude>
@@ -268,6 +275,24 @@
     </ClInclude>
     <ClInclude Include="Obj_Collision.h">
       <Filter>02. Scene\00.Scene_Main\OBJ_Main\03.OBJ_Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Zombie.h">
+      <Filter>02. Scene\04.Scene_KS\Obj_KS\Zombie_KS</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster_KS.h">
+      <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_KS.h">
+      <Filter>02. Scene\04.Scene_KS\Scene_KS</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_WinKS.h">
+      <Filter>02. Scene\04.Scene_KS\Scene_KS\WIN</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_LoseKS.h">
+      <Filter>02. Scene\04.Scene_KS\Scene_KS\LOSE</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>02. Scene\04.Scene_KS\Obj_KS\WALL_KS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -322,9 +347,6 @@
     <ClCompile Include="Scene_KJE.cpp">
       <Filter>02. Scene\03.Scene_KJE</Filter>
     </ClCompile>
-    <ClCompile Include="Scene_KS.cpp">
-      <Filter>02. Scene\04.Scene_KS</Filter>
-    </ClCompile>
     <ClCompile Include="Snake_Head.cpp">
       <Filter>02. Scene\03.Scene_KJE\PlayerKJE</Filter>
     </ClCompile>
@@ -370,7 +392,6 @@
     <ClCompile Include="Monster_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
     </ClCompile>
-
     <ClCompile Include="TileMS.cpp">
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClCompile>
@@ -388,6 +409,21 @@
     </ClCompile>
     <ClCompile Include="Obj_Collision.cpp">
       <Filter>02. Scene\00.Scene_Main\OBJ_Main\03.OBJ_Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Zombie.cpp">
+      <Filter>02. Scene\04.Scene_KS\Obj_KS\Zombie_KS</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_KS.cpp">
+      <Filter>02. Scene\04.Scene_KS\Scene_KS</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_WinKS.cpp">
+      <Filter>02. Scene\04.Scene_KS\Scene_KS\WIN</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_LoseKS.cpp">
+      <Filter>02. Scene\04.Scene_KS\Scene_KS\LOSE</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>02. Scene\04.Scene_KS\Obj_KS\WALL_KS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

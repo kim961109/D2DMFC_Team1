@@ -20,11 +20,21 @@ public:
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
 
+public:
+	const int& Get_PlayerKS_Hp(void) { return m_iHp; }
+	void Set_Damage(void) { m_iHp -= 1; }
+
+	void Set_KSPosX(float _fX) { m_tInfo.vPos.x += _fX; }
+	void Set_KSPosY(float _fY) { m_tInfo.vPos.y += _fY; }
+	const float& Get_KSPosX(void) { return m_tInfo.vPos.x; }
+	const float& Get_KSPosY(void) { return m_tInfo.vPos.y; }
+
 private:
 	void		Key_Input(void);
 	void		Key_Shoot(void);
 	void        Change_GunAngle(void);
 	void        Offset(void);
+	void        Update_RectKS(void);
 
 
 private:

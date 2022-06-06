@@ -5,6 +5,8 @@
 #include "Scene_jini.h"
 #include "Scene_KJE.h"
 #include "Scene_KS.h"
+#include "Scene_WinKS.h"
+#include "Scene_LoseKS.h"
 #include "Scene_MinSungJJang.h"
 
 class CSceneMgr

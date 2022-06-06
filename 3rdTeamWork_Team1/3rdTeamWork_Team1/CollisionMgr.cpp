@@ -208,7 +208,7 @@ void CCollisionMgr::Collision_BulletKS(list<CObj*>& _Dest, list<CObj*>& _Sour)
 			if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((*Sour)->Get_Rect())))
 			{
 				(*Dest)->Set_Dead();
-				static_cast<CMonster_KS*>(*Sour)->Set_Damage();
+				static_cast<CZombie*>(*Sour)->Set_Damage();
 			}
 		}
 	}
@@ -313,13 +313,67 @@ void CCollisionMgr::Collision_Choose(list<CObj*> _Dest, vector<CObj*> _Sour)
 			}
 			//CSceneMgr::Get_Instance()->Scene_Change(SC_KMS);
 		}
-		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[2])->Get_Rect())))//정은
+		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[4])->Get_Rect())))//정은
 		{
 			CSceneMgr::Get_Instance()->Scene_Change(SC_KJE);
 		}
-		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[2])->Get_Rect())))//성
+		else if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((_Sour[5])->Get_Rect())))//성
 		{
 			CSceneMgr::Get_Instance()->Scene_Change(SC_KS);
+		}
+	}
+}
+
+                                       // 플레이어            //좀비.
+void CCollisionMgr::Collision_Zombie(list<CObj*> _Dest, list<CObj*> _Sour)
+{
+	RECT		rc{};
+	for (auto& Dest = _Dest.begin(); Dest != _Dest.end(); ++Dest)
+	{
+		for (auto& Sour = _Sour.begin(); Sour != _Sour.end(); ++Sour)
+		{
+			if (IntersectRect(&rc, &((*Dest)->Get_Rect()), &((*Sour)->Get_Rect())))
+			{
+				static_cast<CPlayer_KS*>(*Dest)->Set_Damage();
+			}
+		}
+	}
+}
+
+                                      // 고정                     // 플레이어
+void CCollisionMgr::Collision_RectKS(list<CObj*> _Dest, list<CObj*> _Sour)// 고정된 물체가 움직이는 물체를 밀어내는 용도.
+{
+	for (auto& Dest : _Dest)
+	{
+		for (auto& Sour : _Sour)
+		{
+			float	fX = 0.f, fY = 0.f;
+
+			if (Check_Rect(Dest, Sour, &fX, &fY))
+			{
+				// 상하 충돌
+				if (fX > fY)
+				{
+					// 상 충돌
+					if (Dest->Get_ObjInfo().fY > Sour->Get_ObjInfo().fY)
+						static_cast<CPlayer_KS*>(Sour)->Set_KSPosY(-fY);
+
+					else // 하 충돌
+						static_cast<CPlayer_KS*>(Sour)->Set_KSPosY(fY);
+				}
+				// 좌우 충돌
+				else
+				{
+					// 좌 충돌
+					if (Dest->Get_ObjInfo().fX > Sour->Get_ObjInfo().fX)
+						static_cast<CPlayer_KS*>(Sour)->Set_KSPosX(-fX);
+
+					// 우 충돌
+					else
+						static_cast<CPlayer_KS*>(Sour)->Set_KSPosX(fX);
+				}
+
+			}
 		}
 	}
 }

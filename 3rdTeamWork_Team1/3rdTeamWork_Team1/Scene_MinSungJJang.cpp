@@ -51,7 +51,7 @@ void CScene_MinSungJJang::Render(HDC hDC)
 		0,
 		799,				// 복사할 비트맵의 가로, 세로 길이
 		582,
-		RGB(0, 0, 0));			// 제거하고자 하는 색상
+		RGB(255, 255, 255));			// 제거하고자 하는 색상
 
 	//Rectangle(hDC, 0, 0, WINCX, WINCY);
 	CTileMgr::Get_Instance()->Render(hDC);

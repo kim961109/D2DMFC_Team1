@@ -24,16 +24,16 @@ void CScene_Main::Initialize(void)
 	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(230.f, 475.f, 280.f, 10.f));//하좌
 	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(580.f, 120.f, 280.f, 10.f));//상우
 	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(580.f, 475.f, 280.f, 10.f));//하우
-	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(755.f, 295.f, 10.f, 270.f));//우
-	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(55.f, 295.f, 10.f, 270.f));//좌
+	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(755.f, 295.f, 10.f, 280.f));//우
+	CObjMgr::Get_Instance()->Add_Object(OBJ_COLLISIONKS, CAbstractFactory<CObj_Collision>::Create_CollisionKS(55.f, 295.f, 10.f, 280.f));//좌
 
 	// 6개의 구멍에 각각 오브젝트를 놓아 충돌 처리를 해줌.(씬 전환)-씬 체인지를 할 객체를 담을 vector에 6개 객체 담고 
-	CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(50.f, 100.f, 50.f, 50.f));//나가기
+	CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(40.f, 100.f, 50.f, 50.f));//나가기
 	CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(400.f, 80.f, 50.f, 50.f));//jini
-	CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(750.f, 100.f, 50.f, 50.f));//KMS
-	CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(50.f, 480.f, 50.f, 50.f));//Random
+	CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(760.f, 100.f, 50.f, 50.f));//KMS
+	CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(40.f, 480.f, 50.f, 50.f));//Random
 	CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(400.f, 510.f, 50.f, 50.f));//KJE
-	CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(750.f, 480.f, 50.f, 50.f));//KS
+	CObjMgr::Get_Instance()->Add_ObjectMain(CAbstractFactory<CObj_Collision>::Create_CollisionKS(760.f, 480.f, 50.f, 50.f));//KS
 }
 
 void CScene_Main::Update(void)
