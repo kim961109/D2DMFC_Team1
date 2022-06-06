@@ -5,6 +5,14 @@ CPlayerMS::CPlayerMS()
 {
 }
 
+CPlayerMS::CPlayerMS(float _fX, float _fY, float _fZ)
+{
+	m_tInfo.vPos.x = _fX;
+	m_tInfo.vPos.y = _fY;
+	m_tInfo.vPos.z = _fZ;
+
+}
+
 CPlayerMS::~CPlayerMS()
 {
 	Release();
@@ -14,7 +22,7 @@ void CPlayerMS::Initialize(void)
 {
 	
 
-	m_tInfo.vPos = { 100.f,120.f,0.f };
+	//m_tInfo.vPos = { 100.f, 130.f, 0.f };
 	m_tInfo.vLook = { 0.f, -1.f, 0.f };
 	m_fAngle = 140;
 	
@@ -86,43 +94,52 @@ int CPlayerMS::Update(void)
 	for (int i = 0; i < 4; ++i)  
 	{
 		m_vPoint[i] = m_vOriginPoint[i];
-		m_vPoint[i] -= {100.f, 120.f, 0.f };
+		m_vPoint[i] -= {100.f, 130.f, 0.f};
 		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
 	}
 	for (int i = 0; i < 4; ++i)
 	{
 		m_vleftPoint[i] = m_vOriginleftPoint[i];
-		m_vleftPoint[i] -= {  100.f, 120.f, 0.f};
+		m_vleftPoint[i] -= { 100.f, 130.f, 0.f};
 		D3DXVec3TransformCoord(&m_vleftPoint[i], &m_vleftPoint[i], &m_tInfo.matWorld);
 	}
 
 	for (int i = 0; i < 4; ++i)
 	{
 		m_vrightPoint[i] = m_vOriginrightPoint[i];
-		m_vrightPoint[i] -= { 100.f, 120.f, 0.f};
+		m_vrightPoint[i] -= { 100.f, 130.f, 0.f};
 		D3DXVec3TransformCoord(&m_vrightPoint[i], &m_vrightPoint[i], &m_tInfo.matWorld);
 	}
 
 	for (int i = 0; i < 4; ++i)
 	{
 		m_vleftDownPoint[i] = m_vOriginleftDownPoint[i];
-		m_vleftDownPoint[i] -= {  100.f, 120.f, 0.f};
+		m_vleftDownPoint[i] -= { 100.f, 130.f, 0.f};
 		D3DXVec3TransformCoord(&m_vleftDownPoint[i], &m_vleftDownPoint[i], &m_tInfo.matWorld);
 	}
 
 	for (int i = 0; i < 4; ++i)
 	{
 		m_vrightDownPoint[i] = m_vOriginrightDownPoint[i];
-		m_vrightDownPoint[i] -= {  100.f, 120.f, 0.f};
+		m_vrightDownPoint[i] -= {  100.f, 130.f, 0.f};
 		D3DXVec3TransformCoord(&m_vrightDownPoint[i], &m_vrightDownPoint[i], &m_tInfo.matWorld);
 	}
+
+	if (m_tInfo.vPos.y >= 230|| m_tInfo.vPos.y <= 105)
+	{
+		m_tInfo.vPos = { 100.f,120.f,0.f };
+	}
+	
 
 	return 0;
 }
 
 void CPlayerMS::Late_Update(void)
 {
-	
+	if (m_tInfo.vPos.y == 400)
+	{
+		m_tInfo.vPos = { 100.f,120.f,0.f };
+	}
 }
 
 void CPlayerMS::Render(HDC hDC)
@@ -211,6 +228,7 @@ void CPlayerMS::Key_Input(void)
 		
 		
 		m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+		
 	}
 
 	if (GetAsyncKeyState('S'))
@@ -220,6 +238,7 @@ void CPlayerMS::Key_Input(void)
 
 		D3DXVec3TransformNormal(&m_tInfo.vDir,	&m_tInfo.vLook, &m_tInfo.matWorld);
 		m_tInfo.vPos -= m_tInfo.vDir * m_fSpeed;
+	
 	}
 
 	if (GetAsyncKeyState('A'))

@@ -177,6 +177,7 @@
     <ClInclude Include="Obj_Collision.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerMS.h" />
+    <ClInclude Include="Scene_ShapeMoment.h" />
     <ClInclude Include="Snake_Body.h" />
     <ClInclude Include="Snake_Head.h" />
     <ClInclude Include="Player_KS.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="Obj_Collision.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerMS.cpp" />
+    <ClCompile Include="Scene_ShapeMoment.cpp" />
     <ClCompile Include="Snake_Body.cpp" />
     <ClCompile Include="Snake_Head.cpp" />
     <ClCompile Include="Player_KS.cpp" />
@@ -238,7 +240,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-
     <ClCompile Include="TileMS.cpp" />
     <ClCompile Include="Stick.cpp" />
     <ClCompile Include="UI.cpp" />

@@ -106,7 +106,6 @@
     <Filter Include="02. Scene\04.Scene_KS\Obj_KS\Monster_KS">
       <UniqueIdentifier>{871c7ff1-5616-4aea-91f0-8c2edd09b6c7}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="02. Scene\MyEdit">
       <UniqueIdentifier>{a6b2ec7f-d4c7-4c3c-aa4e-78479b29b689}</UniqueIdentifier>
     </Filter>
@@ -196,9 +195,6 @@
     <ClInclude Include="Scene_jini.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClInclude>
-    <ClInclude Include="Scene_MinSungJJang.h">
-      <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
-    </ClInclude>
     <ClInclude Include="Scene_KJE.h">
       <Filter>02. Scene\03.Scene_KJE</Filter>
     </ClInclude>
@@ -250,7 +246,6 @@
     <ClInclude Include="Monster_KS.h">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
     </ClInclude>
-
     <ClInclude Include="TileMS.h">
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClInclude>
@@ -268,6 +263,12 @@
     </ClInclude>
     <ClInclude Include="Obj_Collision.h">
       <Filter>02. Scene\00.Scene_Main\OBJ_Main\03.OBJ_Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_MinSungJJang.h">
+      <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_ShapeMoment.h">
+      <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -370,7 +371,6 @@
     <ClCompile Include="Monster_KS.cpp">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
     </ClCompile>
-
     <ClCompile Include="TileMS.cpp">
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClCompile>
@@ -388,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="Obj_Collision.cpp">
       <Filter>02. Scene\00.Scene_Main\OBJ_Main\03.OBJ_Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_ShapeMoment.cpp">
+      <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
