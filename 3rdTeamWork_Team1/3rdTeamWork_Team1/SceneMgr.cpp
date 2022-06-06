@@ -35,6 +35,10 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 			m_pScene = new CScene_MinSungJJang;
 			break;
 
+		case SC_KMS2:
+			m_pScene = new CScene_ShapeMoment;
+			break;
+
 		case SC_KJE:
 			m_pScene = new CScene_KJE;
 			break;
@@ -49,6 +53,10 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 
 		case SC_KSLOSE:
 			m_pScene = new CScene_LoseKS;
+			break;
+
+		case SC_MSLOSE:
+			m_pScene = new CSceneMS_Lose;
 			break;
 
 		}

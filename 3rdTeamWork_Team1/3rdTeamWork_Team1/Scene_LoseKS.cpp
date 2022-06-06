@@ -13,6 +13,7 @@ CScene_LoseKS::~CScene_LoseKS()
 
 void CScene_LoseKS::Initialize(void)
 {
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/lose.bmp", L"lose");
 }
 
 void CScene_LoseKS::Update(void)

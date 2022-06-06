@@ -53,8 +53,8 @@ void CScene_KS::Initialize(void)
 
 	//배경 이미지추가.
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/BackGround_KS.bmp", L"BackGround_KS");
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/win.bmp", L"win");
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/lose.bmp", L"lose");
+	//CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/win.bmp", L"win");
+	//CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/lose.bmp", L"lose");
 }
 
 void CScene_KS::Update(void)

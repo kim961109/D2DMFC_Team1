@@ -136,6 +136,9 @@
     <Filter Include="02. Scene\04.Scene_KS\Obj_KS\WALL_KS">
       <UniqueIdentifier>{5fbd88e6-bd57-46cc-b43a-0089a3fa8c3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Scene\02.Scene_MinSungJJang\SceneMS">
+      <UniqueIdentifier>{c1a282dd-4011-4d85-b0c2-a1ca6aacdd1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -209,9 +212,6 @@
     </ClInclude>
     <ClInclude Include="Scene_jini.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene_MinSungJJang.h">
-      <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClInclude>
     <ClInclude Include="Scene_KJE.h">
       <Filter>02. Scene\03.Scene_KJE</Filter>
@@ -300,8 +300,18 @@
     <ClInclude Include="Wall.h">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\WALL_KS</Filter>
     </ClInclude>
+
     <ClInclude Include="Result.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_MinSungJJang.h">
+      <Filter>02. Scene\02.Scene_MinSungJJang\SceneMS</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_ShapeMoment.h">
+      <Filter>02. Scene\02.Scene_MinSungJJang\SceneMS</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMS_Lose.h">
+      <Filter>02. Scene\02.Scene_MinSungJJang\SceneMS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -346,9 +356,6 @@
     </ClCompile>
     <ClCompile Include="Scene_jini.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene_MinSungJJang.cpp">
-      <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClCompile>
     <ClCompile Include="Scene_KJE.cpp">
       <Filter>02. Scene\03.Scene_KJE</Filter>
@@ -437,8 +444,18 @@
     <ClCompile Include="Obj.cpp">
       <Filter>01.OBJ</Filter>
     </ClCompile>
+
     <ClCompile Include="Result.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_MinSungJJang.cpp">
+      <Filter>02. Scene\02.Scene_MinSungJJang\SceneMS</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_ShapeMoment.cpp">
+      <Filter>02. Scene\02.Scene_MinSungJJang\SceneMS</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMS_Lose.cpp">
+      <Filter>02. Scene\02.Scene_MinSungJJang\SceneMS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
