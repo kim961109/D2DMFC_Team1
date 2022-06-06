@@ -25,8 +25,9 @@ void CScene_MinSungJJang::Initialize(void)
 
 void CScene_MinSungJJang::Update(void)
 {
-	CTileMgr::Get_Instance()->Update();
+
 	
+	CTileMgr::Get_Instance()->Update();
 	CObjMgr::Get_Instance()->Update();
 }
 
@@ -61,4 +62,9 @@ void CScene_MinSungJJang::Render(HDC hDC)
 
 void CScene_MinSungJJang::Release(void)
 {
+}
+
+void CScene_MinSungJJang::Key_Input()
+{
+	
 }

@@ -39,6 +39,6 @@ private:
 	TCHAR*		m_pFrameKey;
 
 	float		m_fSpeed;
-	float		m_fAngle = 0;
+	float		m_fAngle;
 };
 
