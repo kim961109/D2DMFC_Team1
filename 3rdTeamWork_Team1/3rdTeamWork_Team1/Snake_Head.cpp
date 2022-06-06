@@ -168,7 +168,7 @@ void CSnake_Head::GrowUp()
 	{
 		m_vNewPos = m_tInfo.vPos - m_tInfo.vDir * m_fRadius * 2.0f;*/
 
-		D3DXVECTOR3 m_vNewPos;
+	D3DXVECTOR3 m_vNewPos;
 	if (CObjMgr::Get_Instance()->Get_List(OBJ_SNAKEBODY).empty())//
 	{
 		m_vNewPos = m_tInfo.vPos - m_tInfo.vDir * m_fRadius * 2.0f;
