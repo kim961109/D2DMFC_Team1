@@ -49,7 +49,7 @@ void CCollisionMgr::Collision_Snake_Apple(list<CObj*> _Snake, list<CObj*> _Apple
 				dynamic_cast<CSnake_Head*>(Snake)->GrowUp();
 				
 
-      }
+            }
 		}
 	}
 }
