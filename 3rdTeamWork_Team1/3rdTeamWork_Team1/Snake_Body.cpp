@@ -14,8 +14,8 @@ CSnake_Body::~CSnake_Body()
 }
 
 void CSnake_Body::Initialize(void)
-{	
-	m_tInfo.vPos = {0.f, 0.f, 0.f };
+{
+	m_tInfo.vPos = { 0.f, 0.f, 0.f };
 	m_tInfo.vDir = { 0.f, -1.f, 0.f };
 
 	m_vPoint[0] = { m_tInfo.vPos.x - 10.f,  m_tInfo.vPos.y - 10.f, 0.f };
@@ -39,7 +39,6 @@ int CSnake_Body::Update(void)
 		return OBJ_DEAD;
 	}
 	//front 는 head를 따라가고  나머지는 바로앞에꺼 따라가게 
-	
 	if (!CObjMgr::Get_Instance()->Get_List(OBJ_SNAKE).empty())
 
 	{
@@ -59,20 +58,21 @@ int CSnake_Body::Update(void)
 			// 벡터의 크기를 구해주는 함수
 			// float fLength = D3DXVec3Length(&m_tInfo.vDir);
 
+
 			// 두 방향 벡터의 내적을 수행하는 함수
 
 			/*
-	float   fWidth = fabs(pDest->Get_Info().vPos.x - pSour->Get_Info().vPos.x);
-	float   fHeight = fabs(pDest->Get_Info().vPos.y - pSour->Get_Info().vPos.y);
+			float   fWidth = fabs(pDest->Get_Info().vPos.x - pSour->Get_Info().vPos.x);
+			float   fHeight = fabs(pDest->Get_Info().vPos.y - pSour->Get_Info().vPos.y);
 
-	float   fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
-	float   fRadius=20;
-*/
+			float   fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
+			float   fRadius=20;
+			*/
 			float   fWidth = fabs(m_tHead.vPos.x - m_tInfo.vPos.x);
 			float   fHeight = fabs(m_tHead.vPos.y - m_tInfo.vPos.y);
 
 			float   fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
-			
+
 			if (fDiagonal > 20)
 			{
 				m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
@@ -81,13 +81,13 @@ int CSnake_Body::Update(void)
 			{
 
 			}
-			
+
 
 			float fDot = D3DXVec3Dot(&m_tHead.vDir, &m_tInfo.vDir);
 
 			float	fAngle = acosf(fDot);
 			//m_tInfo.vPos.x += m_fSpeed * cosf(fAngle);
-		//	m_tInfo.vPos.y -= m_fSpeed * sinf(fAngle);
+			//	m_tInfo.vPos.y -= m_fSpeed * sinf(fAngle);
 
 			D3DXMATRIX		matScale, matRotZ, matTrans;
 
@@ -135,7 +135,7 @@ int CSnake_Body::Update(void)
 
 			float   fWidth = fabs(m_tFrontBody.vPos.x - m_tInfo.vPos.x);
 			float   fHeight = fabs(m_tFrontBody.vPos.y - m_tInfo.vPos.y);
-			
+
 			float   fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
 
 			if (fDiagonal > 20)
@@ -185,7 +185,7 @@ void CSnake_Body::Render(HDC hDC)
 	/*MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
 	for (int i = 0; i < 4; ++i)
 	{
-		LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
+	LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
 	}
 	LineTo(hDC, m_vPoint[0].x, m_vPoint[0].y);*/
 

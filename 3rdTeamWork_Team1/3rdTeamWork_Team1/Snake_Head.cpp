@@ -19,7 +19,7 @@ void CSnake_Head::Initialize(void)
 {
 	m_tInfo.vPos = { 400.f, 300.f, 0.f };
 	m_tInfo.vLook = { 0.f, -1.f, 0.f };
-	
+
 	m_vPoint[0] = { m_tInfo.vPos.x - 10.f,  m_tInfo.vPos.y - 10.f, 0.f };
 	m_vPoint[1] = { m_tInfo.vPos.x + 10.f,  m_tInfo.vPos.y - 10.f, 0.f };
 	m_vPoint[2] = { m_tInfo.vPos.x + 10.f,  m_tInfo.vPos.y + 10.f, 0.f };
@@ -27,13 +27,13 @@ void CSnake_Head::Initialize(void)
 	m_fRadius = 10;
 	for (int i = 0; i < 4; ++i)
 	{
-		m_vOriginPoint[i] = m_vPoint[i];//Å°´©¸¦¶§¸¸¿òÁ÷ÀÌ°ÔÇÏ·Á°í originpoint ¸¸µë
+		m_vOriginPoint[i] = m_vPoint[i];//í‚¤ëˆ„ë¥¼ë•Œë§Œì›€ì§ì´ê²Œí•˜ë ¤ê³  originpoint ë§Œë“¬
 	}
 
 	m_fAngle = 0;
 	m_fSpeed = 1.f;
 
-	// »ö»ó ·£´ý ¼³Á¤
+	// ìƒ‰ìƒ ëžœë¤ ì„¤ì •
 	srand(unsigned int(time(NULL)));
 	m_iSnakeColorR = rand() % 256;
 	m_iSnakeColorG = rand() % 256;
@@ -73,7 +73,7 @@ int CSnake_Head::Update(void)
 	m_tRect.top = m_tInfo.vPos.y - 10.f;
 	m_tRect.right = m_tInfo.vPos.x + 10.f;
 	m_tRect.bottom = m_tInfo.vPos.y + 10.f;
-	
+
 	return 0;
 }
 
@@ -87,16 +87,18 @@ void CSnake_Head::Render(HDC hDC)
 
 	/*for (int i = 0; i < 4; ++i)
 	{
-		LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
 
-		if (i > 1)
-			continue;
-	
-			Ellipse(hDC,
-			(int)m_vPoint[i].x - 5,
-			(int)m_vPoint[i].y - 5,
-			(int)m_vPoint[i].x + 5,
-			(int)m_vPoint[i].y + 5);
+	LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
+
+	if (i > 1)
+	continue;
+
+	Ellipse(hDC,
+	(int)m_vPoint[i].x - 5,
+	(int)m_vPoint[i].y - 5,
+	(int)m_vPoint[i].x + 5,
+	(int)m_vPoint[i].y + 5);
+
 	}
 	LineTo(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y);*/
 	//Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
@@ -106,18 +108,17 @@ void CSnake_Head::Render(HDC hDC)
 	HPEN oldPen = (HPEN)SelectObject(hDC, myPen);
 
 	//Ellipse(hDC,
-		//int(m_vPoint[0].x),
-		//int(m_vPoint[1].y),
-		//int(m_vPoint[2].x),
-		//int(m_vPoint[3].y));
+
+	//int(m_vPoint[0].x),
+	//int(m_vPoint[1].y),
+	//int(m_vPoint[2].x),
+	//int(m_vPoint[3].y));
 
 	Ellipse(hDC,
-		int(m_tInfo.vPos.x-10.f),
-		int(m_tInfo.vPos.y-10.f),
-		int(m_tInfo.vPos.x+10.f),
-		int(m_tInfo.vPos.y+10.f));
-
-
+		int(m_tInfo.vPos.x - 10.f),
+		int(m_tInfo.vPos.y - 10.f),
+		int(m_tInfo.vPos.x + 10.f),
+		int(m_tInfo.vPos.y + 10.f));
 
 	SelectObject(hDC, oldBrush);
 	DeleteObject(myBrush);
@@ -141,9 +142,8 @@ void CSnake_Head::Key_Input(void)
 	}
 
 	if (GetAsyncKeyState(VK_UP))
-	{	
-		
-		
+	{
+
 	}
 	if (GetAsyncKeyState(VK_DOWN))
 	{
@@ -161,7 +161,13 @@ void CSnake_Head::Key_Input(void)
 	}
 }
 void CSnake_Head::GrowUp()
-{	//Ã¹¹øÂ°¸öÅëÀº ¸Ó¸®µÚ¿¡
+{	//ì²«ë²ˆì§¸ëª¸í†µì€ ë¨¸ë¦¬ë’¤ì—
+
+	/*D3DXVECTOR3 m_vNewPos;
+	if (CObjMgr::Get_Instance()->Get_List(OBJ_SNAKEBODY).empty())//
+	{
+		m_vNewPos = m_tInfo.vPos - m_tInfo.vDir * m_fRadius * 2.0f;*/
+
 		D3DXVECTOR3 m_vNewPos;
 	if (CObjMgr::Get_Instance()->Get_List(OBJ_SNAKEBODY).empty())//
 	{
@@ -171,7 +177,7 @@ void CSnake_Head::GrowUp()
 		CAbstractFactory<CSnake_Body>::Create_SetPos(m_vNewPos.x, m_vNewPos.y, 0.f));
 		m_vecBody.push_back(CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKEBODY));
 	}
-	//µÎ¹øÂ°ºÎÅÍ´Â ¾Õ¿¡²¨µÚ¿¡
+	//ë‘ë²ˆì§¸ë¶€í„°ëŠ” ì•žì—êº¼ë’¤ì—
 	else 
 	{	
 		m_FrontBody = CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKEBODY);
@@ -183,4 +189,17 @@ void CSnake_Head::GrowUp()
 		m_vecBody.push_back(CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKEBODY));
 
 	}
+	/*//ë‘ë²ˆì§¸ë¶€í„°ëŠ” ì•žì—êº¼ë’¤ì—
+	else
+	{
+		m_FrontBody = CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKEBODY);
+		m_tFrontBody = m_FrontBody->Get_Info();
+		m_vNewPos = m_tFrontBody.vPos - m_tFrontBody.vDir * m_fRadius * 2.f;
+
+		CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKEBODY,
+			CAbstractFactory<CSnake_Body>::Create_SetPos(m_vNewPos.x, m_vNewPos.y, 0.f));
+		m_vecBody.push_back(CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKEBODY));*/
+
+	}
 }
+
