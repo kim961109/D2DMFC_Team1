@@ -2,6 +2,7 @@
 #include "CollisionMgr.h"
 #include"SceneMgr.h"
 #include"Apple.h"
+#include"Snake_Body.h"
 #include "PlayerJini.h"
 #include "MonsterJini.h"
 #include "Jelly.h"
@@ -68,6 +69,7 @@ void CCollisionMgr::Collision_Snake_Tile(list<CObj*> _Snake, vector<CObj*> _Tile
 	}
 }
 
+
 void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _index)
 {
 
@@ -115,13 +117,10 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 				   break;
 
 					//jeongeun
-				case 4: //Snake - Apple
-					srand(unsigned int(time(NULL)));
-					Sour->Set_ObjPos(rand() % (WINCX - 140) + 70, rand() % (WINCY - 140) + 70);
-					dynamic_cast<CApple*>(Sour)->Set_ApplePlus();
+				case 4: //SnakeHead - SnakeBody
 					break;
 
-				case 5://Snake - Tile
+				case 5://SnakeBody -SnakeBody
 					break;
 
 				case 6: // JINI : Monster - Jelly
@@ -367,6 +366,36 @@ void CCollisionMgr::Collision_RectKS(list<CObj*> _Dest, list<CObj*> _Sour)// 고
 						static_cast<CPlayer_KS*>(Sour)->Set_KSPosX(fX);
 				}
 
+			}
+		}
+	}
+}
+
+bool CCollisionMgr::Check_Snake(CObj* pDest, CObj* pSour)
+{
+
+	float   fWidth = fabs(pDest->Get_Info().vPos.x - pSour->Get_Info().vPos.x);
+	float   fHeight = fabs(pDest->Get_Info().vPos.y - pSour->Get_Info().vPos.y);
+
+	float   fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
+	float   fRadius=1;
+
+	return fRadius > fDiagonal;
+}
+
+void CCollisionMgr::Collision_Snake(list<CObj*> _Dest, list<CObj*> _Sour)
+{
+
+	for (auto& Dest : _Dest)
+	{
+		for (auto& Sour : _Sour)
+		{
+			if (Check_Snake(Dest, Sour))
+			{
+				{
+					Sour->Set_Dead();
+					Dest->Set_Dead();
+				}
 			}
 		}
 	}

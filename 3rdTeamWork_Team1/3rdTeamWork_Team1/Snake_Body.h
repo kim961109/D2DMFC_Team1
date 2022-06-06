@@ -30,6 +30,8 @@ private:
 	float		m_fAngle;
 	D3DXVECTOR3	m_HeadPos;
 	INFO		m_tHead;
+	INFO		m_tFrontBody;
+	list<CObj*> m_SnakeList;
 
 };
 
