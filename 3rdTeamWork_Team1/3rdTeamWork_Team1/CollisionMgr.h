@@ -22,5 +22,8 @@ public:
 	static void     Collision_Choose(list<CObj*> _Dest, vector<CObj*> _Sour);
 	static void		Collision_Zombie(list<CObj*> _Dest, list<CObj*> _Sour);
 	static void     Collision_RectKS(list<CObj*> _Dest, list<CObj*> _Sour);
+	static bool		Check_Snake(CObj* pDest, CObj* pSour);
+	static void		Collision_Snake(list<CObj*> _Dest, list<CObj*> _Sour);
+
 };
 

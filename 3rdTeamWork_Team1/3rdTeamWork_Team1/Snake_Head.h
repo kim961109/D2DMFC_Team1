@@ -18,8 +18,11 @@ public:
 	D3DXVECTOR3 Get_Pos() { return m_tInfo.vPos; }
 	INFO Get_Info() { return m_tInfo; }
 
-	void		GrowUp();
+	CObj* Get_vecBody(int _Index) { return m_vecBody.at(_Index); }
+	vector<CObj*>& Get_vector() { return m_vecBody; }
 
+	void		GrowUp();
+	bool		Get_bDead() { return m_bDead; }
 
 private:
 	void		Key_Input(void);
@@ -41,6 +44,8 @@ private:
 	int		m_iSnakeColorB;
 
 	vector<CObj*>	m_vecBody;
+	CObj*			m_FrontBody;
+	INFO			m_tFrontBody;
 	
 
 };
