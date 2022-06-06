@@ -201,7 +201,7 @@ void CPlayerJini::Late_Update(void)
 
 	// 점수 출력용
 	int iScoreTemp = (int)g_fScore;
-	swprintf_s(m_szScore, L"순수하짐 : %d", iScoreTemp);
+	swprintf_s(m_szScore, L"%d등  순수하짐 : %d", m_iRank+1, iScoreTemp);
 
 	//cout << "vPos.x = " << m_tInfo.vPos.x << "\t vPos.y = " << m_tInfo.vPos.y << "\t m_fScale = " << m_fScale << "\t g_fScore = " << g_fScore << endl;
 }
@@ -284,7 +284,7 @@ void CPlayerJini::Render(HDC hDC)
 		oldFont2 = (HFONT)SelectObject(hDC, textFont2);
 		SetBkMode(hDC, TRANSPARENT); // TRANSPARENT, OPAQUE
 		SetBkColor(hDC, RGB(0, 10, 17));
-		SetTextColor(hDC, RGB(255, 255, 255));
+		SetTextColor(hDC, RGB(m_iPlayerColorROrigin, m_iPlayerColorGOrigin, m_iPlayerColorBOrigin));
 
 		TextOut(hDC, 650.f, 10.f + 20.f * (m_iRank), m_szScore, lstrlen(m_szScore));
 

@@ -165,15 +165,15 @@ void CMonsterJini::Late_Update(void)
 	{
 	case 1:
 		iScoreTemp = (int)g_fScoreKS;
-		swprintf_s(m_szScore, L"성이 : %d", iScoreTemp);
+		swprintf_s(m_szScore, L"%d등  성이 : %d", m_iRank + 1, iScoreTemp);
 		break;
 	case 2:
 		iScoreTemp = (int)g_fScoreKJE;
-		swprintf_s(m_szScore, L"정은이 : %d", iScoreTemp);
+		swprintf_s(m_szScore, L"%d등  정은이 : %d", m_iRank + 1, iScoreTemp);
 		break;
 	case 3:
 		iScoreTemp = (int)g_fScoreKMS;
-		swprintf_s(m_szScore, L"민성이 : %d", iScoreTemp);
+		swprintf_s(m_szScore, L"%d등  민성이 : %d", m_iRank + 1, iScoreTemp);
 		break;
 	}
 }
