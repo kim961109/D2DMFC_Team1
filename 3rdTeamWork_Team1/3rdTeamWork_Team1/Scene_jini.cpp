@@ -58,7 +58,7 @@ void CScene_jini::Initialize(void)
 	
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonsterJini>::Create_MonsterJini(1500.f, 800.f, 0.f, 1, 3.f));
 	m_pMonster1 = CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER);
-	m_pMonster1->Set_Dir(-1.0f, 0.f, 0.f);
+	m_pMonster1->Set_Dir(-0.7f, 0.3f, 0.f);
 	dynamic_cast<CMonsterJini*>(m_pMonster1)->Set_Player(m_pPlayer);
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonsterJini>::Create_MonsterJini(2200.f, 1500.f, 0.f, 2, 4.5f));
@@ -102,15 +102,18 @@ void CScene_jini::Update(void)
 		CObjMgr::Get_Instance()->Update();
 
 
-			int ListRank[4] = { (int)g_fScore, (int)g_fScoreKS, (int)g_fScoreKJE, (int)g_fScoreKMS };
-			m_vecRank = { m_pPlayer, m_pMonster1, m_pMonster2, m_pMonster3 };
+		int ListRank[4] = { (int)g_fScore, (int)g_fScoreKS, (int)g_fScoreKJE, (int)g_fScoreKMS };
+		m_vecRank = { m_pPlayer, m_pMonster1, m_pMonster2, m_pMonster3 };
 
-			Bublle_Sort(ListRank, 4);
+		Bublle_Sort(ListRank, 4);
 
-			for (int i = 0; i < 4; ++i)
-			{
-				m_vecRank[i]->Set_Rank(i);
-			}
+		for (int i = 0; i < 4; ++i)
+		{
+			m_vecRank[i]->Set_Rank(i);
+		}
+
+		CScrollMgr::Get_Instance()->Scroll_Lock();
+
 	}
 }
 
@@ -125,6 +128,8 @@ void CScene_jini::Late_Update(void)
 		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERJINI), CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERCHILD), 1);
 		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERJINI), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER), 3);
 		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERJINI), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTERCHILD), 3);
+		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERCHILD), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER), 3);
+		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERCHILD), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTERCHILD), 3);
 
 		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERCHILD), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER), 3);
 		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER), CObjMgr::Get_Instance()->Get_List(OBJ_ITEM), 6);

@@ -66,8 +66,11 @@ int CPlayerJini::Update(void)
 {
 	if (m_bDead)
 	{
-		CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CResult>::Create_SetPos(200.f, 100.f, 0.f));
-		g_bGameOver = true;
+		if (m_strTag == "부모")
+		{
+			CObjMgr::Get_Instance()->Add_Object(OBJ_UI, CAbstractFactory<CResult>::Create_SetPos(200.f, 100.f, 0.f));
+			g_bGameOver = true;
+		}
 		return OBJ_DEAD;
 	}
 
@@ -171,7 +174,7 @@ int CPlayerJini::Update(void)
 void CPlayerJini::Late_Update(void)
 {
 	// 일정크기 이상 커지면 줌 아웃
-	if (g_fScore > 1200.f * (g_fScaleCount + 1.f))
+	if (g_fScore > 1000.f * (g_fScaleCount + 1.f))
 	{
 		++g_fScaleCount;
 		m_fRenderPercentTemp = g_fRenderPercent * 0.5f;
@@ -179,7 +182,7 @@ void CPlayerJini::Late_Update(void)
 	}
 
 	// 일정크기 이상 작아지면 줌 인
-	if ((g_fScaleCount != 0.f) && g_fScore < (1200.f * g_fScaleCount))
+	if ((g_fScaleCount != 0.f) && g_fScore < (1000.f * g_fScaleCount))
 	{
 		--g_fScaleCount;
 		m_fRenderPercentTemp = g_fRenderPercent * 2.f;
@@ -288,6 +291,9 @@ void CPlayerJini::Render(HDC hDC)
 		SelectObject(hDC, oldFont2);
 		DeleteObject(textFont2);
 	}
+
+	cout << "x = " << iScrollX << "y = " << iScrollY << endl;
+
 
 }
 
