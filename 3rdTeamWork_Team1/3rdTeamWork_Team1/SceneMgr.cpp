@@ -43,6 +43,14 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 			m_pScene = new CScene_KS;
 			break;
 
+		case SC_KSWIN:
+			m_pScene = new CScene_WinKS;
+			break;
+
+		case SC_KSLOSE:
+			m_pScene = new CScene_LoseKS;
+			break;
+
 		}
 
 		m_pScene->Initialize();

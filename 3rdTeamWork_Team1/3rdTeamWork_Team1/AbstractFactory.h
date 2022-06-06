@@ -82,4 +82,12 @@ public:
 
 		return pObj;
 	}
+
+	static CObj*& Create_Zombie(D3DXVECTOR3 vPos, CObj* _pObj)
+	{
+		CObj* pObj = new T(vPos, _pObj);
+		pObj->Initialize();
+
+		return pObj;
+	}
 };
