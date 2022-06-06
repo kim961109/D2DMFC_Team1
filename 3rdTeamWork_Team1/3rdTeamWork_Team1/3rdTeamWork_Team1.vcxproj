@@ -178,6 +178,7 @@
     <ClInclude Include="Obj_Collision.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerMS.h" />
+    <ClInclude Include="Result.h" />
     <ClInclude Include="Scene_LoseKS.h" />
     <ClInclude Include="Scene_WinKS.h" />
     <ClInclude Include="Snake_Body.h" />
@@ -226,6 +227,7 @@
     <ClCompile Include="Obj_Collision.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerMS.cpp" />
+    <ClCompile Include="Result.cpp" />
     <ClCompile Include="Scene_LoseKS.cpp" />
     <ClCompile Include="Scene_WinKS.cpp" />
     <ClCompile Include="Snake_Body.cpp" />

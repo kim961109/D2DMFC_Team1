@@ -43,6 +43,17 @@ public:
 		return pObj;
 	}
 
+	static CObj*& Create_MonsterJini(float _fX, float _fY, float _fZ, int _NameNum, float _scale)
+	{
+		CObj* pObj = new T();
+		pObj->Initialize();
+		pObj->Set_Pos(_fX, _fY, _fZ);
+		dynamic_cast<CMonsterJini*>(pObj)->Set_NameNum(_NameNum);
+		dynamic_cast<CMonsterJini*>(pObj)->Set_Scale(_scale);
+		dynamic_cast<CMonsterJini*>(pObj)->Late_Initialize();
+		return pObj;
+	}
+
 	static CObj*& Create_Bullet(float _fAngle, D3DXVECTOR3 vA, D3DXVECTOR3 vB)
 	{
 		CObj* pObj = new T(_fAngle, vA, vB);
