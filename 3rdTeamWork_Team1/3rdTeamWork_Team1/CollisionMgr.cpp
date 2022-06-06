@@ -378,7 +378,7 @@ bool CCollisionMgr::Check_Snake(CObj* pDest, CObj* pSour)
 	float   fHeight = fabs(pDest->Get_Info().vPos.y - pSour->Get_Info().vPos.y);
 
 	float   fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
-	float   fRadius=20;
+	float   fRadius=1;
 
 	return fRadius > fDiagonal;
 }
@@ -393,7 +393,8 @@ void CCollisionMgr::Collision_Snake(list<CObj*> _Dest, list<CObj*> _Sour)
 			if (Check_Snake(Dest, Sour))
 			{
 				{
-					dynamic_cast<CSnake_Body*>(Sour)->Get_Info().vPos -= Sour->Get_Info().vDir * 20;
+					Sour->Set_Dead();
+					Dest->Set_Dead();
 				}
 			}
 		}

@@ -22,7 +22,7 @@ public:
 	vector<CObj*>& Get_vector() { return m_vecBody; }
 
 	void		GrowUp();
-
+	bool		Get_bDead() { return m_bDead; }
 
 private:
 	void		Key_Input(void);
