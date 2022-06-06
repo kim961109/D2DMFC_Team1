@@ -154,14 +154,27 @@ void CSnake_Head::Key_Input(void)
 	}
 }
 void CSnake_Head::GrowUp()
-{
-	D3DXVECTOR3 m_vNewPos;
-	m_vNewPos = m_tInfo.vPos - m_tInfo.vDir * m_fRadius * 2.f;
-	//float   fPosX = (m_tInfo.vPos.x) + (m_tInfo.vDir.x * m_fRadius);
-	//float	fPosY = (m_tInfo.vPos.y) - (m_tInfo.vDir.y * m_fRadius);
+{	//첫번째몸통은 머리따라가게
+		D3DXVECTOR3 m_vNewPos;
+	if (CObjMgr::Get_Instance()->Get_List(OBJ_SNAKE).empty())
+	{
+		m_vNewPos = m_tInfo.vPos - m_tInfo.vDir * m_fRadius * 3.0f;
 
-	//CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKEBODY, CAbstractFactory<CSnake_Body>::Create_SetPos(fPosX, fPosY, 0.f));
-	CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKEBODY, CAbstractFactory<CSnake_Body>::Create_SetPos(m_vNewPos.x, m_vNewPos.y, 0.f));
-	m_vecBody.push_back(CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKEBODY));
+		CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKEBODY,
+		CAbstractFactory<CSnake_Body>::Create_SetPos(m_vNewPos.x, m_vNewPos.y, 0.f));
+		m_vecBody.push_back(CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKEBODY));
+	}
+	//두번째부터는 앞에꺼따라가게
+	else 
+	{
+		m_FrontBody = CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKE);
+		m_tFrontBody = m_FrontBody->Get_Info();
+		m_vNewPos = m_tFrontBody.vPos - m_tFrontBody.vDir * m_fRadius * 3.f;
 
+		CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKEBODY,
+			CAbstractFactory<CSnake_Body>::Create_SetPos(m_vNewPos.x, m_vNewPos.y, 0.f));
+		m_vecBody.push_back(CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKEBODY));
+
+		//원충돌먼저만들고올게
+	}
 }
