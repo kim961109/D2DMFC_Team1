@@ -258,11 +258,9 @@
     <ClInclude Include="Jelly.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClInclude>
-
     <ClInclude Include="Monster_KS.h">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Monster_KS</Filter>
     </ClInclude>
-
     <ClInclude Include="TileMS.h">
       <Filter>02. Scene\02.Scene_MinSungJJang</Filter>
     </ClInclude>
@@ -281,7 +279,6 @@
     <ClInclude Include="Obj_Collision.h">
       <Filter>02. Scene\00.Scene_Main\OBJ_Main\03.OBJ_Collision</Filter>
     </ClInclude>
-
     <ClInclude Include="MonsterJini.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClInclude>
@@ -302,7 +299,6 @@
     </ClInclude>
     <ClInclude Include="Wall.h">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\WALL_KS</Filter>
-
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -414,15 +410,11 @@
     <ClCompile Include="Obj_Collision.cpp">
       <Filter>02. Scene\00.Scene_Main\OBJ_Main\03.OBJ_Collision</Filter>
     </ClCompile>
-
     <ClCompile Include="Jelly.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClCompile>
     <ClCompile Include="MonsterJini.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj.cpp">
-      <Filter>02. Scene\00.Scene_Main</Filter>
     </ClCompile>
     <ClCompile Include="Zombie.cpp">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\Zombie_KS</Filter>
@@ -438,7 +430,9 @@
     </ClCompile>
     <ClCompile Include="Wall.cpp">
       <Filter>02. Scene\04.Scene_KS\Obj_KS\WALL_KS</Filter>
-
+    </ClCompile>
+    <ClCompile Include="Obj.cpp">
+      <Filter>01.OBJ</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
