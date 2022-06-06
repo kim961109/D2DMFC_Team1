@@ -8,18 +8,24 @@
 #include "PlayerJini.h"
 #include "Jelly.h"
 #include "MonsterJini.h"
+#include "Result.h"
 
-
+bool g_bGameOver = false;
+int g_iSelect = 2;
 bool g_bZoomOut_Jini = false;
 bool g_bZoomIn_Jini = false;
-
 float g_fRenderPercent = 1.0f;
 float g_fScaleCount = 0.f;
-
 float g_fScore = 0.f;
+float g_fScoreKS = 0.f;
+float g_fScoreKJE = 0.f;
+float g_fScoreKMS = 0.f;
+
+DWORD g_dwPlayTime = long(0);
 
 CScene_jini::CScene_jini()
 {
+	m_pPlayer = nullptr;
 }
 
 CScene_jini::~CScene_jini()
@@ -29,45 +35,83 @@ CScene_jini::~CScene_jini()
 
 void CScene_jini::Initialize(void)
 {
-	// 여기부터
+	// 전역변수들
+	g_bGameOver = false;
+	g_iSelect = 2;
+	g_bZoomOut_Jini = false;
+	g_bZoomIn_Jini = false;
+	g_fRenderPercent = 1.0f;
+	g_fScaleCount = 0.f;
+	g_fScore = 0.f;
+	g_fScoreKS = 0.f;
+	g_fScoreKJE = 0.f;
+	g_fScoreKMS = 0.f;
+
+
+	// Scene
 	m_dwJellyCreate = GetTickCount();
 	m_dwJellyCreate2 = GetTickCount();
 	m_dwCollisionJelly = GetTickCount() - long(1000);
 
-	m_pPlayer = CAbstractFactory<CPlayerJini>::Create_SetPos(1200.f, 900.f, 0.f);
-	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, m_pPlayer);
-
+	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYERJINI, CAbstractFactory<CPlayerJini>::Create_SetPos(1200.f, 900.f, 0.f));
+	m_pPlayer = CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERJINI);
 	
-	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonsterJini>::Create_SetPos(1500.f, 800.f, 0.f));
-	CObj* m_pMonster = CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER);
-	m_pMonster->Set_Dir(-1.0f, 0.f, 0.f);
-	dynamic_cast<CMonsterJini*>(m_pMonster)->Set_Player(m_pPlayer);
+	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonsterJini>::Create_MonsterJini(1500.f, 800.f, 0.f, 1, 3.f));
+	m_pMonster1 = CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER);
+	m_pMonster1->Set_Dir(-1.0f, 0.f, 0.f);
+	dynamic_cast<CMonsterJini*>(m_pMonster1)->Set_Player(m_pPlayer);
+
+	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonsterJini>::Create_MonsterJini(2200.f, 1500.f, 0.f, 2, 4.5f));
+	m_pMonster2 = CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER);
+	m_pMonster2->Set_Dir(-0.4f, -0.5f, 0.f);
+	dynamic_cast<CMonsterJini*>(m_pMonster2)->Set_Player(m_pPlayer);
+
+	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonsterJini>::Create_MonsterJini(800.f, 1000.f, 0.f, 3, 2.f));
+	m_pMonster3 = CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER);
+	m_pMonster3->Set_Dir(0.3f, -0.7f, 0.f);
+	dynamic_cast<CMonsterJini*>(m_pMonster3)->Set_Player(m_pPlayer);
 }
 
 
 void CScene_jini::Update(void)
 {
-	if (GetTickCount() - m_dwJellyCreate > 500)
+	Key_Input();
+
+	if (!g_bGameOver)
 	{
-		srand(unsigned int(time(NULL)));
-		float m_fPosXRandom = float(rand() * rand() % 800 + 800);
-		float m_fPosYRandom = float(rand() % 600 + 600);
+		if (GetTickCount() - m_dwJellyCreate > 500)
+		{
+			srand(unsigned int(time(NULL)));
+			float m_fPosXRandom = float(rand() * rand() % 800 + 800);
+			float m_fPosYRandom = float(rand() % 600 + 600);
 
-		CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CJelly>::Create_SetPos(m_fPosXRandom, m_fPosYRandom, 0.f));
-		m_dwJellyCreate = GetTickCount();
+			CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CJelly>::Create_SetPos(m_fPosXRandom, m_fPosYRandom, 0.f));
+			m_dwJellyCreate = GetTickCount();
+		}
+
+		if (GetTickCount() - m_dwJellyCreate2 > 200)
+		{
+			srand(unsigned int(time(NULL)));
+			float m_fPosXRandom2 = float(rand() * rand() % 2350 + 10);
+			float m_fPosYRandom2 = float(rand() % 1750 + 10);
+
+			CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CJelly>::Create_SetPos(m_fPosXRandom2, m_fPosYRandom2, 0.f));
+			m_dwJellyCreate2 = GetTickCount();
+		}
+
+		CObjMgr::Get_Instance()->Update();
+
+
+			int ListRank[4] = { (int)g_fScore, (int)g_fScoreKS, (int)g_fScoreKJE, (int)g_fScoreKMS };
+			m_vecRank = { m_pPlayer, m_pMonster1, m_pMonster2, m_pMonster3 };
+
+			Bublle_Sort(ListRank, 4);
+
+			for (int i = 0; i < 4; ++i)
+			{
+				m_vecRank[i]->Set_Rank(i);
+			}
 	}
-
-	if (GetTickCount() - m_dwJellyCreate2 > 200)
-	{
-		srand(unsigned int(time(NULL)));
-		float m_fPosXRandom2 = float(rand() * rand() % 2350 + 10);
-		float m_fPosYRandom2 = float(rand() % 1750 + 10);
-
-		CObjMgr::Get_Instance()->Add_Object(OBJ_ITEM, CAbstractFactory<CJelly>::Create_SetPos(m_fPosXRandom2, m_fPosYRandom2, 0.f));
-		m_dwJellyCreate2 = GetTickCount();
-	}
-
-	CObjMgr::Get_Instance()->Update();
 }
 
 void CScene_jini::Late_Update(void)
@@ -76,11 +120,11 @@ void CScene_jini::Late_Update(void)
 
 	if (GetTickCount() - m_dwCollisionJelly > 300)
 	{
-		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER), CObjMgr::Get_Instance()->Get_List(OBJ_ITEM), 2);
+		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERJINI), CObjMgr::Get_Instance()->Get_List(OBJ_ITEM), 2);
 		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERCHILD), CObjMgr::Get_Instance()->Get_List(OBJ_ITEM), 2);
-		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER), CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERCHILD), 1);
-		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER), 3);
-		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTERCHILD), 3);
+		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERJINI), CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERCHILD), 1);
+		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERJINI), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER), 3);
+		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERJINI), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTERCHILD), 3);
 
 		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERCHILD), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER), 3);
 		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER), CObjMgr::Get_Instance()->Get_List(OBJ_ITEM), 6);
@@ -114,5 +158,72 @@ void CScene_jini::Render(HDC hDC)
 
 void CScene_jini::Release(void)
 {
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYERJINI);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_PLAYERCHILD);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_ITEM);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_MONSTER);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_MONSTERCHILD);
+	CObjMgr::Get_Instance()->Delete_ID(OBJ_UI);
+
 	CObjMgr::Get_Instance()->Destroy_Instance();
+
+	//Safe_Delete<CObj*>(m_pPlayer);
+	//Safe_Delete<CObj*>(m_pMonster1);
+	//Safe_Delete<CObj*>(m_pMonster2);
+	//Safe_Delete<CObj*>(m_pMonster3);
+}
+
+void CScene_jini::Bublle_Sort(int _list[4], int n)
+{
+	int i, j, temp;
+	CObj* pTemp;
+
+	for(i = n-1; i > 0; i--)
+	{
+		 // 0 ~ (i-1)까지 반복
+		for(j = 0; j < i; j++)
+		{
+			// j번째와 j+1번째의 요소가 크기 순이 아니면 교환
+			if(_list[j]<_list[j+1])
+			{
+				temp = _list[j];
+				_list[j] = _list[j+1];
+				_list[j+1] = temp;
+
+				pTemp = m_vecRank[j];
+				m_vecRank[j] = m_vecRank[j + 1];
+				m_vecRank[j + 1] = pTemp;
+			}
+		}
+	}
+}
+
+void CScene_jini::Key_Input()
+{
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_RETURN))
+	{
+		if (g_iSelect == 1)
+		{
+			CSceneMgr::Get_Instance()->Scene_Change(SC_MAIN);
+			CSceneMgr::Get_Instance()->Scene_Change(SC_JINI);
+		}
+		else if (g_iSelect == 2)
+		{
+			CSceneMgr::Get_Instance()->Scene_Change(SC_MAIN);
+		}
+	}
+
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_RIGHT))
+	{
+		++g_iSelect;
+		if (g_iSelect > 2)
+			g_iSelect = 1;
+	}
+
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_LEFT))
+	{
+		--g_iSelect;
+		if (g_iSelect < 1)
+			g_iSelect = 2;
+	}
 }

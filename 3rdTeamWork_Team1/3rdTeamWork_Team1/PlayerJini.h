@@ -22,8 +22,6 @@ public:
 	const string&	Get_Tag() { return m_strTag; }
 	const bool&		Get_bBirth() { return m_bBirth; }
 
-	
-
 
 public:
 	virtual void Initialize(void) override;
@@ -38,6 +36,7 @@ public:
 	void		Key_Input();
 	void		Attack(D3DXVECTOR3 _vDir, float _fGiveScale);
 	void		AttackRound();
+
 
 private:
 	float	m_fSpeed;
@@ -60,6 +59,9 @@ private:
 	int		m_iPlayerColorR;
 	int		m_iPlayerColorG;
 	int		m_iPlayerColorB;
+	int		m_iPlayerColorROrigin;
+	int		m_iPlayerColorGOrigin;
+	int		m_iPlayerColorBOrigin;
 
 	float	m_fDistanceMouse;
 
@@ -73,8 +75,9 @@ private:
 	D3DXVECTOR3		m_vAttackPos;
 	D3DXVECTOR3		m_vAttackDir;
 	DWORD			m_dwAttackMove;
+	DWORD			m_dwRoundAttackTime;
+	bool			m_bRoundAttack;
 
 	float	m_fRenderPercentTemp;
-
 };
 

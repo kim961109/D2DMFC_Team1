@@ -39,9 +39,13 @@
 // JINI
 extern bool g_bZoomOut_Jini;
 extern bool g_bZoomIn_Jini;
-
 extern float g_fRenderPercent;
 extern float g_fScaleCount;
-
 extern float g_fScore;
+extern float g_fScoreKS;
+extern float g_fScoreKJE;
+extern float g_fScoreKMS;
+extern DWORD g_dwPlayTime;
+extern bool g_bGameOver;
+extern int g_iSelect;
 
