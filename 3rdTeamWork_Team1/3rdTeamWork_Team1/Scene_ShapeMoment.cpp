@@ -89,7 +89,7 @@ void CScene_ShapeMoment::Win_MS(void)
 
 void CScene_ShapeMoment::LoseCount()
 {
-	if (m_iLoseCount >= 5)
+	if (m_iLoseCount >= 10)
 	{
 		CSceneMgr::Get_Instance()->Scene_Change(SC_MSLOSE);
 	}

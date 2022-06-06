@@ -92,7 +92,7 @@ void CScene_MinSungJJang::Reset(void)
 
 void CScene_MinSungJJang::LoseCount()
 {
-	if (m_iLoseCount >= 5)
+	if (m_iLoseCount >= 10)
 	{
 		CSceneMgr::Get_Instance()->Scene_Change(SC_MSLOSE);
 	}
