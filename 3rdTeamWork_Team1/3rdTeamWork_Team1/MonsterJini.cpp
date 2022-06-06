@@ -18,15 +18,13 @@ CMonsterJini::~CMonsterJini()
 void CMonsterJini::Initialize(void)
 {
 	//m_vPosMiniMap = { 0.f, 0.f, 0.f };
-	m_tInfo.vDir = { 1.f, 0.f, 0.f };
+	m_tInfo.vDir = { -1.f, 0.f, 0.f };
 	m_vDirLocal = { 1.f, 0.f, 0.f };
 
 	m_tInfo.vLook = { 1.f, 0.f, 0.f };
 	m_fSpeed = 1.f;
 	m_fAngle = 0.f;
-	m_fScale = 3.0f;
-	m_fScaleSum = 0.f;
-	m_fScore = 0.f;
+	m_fScale = 2.0f;
 	//m_fEllipse		= 50.f;
 
 	m_vBodyLocal[0] = { -50.f, 0.f, 0.f }; //left
@@ -45,7 +43,7 @@ void CMonsterJini::Initialize(void)
 	lstrcpy(m_szName, L"성이");
 
 	m_dwAttackMove = GetTickCount();
-	m_bMouseMove = false;
+	//m_bMouseMove = false;
 	m_bBirth = false;
 
 	m_vAttackPos = { 0.f, 0.f, 0.f };
@@ -75,6 +73,8 @@ int CMonsterJini::Update(void)
 	if (0 >= m_tInfo.vPos.x || 2400 <= m_tInfo.vPos.x || 0 >= m_tInfo.vPos.y || 1800 <= m_tInfo.vPos.y)
 		m_tInfo.vDir *= -1.f;
 
+	KeyInput();
+
 	// 분열 공격 시, 이동
 	if (m_bBirth & m_strTag != "부모")
 	{
@@ -95,6 +95,7 @@ int CMonsterJini::Update(void)
 		}
 	}
 
+	// 디폴트 이동
 	m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
 
 	// 월드행렬 만들기
@@ -113,11 +114,9 @@ int CMonsterJini::Update(void)
 	// 반지름 계산해두기
 	m_fRadius = (m_vBody[2].x - m_vBody[0].x) * 0.5;
 
-
 	//cout << "vPos.x = " << m_tInfo.vPos.x << "\t vPos.y = " << m_tInfo.vPos.y << "\t m_fScale = " << m_fScale << "\t m_fScore = " << m_fScore << "\t m_fScaleSum = " << m_fScaleSum << endl;
-
-	//m_vPosMiniMap.x = m_tInfo.vPos.x / 2400.f * JINIMAPCX;
-	//m_vPosMiniMap.y = m_tInfo.vPos.y / 1800.f * JINIMAPCY;
+	
+	
 
 	return OBJ_NOEVENT;
 }
@@ -192,12 +191,12 @@ void CMonsterJini::Attack(D3DXVECTOR3 _vDir, float _fGiveScale)
 	float   fPosX = (m_tInfo.vPos.x) + (_vDir.x * m_fRadius);
 	float	fPosY = (m_tInfo.vPos.y) + (_vDir.y * m_fRadius);
 
-	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonsterJini>::Create_SetPos(fPosX, fPosY, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
+	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTERCHILD, CAbstractFactory<CMonsterJini>::Create_SetPos(fPosX, fPosY, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
 																														   //CObjMgr::Get_Instance()->Add_Object(OBJ_PlayerChild, CAbstractFactory<CPlayerJini>::Create_SetPos(m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f)); 
 
-	dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER))->Set_Scale(m_fScale * _fGiveScale);
-	dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER))->Set_Tag("자식");
-	dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER))->Set_AttackDir(_vDir);
+	dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTERCHILD))->Set_Scale(m_fScale * _fGiveScale);
+	dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTERCHILD))->Set_Tag("자식");
+	dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTERCHILD))->Set_AttackDir(_vDir);
 
 	m_fScale *= (1.f - _fGiveScale);
 
@@ -235,12 +234,18 @@ void CMonsterJini::AttackRound()
 		float	fPosY = (m_tInfo.vPos.y) + (m_vDirTemp[i].y * m_fRadius);
 
 		CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonsterJini>::Create_SetPos(fPosX, fPosY, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
-		dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER))->Set_Scale(m_fScale * 0.1f);
-		dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER))->Set_Tag("다자녀");
-		dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER))->Set_AttackDir(m_vDirTemp[i]);
-
-
+		CMonsterJini* pMonster = dynamic_cast<CMonsterJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER));
+		pMonster->Set_Scale(m_fScale * 0.1f);
+		pMonster->Set_Tag("다자녀");
+		pMonster->Set_AttackDir(m_vDirTemp[i]);
 	}
 
 	m_fScale *= (10 - iRandom) * 0.1f;
+}
+void CMonsterJini::KeyInput()
+{
+	if (CKeyMgr::Get_Instance()->Key_Down('Z'))
+	{
+		Attack(m_tInfo.vDir, 0.35f);
+	}
 }

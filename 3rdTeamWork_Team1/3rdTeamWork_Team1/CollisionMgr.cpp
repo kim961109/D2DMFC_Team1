@@ -130,6 +130,13 @@ void CCollisionMgr::Collision_Sphere(list<CObj*> _Dest, list<CObj*> _Sour, int _
 					dynamic_cast<CJelly*>(Sour)->Set_ScaleZero();
 					Sour->Set_Dead(true);
 					break;
+				case 7: // JINI : Monster - Monster
+					if ((_index == 1) & dynamic_cast<CMonsterJini*>(Sour)->Get_bBirth())
+						continue;
+					dynamic_cast<CMonsterJini*>(Dest)->Set_ScalePlus(dynamic_cast<CMonsterJini*>(Sour)->Get_Scale());
+					Sour->Set_Dead(true);
+					break;
+
 				}
 
 			}
@@ -152,10 +159,12 @@ bool CCollisionMgr::Check_Sphere(CObj* pDest, CObj* pSour, int _index)
 		fRadius = dynamic_cast<CPlayerJini*>(pDest)->Get_Radius() + dynamic_cast<CPlayerJini*>(pSour)->Get_Radius();
 		fRadius = fRadius * 0.7f * g_fRenderPercent;
 		break;
+
 	case 2: // JINI : Player - Jelly
 		fRadius = dynamic_cast<CPlayerJini*>(pDest)->Get_Radius() + dynamic_cast<CJelly*>(pSour)->Get_Radius();
 		fRadius *= g_fRenderPercent;
 		break;
+
 	case 3: // JINI : Player - Monster
 		fRadius = dynamic_cast<CPlayerJini*>(pDest)->Get_Radius() + dynamic_cast<CMonsterJini*>(pSour)->Get_Radius();
 		fRadius *= g_fRenderPercent;
@@ -163,16 +172,21 @@ bool CCollisionMgr::Check_Sphere(CObj* pDest, CObj* pSour, int _index)
 
 	case 4: //Snake - Apple
 		//float	fRadius = (pDest->Get_Info().fCX + pSour->Get_Info().fCX) * 0.5f;
-		
 		break;
+
 	case 5: //Snake - Tile
 		break;
+
 	case 6: // JINI : Monster - Jelly
 		fRadius = dynamic_cast<CMonsterJini*>(pDest)->Get_Radius() + dynamic_cast<CJelly*>(pSour)->Get_Radius();
 		fRadius *= g_fRenderPercent;
 		break;
-	}
 
+	case 7: // JINI : Monster - Monster
+		fRadius = dynamic_cast<CMonsterJini*>(pDest)->Get_Radius() + dynamic_cast<CMonsterJini*>(pSour)->Get_Radius();
+		fRadius = fRadius * 0.7f * g_fRenderPercent;
+		break;
+	}
 
 	return fRadius > fDiagonal;
 }

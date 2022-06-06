@@ -281,9 +281,6 @@
     <ClCompile Include="MainGame.cpp">
       <Filter>00.MainGame</Filter>
     </ClCompile>
-    <ClCompile Include="Obj.cpp">
-      <Filter>01.OBJ</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>01.OBJ\01.Player</Filter>
     </ClCompile>
@@ -391,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="MonsterJini.cpp">
       <Filter>02. Scene\01.Scene_jini</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj.cpp">
+      <Filter>02. Scene\00.Scene_Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

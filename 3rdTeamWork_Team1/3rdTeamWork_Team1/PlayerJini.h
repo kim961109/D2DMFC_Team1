@@ -64,10 +64,9 @@ private:
 	float	m_fDistanceMouse;
 
 	//여기
-	string m_strName;
 	string m_strTag;   // 부모 or 자식
-
 	TCHAR	m_szName[64];
+	TCHAR	m_szScore[64];
 
 	bool	m_bBirth;
 	bool	m_bMouseMove;

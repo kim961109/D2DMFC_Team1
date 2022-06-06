@@ -18,7 +18,6 @@ float g_fScaleCount = 0.f;
 
 float g_fScore = 0.f;
 
-
 CScene_jini::CScene_jini()
 {
 }
@@ -35,30 +34,14 @@ void CScene_jini::Initialize(void)
 	m_dwJellyCreate2 = GetTickCount();
 	m_dwCollisionJelly = GetTickCount() - long(1000);
 
-	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, CAbstractFactory<CPlayerJini>::Create_SetPos(1200.f, 900.f, 0.f));
+	m_pPlayer = CAbstractFactory<CPlayerJini>::Create_SetPos(1200.f, 900.f, 0.f);
+	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYER, m_pPlayer);
+
+	
 	CObjMgr::Get_Instance()->Add_Object(OBJ_MONSTER, CAbstractFactory<CMonsterJini>::Create_SetPos(1500.f, 800.f, 0.f));
-	CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER)->Set_Dir(-1.0f, 0.f, 0.f);
-
-	// 여기까지
-
-	//for (int i = 0; i < 1000; ++i)
-	//{
-	//srand(unsigned int(time(NULL)));
-	//float m_fPosXRandom2 = float(rand() * rand() % 2350 + 10);
-	//float m_fPosYRandom2 = float(rand() * (int)m_fPosXRandom2 % 1750 + 10);
-
-	//CObjMgr::Get_Instance()->Add_Object(OBJ_Item, CAbstractFactory<CJelly>::Create_SetPos(m_fPosXRandom2, m_fPosYRandom2, 0.f));
-	//}
-
-	//for (int i = 0; i < 20; ++i)
-	//{
-	//	srand(unsigned int(time(NULL)));
-	//	float m_fPosXRandom = float((rand() * rand()) % 800 + 800);
-	//	float m_fPosYRandom = float((rand() * (int)m_fPosXRandom) % 600 + 600);
-
-	//	CObjMgr::Get_Instance()->Add_Object(OBJ_Item, CAbstractFactory<CJelly>::Create_SetPos(m_fPosXRandom, m_fPosYRandom, 0.f));
-	//}
-
+	CObj* m_pMonster = CObjMgr::Get_Instance()->Get_ListBack(OBJ_MONSTER);
+	m_pMonster->Set_Dir(-1.0f, 0.f, 0.f);
+	dynamic_cast<CMonsterJini*>(m_pMonster)->Set_Player(m_pPlayer);
 }
 
 
@@ -97,8 +80,11 @@ void CScene_jini::Late_Update(void)
 		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERCHILD), CObjMgr::Get_Instance()->Get_List(OBJ_ITEM), 2);
 		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER), CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERCHILD), 1);
 		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER), 3);
+		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYER), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTERCHILD), 3);
+
 		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_PLAYERCHILD), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER), 3);
 		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER), CObjMgr::Get_Instance()->Get_List(OBJ_ITEM), 6);
+		CCollisionMgr::Collision_Sphere(CObjMgr::Get_Instance()->Get_List(OBJ_MONSTER), CObjMgr::Get_Instance()->Get_List(OBJ_MONSTERCHILD), 7);
 
 		m_dwCollisionJelly = GetTickCount();
 	}

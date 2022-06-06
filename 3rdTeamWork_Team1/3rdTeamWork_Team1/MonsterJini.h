@@ -13,7 +13,7 @@ public:
 	void	Set_Tag(const string& _Tag) { m_strTag = _Tag; }
 	void	Set_AttackDir(D3DXVECTOR3 _vDir) { m_vAttackDir = _vDir; }
 	void	Set_AttackPos(D3DXVECTOR3 _vPos) { m_vAttackPos = _vPos; }
-	void	Set_Score(float _Score) { m_fScore += _Score; }
+	void	Set_Player(CObj*& _Player) { m_pPlayer = _Player; }
 
 	const float&	Get_Scale() { return m_fScale; }
 	const float&	Get_Radius() { return m_fRadius; }
@@ -33,15 +33,12 @@ public:
 public:
 	void		Attack(D3DXVECTOR3 _vDir, float _fGiveScale);
 	void		AttackRound();
+	void		KeyInput();
 
 private:
 	float	m_fSpeed;
 	float	m_fAngle;
 	float	m_fScale;
-	float	m_fScaleSum;
-
-	//float	m_fEllipse;
-
 	float	m_fRadius;
 
 	D3DXVECTOR3		m_vBodyLocal[4];
@@ -50,10 +47,9 @@ private:
 	D3DXVECTOR3		m_vDirLocal;
 	D3DXVECTOR3		m_vLookLocal;
 
-	D3DXVECTOR3		m_vPosScreen;
-	D3DXVECTOR3		m_vDirBefore;
-	D3DXVECTOR3		m_vMouseTemp;
-
+	//D3DXVECTOR3		m_vPosScreen;
+	//D3DXVECTOR3		m_vDirBefore;
+	//D3DXVECTOR3		m_vMouseTemp;
 	//D3DXVECTOR3		m_vPosMiniMap;
 
 	int		m_iPlayerColorR;
@@ -64,14 +60,12 @@ private:
 	TCHAR	m_szName[64];
 
 	bool	m_bBirth;
-	bool	m_bMouseMove;
+	//bool	m_bMouseMove;
 	D3DXVECTOR3		m_vAttackPos;
 	D3DXVECTOR3		m_vAttackDir;
 	DWORD			m_dwAttackMove;
 
-	int		m_fScore;
-
-	float	m_fRenderPercentTemp;
+	CObj*			m_pPlayer;
 
 };
 

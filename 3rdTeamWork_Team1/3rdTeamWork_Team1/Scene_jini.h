@@ -1,5 +1,7 @@
 #pragma once
 #include "Scene.h"
+#include "Obj.h"
+
 class CScene_jini :
 	public CScene
 {
@@ -19,8 +21,9 @@ private:
 	//¿©±â
 	DWORD	m_dwJellyCreate;
 	DWORD	m_dwJellyCreate2;
-
 	DWORD	m_dwCollisionJelly;
+
+	CObj*	m_pPlayer;
 
 };
 

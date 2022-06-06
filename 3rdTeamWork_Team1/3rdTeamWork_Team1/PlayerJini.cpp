@@ -45,7 +45,6 @@ void CPlayerJini::Initialize(void)
 
 	m_fDistanceMouse = 0.f;
 
-	m_strName = "순수하짐";
 	m_strTag = "부모";
 	lstrcpy(m_szName, L"순수하짐");
 
@@ -60,6 +59,7 @@ void CPlayerJini::Initialize(void)
 
 int CPlayerJini::Update(void)
 {
+
 	if (m_bDead)
 		return OBJ_DEAD;
 
@@ -183,7 +183,11 @@ void CPlayerJini::Late_Update(void)
 	else
 		g_bZoomIn_Jini = false;
 
-	//cout << "vPos.x = " << m_tInfo.vPos.x << "\t vPos.y = " << m_tInfo.vPos.y << "\t m_fScale = " << m_fScale << "\t g_fScore = " << g_fScore << "\t m_fScaleSum = " << m_fScaleSum << endl;
+	// 점수 출력용
+	int iScoreTemp = (int)g_fScore;
+	swprintf_s(m_szScore, L"순수하짐 : %d", iScoreTemp);
+
+	cout << "vPos.x = " << m_tInfo.vPos.x << "\t vPos.y = " << m_tInfo.vPos.y << "\t m_fScale = " << m_fScale << "\t g_fScore = " << g_fScore << endl;
 }
 
 void CPlayerJini::Render(HDC hDC)
@@ -222,8 +226,8 @@ void CPlayerJini::Render(HDC hDC)
 
 	LOGFONT m_labelFontInfo{};
 	m_labelFontInfo.lfCharSet = 129;
-	m_labelFontInfo.lfHeight = m_fScale * g_fRenderPercent * 1.5 * 12;
-	m_labelFontInfo.lfWidth = m_fScale * g_fRenderPercent * 1.5 * 6;
+	m_labelFontInfo.lfHeight = m_fScale * g_fRenderPercent * 1.8 * 12;
+	m_labelFontInfo.lfWidth = m_fScale * g_fRenderPercent * 1.8 * 6;
 	//m_labelFontInfo.lfWeight = FW_BOLD;
 
 	HFONT textFont, oldFont;
@@ -233,10 +237,31 @@ void CPlayerJini::Render(HDC hDC)
 	SetBkColor(hDC, RGB(m_iPlayerColorR, m_iPlayerColorG, m_iPlayerColorB));
 	SetTextColor(hDC, RGB(255, 255, 255));
 
-	TextOut(hDC, m_tInfo.vPos.x - m_fRadius * 0.7 * g_fRenderPercent + iScrollX, m_tInfo.vPos.y - m_fRadius * 0.2 * g_fRenderPercent + iScrollY, m_szName, lstrlen(m_szName));
+	TextOut(hDC, m_tInfo.vPos.x - m_fRadius * 0.8 * g_fRenderPercent + iScrollX, 
+				m_tInfo.vPos.y - m_fRadius * 0.2 * g_fRenderPercent + iScrollY, 
+				m_szName, lstrlen(m_szName));
 
 	SelectObject(hDC, oldFont);
 	DeleteObject(textFont);
+
+
+	LOGFONT m_labelFontInfo2{};
+	m_labelFontInfo2.lfCharSet = 129;
+	m_labelFontInfo2.lfHeight = 16;
+	m_labelFontInfo2.lfWidth = 8;
+	m_labelFontInfo.lfWeight = FW_BOLD;
+
+	HFONT textFont2, oldFont2;
+	textFont2 = CreateFontIndirect(&m_labelFontInfo2);
+	oldFont2 = (HFONT)SelectObject(hDC, textFont2);
+	SetBkMode(hDC, OPAQUE); // TRANSPARENT, OPAQUE
+	SetBkColor(hDC, RGB(0, 10, 17));
+	SetTextColor(hDC, RGB(255, 255, 255));
+
+	TextOut(hDC, 650.f, 20.f, m_szScore, lstrlen(m_szScore));
+
+	SelectObject(hDC, oldFont2);
+	DeleteObject(textFont2);
 
 }
 
@@ -294,10 +319,10 @@ void CPlayerJini::Attack(D3DXVECTOR3 _vDir, float _fGiveScale)
 
 	CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYERCHILD, CAbstractFactory<CPlayerJini>::Create_SetPos(fPosX, fPosY, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
 																														   //CObjMgr::Get_Instance()->Add_Object(OBJ_PlayerChild, CAbstractFactory<CPlayerJini>::Create_SetPos(m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f)); 
-
-	dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_Scale(m_fScale * _fGiveScale);
-	dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_Tag("자식");
-	dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_AttackDir(_vDir);
+	CPlayerJini* m_Child = dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD));
+	m_Child->Set_Scale(m_fScale * _fGiveScale);
+	m_Child->Set_Tag("자식");
+	m_Child->Set_AttackDir(_vDir);
 	//dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PlayerChild))->Set_AttackPos();
 
 
@@ -337,11 +362,10 @@ void CPlayerJini::AttackRound()
 		float	fPosY = (m_tInfo.vPos.y) + (m_vDirTemp[i].y * m_fRadius );
 
 		CObjMgr::Get_Instance()->Add_Object(OBJ_PLAYERCHILD, CAbstractFactory<CPlayerJini>::Create_SetPos(fPosX, fPosY, 0.f)); // (마우스방향으로), Pos 셋팅을 원의 지름만큼.
-		dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_Scale(m_fScale * 0.1f);
-		dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_Tag("다자녀");
-		dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD))->Set_AttackDir(m_vDirTemp[i]);
-
-
+		CPlayerJini* m_Child = dynamic_cast<CPlayerJini*>(CObjMgr::Get_Instance()->Get_ListBack(OBJ_PLAYERCHILD));
+		m_Child->Set_Scale(m_fScale * 0.1f);
+		m_Child->Set_Tag("다자녀");
+		m_Child->Set_AttackDir(m_vDirTemp[i]);
 	}
 
 	m_fScale *= (10 - iRandom) * 0.1f;
