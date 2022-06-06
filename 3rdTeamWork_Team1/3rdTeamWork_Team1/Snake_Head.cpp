@@ -45,6 +45,7 @@ int CSnake_Head::Update(void)
 	if (m_bDead)
 	{
 		return OBJ_DEAD;
+
 	}
 
 	if (GetTickCount() - m_dKeyInput > 300)

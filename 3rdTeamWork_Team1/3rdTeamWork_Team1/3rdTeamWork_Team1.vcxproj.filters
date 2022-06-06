@@ -312,6 +312,9 @@
     <ClInclude Include="Result.h">
       <Filter>02. Scene\01.Scene_jini</Filter>
     </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -454,6 +457,9 @@
     </ClCompile>
     <ClCompile Include="ScrollMgr.cpp">
       <Filter>99.Design\05.CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
