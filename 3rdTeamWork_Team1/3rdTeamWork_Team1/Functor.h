@@ -19,9 +19,6 @@ void		Safe_Delete_Array(T& Temp)
 	}
 }
 
-
-// ÇÔ¼ö °´Ã¼
-
 class CDeleteObj
 {
 public:

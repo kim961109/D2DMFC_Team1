@@ -25,6 +25,7 @@ public:
 	void Set_Dead() { m_bDead = true; }
     void Set_Dead(bool _b) { m_bDead = _b; }
 	void Set_Pos(float _fX, float _fY, float _fZ) { m_tInfo.vPos.x = _fX; m_tInfo.vPos.y = _fY; m_tInfo.vPos.z = _fZ; }
+	void Set_Dir(float _fX, float _fY, float _fZ) { m_tInfo.vDir.x = _fX; m_tInfo.vDir.y = _fY; m_tInfo.vDir.z = _fZ; }
 	void Set_ObjPos(float _fX, float _fY) { m_tObjInfo.fX = _fX;  m_tObjInfo.fY = _fY; }
 
 protected:
