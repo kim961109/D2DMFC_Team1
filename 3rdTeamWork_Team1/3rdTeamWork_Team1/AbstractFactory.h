@@ -37,9 +37,18 @@ public:
 	static CObj*& Create_SetPos(float _fX, float _fY, float _fZ)
 	{
 		CObj* pObj = new T();
-		pObj->Initialize();
 		pObj->Set_Pos(_fX, _fY, _fZ);
+		pObj->Initialize();
 		
+		return pObj;
+	}
+
+	static CObj*& Create_PlayerMS(float _fX, float _fY, float _fZ)
+	{
+		CObj* pObj = new T(_fX, _fY, _fZ);
+		//pObj->Set_Pos(_fX, _fY, _fZ);
+		pObj->Initialize();
+
 		return pObj;
 	}
 

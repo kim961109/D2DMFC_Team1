@@ -9,6 +9,7 @@
 #include "Scene_LoseKS.h"
 #include "Scene_MinSungJJang.h"
 #include "Scene_ShapeMoment.h"
+#include "SceneMS_Lose.h"
 
 class CSceneMgr
 {
