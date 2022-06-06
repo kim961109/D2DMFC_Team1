@@ -19,7 +19,7 @@ void CSnake_Head::Initialize(void)
 {
 	m_tInfo.vPos = { 400.f, 300.f, 0.f };
 	m_tInfo.vLook = { 0.f, -1.f, 0.f };
-	
+
 	m_vPoint[0] = { m_tInfo.vPos.x - 10.f,  m_tInfo.vPos.y - 10.f, 0.f };
 	m_vPoint[1] = { m_tInfo.vPos.x + 10.f,  m_tInfo.vPos.y - 10.f, 0.f };
 	m_vPoint[2] = { m_tInfo.vPos.x + 10.f,  m_tInfo.vPos.y + 10.f, 0.f };
@@ -73,7 +73,7 @@ int CSnake_Head::Update(void)
 	m_tRect.top = m_tInfo.vPos.y - 10.f;
 	m_tRect.right = m_tInfo.vPos.x + 10.f;
 	m_tRect.bottom = m_tInfo.vPos.y + 10.f;
-	
+
 	return 0;
 }
 
@@ -87,16 +87,16 @@ void CSnake_Head::Render(HDC hDC)
 
 	/*for (int i = 0; i < 4; ++i)
 	{
-		LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
+	LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
 
-		if (i > 1)
-			continue;
-	
-			Ellipse(hDC,
-			(int)m_vPoint[i].x - 5,
-			(int)m_vPoint[i].y - 5,
-			(int)m_vPoint[i].x + 5,
-			(int)m_vPoint[i].y + 5);
+	if (i > 1)
+	continue;
+
+	Ellipse(hDC,
+	(int)m_vPoint[i].x - 5,
+	(int)m_vPoint[i].y - 5,
+	(int)m_vPoint[i].x + 5,
+	(int)m_vPoint[i].y + 5);
 	}
 	LineTo(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y);*/
 	//Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
@@ -106,16 +106,16 @@ void CSnake_Head::Render(HDC hDC)
 	HPEN oldPen = (HPEN)SelectObject(hDC, myPen);
 
 	//Ellipse(hDC,
-		//int(m_vPoint[0].x),
-		//int(m_vPoint[1].y),
-		//int(m_vPoint[2].x),
-		//int(m_vPoint[3].y));
+	//int(m_vPoint[0].x),
+	//int(m_vPoint[1].y),
+	//int(m_vPoint[2].x),
+	//int(m_vPoint[3].y));
 
 	Ellipse(hDC,
-		int(m_tInfo.vPos.x-10.f),
-		int(m_tInfo.vPos.y-10.f),
-		int(m_tInfo.vPos.x+10.f),
-		int(m_tInfo.vPos.y+10.f));
+		int(m_tInfo.vPos.x - 10.f),
+		int(m_tInfo.vPos.y - 10.f),
+		int(m_tInfo.vPos.x + 10.f),
+		int(m_tInfo.vPos.y + 10.f));
 
 
 
@@ -141,9 +141,9 @@ void CSnake_Head::Key_Input(void)
 	}
 
 	if (GetAsyncKeyState(VK_UP))
-	{	
-		
-		
+	{
+
+
 	}
 	if (GetAsyncKeyState(VK_DOWN))
 	{
@@ -162,18 +162,18 @@ void CSnake_Head::Key_Input(void)
 }
 void CSnake_Head::GrowUp()
 {	//첫번째몸통은 머리뒤에
-		D3DXVECTOR3 m_vNewPos;
+	D3DXVECTOR3 m_vNewPos;
 	if (CObjMgr::Get_Instance()->Get_List(OBJ_SNAKEBODY).empty())//
 	{
 		m_vNewPos = m_tInfo.vPos - m_tInfo.vDir * m_fRadius * 2.0f;
 
 		CObjMgr::Get_Instance()->Add_Object(OBJ_SNAKEBODY,
-		CAbstractFactory<CSnake_Body>::Create_SetPos(m_vNewPos.x, m_vNewPos.y, 0.f));
+			CAbstractFactory<CSnake_Body>::Create_SetPos(m_vNewPos.x, m_vNewPos.y, 0.f));
 		m_vecBody.push_back(CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKEBODY));
 	}
 	//두번째부터는 앞에꺼뒤에
-	else 
-	{	
+	else
+	{
 		m_FrontBody = CObjMgr::Get_Instance()->Get_ListBack(OBJ_SNAKEBODY);
 		m_tFrontBody = m_FrontBody->Get_Info();
 		m_vNewPos = m_tFrontBody.vPos - m_tFrontBody.vDir * m_fRadius * 2.f;
