@@ -18,7 +18,7 @@ void CMainGame::Initialize(void)
 
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/stardewPanorama.bmp", L"stardewPanorama"); //Back 버퍼에 해당하는 그림을 추가를 해야한다.
 
-	CSceneMgr::Get_Instance()->Scene_Change(SC_JINI);
+	CSceneMgr::Get_Instance()->Scene_Change(SC_MAIN);
 
 
 #ifdef _DEBUG
