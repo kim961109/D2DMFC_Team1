@@ -14,9 +14,9 @@ void CPlayerMS::Initialize(void)
 {
 	
 
-	m_tInfo.vPos = { 400.f,300.f,0.f };
+	m_tInfo.vPos = { 100.f,120.f,0.f };
 	m_tInfo.vLook = { 0.f, -1.f, 0.f };
-	 
+	m_fAngle = 140;
 	
 
 	m_vPoint[0] = { m_tInfo.vPos.x - 30.f, m_tInfo.vPos.y - 30.f, 0.f };
@@ -54,6 +54,7 @@ void CPlayerMS::Initialize(void)
 		m_vOriginleftPoint[i] = m_vleftPoint[i];
 	}
 
+
 	for (int i = 0; i < 4; ++i)
 	{
 		m_vOriginrightPoint[i] = m_vrightPoint[i];
@@ -85,34 +86,34 @@ int CPlayerMS::Update(void)
 	for (int i = 0; i < 4; ++i)  
 	{
 		m_vPoint[i] = m_vOriginPoint[i];
-		m_vPoint[i] -= { 400.f, 300.f, 0.f };
+		m_vPoint[i] -= {100.f, 120.f, 0.f };
 		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
 	}
 	for (int i = 0; i < 4; ++i)
 	{
 		m_vleftPoint[i] = m_vOriginleftPoint[i];
-		m_vleftPoint[i] -= { 400.f, 300.f, 0.f };
+		m_vleftPoint[i] -= {  100.f, 120.f, 0.f};
 		D3DXVec3TransformCoord(&m_vleftPoint[i], &m_vleftPoint[i], &m_tInfo.matWorld);
 	}
 
 	for (int i = 0; i < 4; ++i)
 	{
 		m_vrightPoint[i] = m_vOriginrightPoint[i];
-		m_vrightPoint[i] -= { 400.f, 300.f, 0.f };
+		m_vrightPoint[i] -= { 100.f, 120.f, 0.f};
 		D3DXVec3TransformCoord(&m_vrightPoint[i], &m_vrightPoint[i], &m_tInfo.matWorld);
 	}
 
 	for (int i = 0; i < 4; ++i)
 	{
 		m_vleftDownPoint[i] = m_vOriginleftDownPoint[i];
-		m_vleftDownPoint[i] -= { 400.f, 300.f, 0.f };
+		m_vleftDownPoint[i] -= {  100.f, 120.f, 0.f};
 		D3DXVec3TransformCoord(&m_vleftDownPoint[i], &m_vleftDownPoint[i], &m_tInfo.matWorld);
 	}
 
 	for (int i = 0; i < 4; ++i)
 	{
 		m_vrightDownPoint[i] = m_vOriginrightDownPoint[i];
-		m_vrightDownPoint[i] -= { 400.f, 300.f, 0.f };
+		m_vrightDownPoint[i] -= {  100.f, 120.f, 0.f};
 		D3DXVec3TransformCoord(&m_vrightDownPoint[i], &m_vrightDownPoint[i], &m_tInfo.matWorld);
 	}
 
@@ -121,6 +122,7 @@ int CPlayerMS::Update(void)
 
 void CPlayerMS::Late_Update(void)
 {
+	
 }
 
 void CPlayerMS::Render(HDC hDC)
